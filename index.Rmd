@@ -1,7 +1,7 @@
 --- 
 title: "fulltext manual"
 # author: "Scott Chamberlain"
-date: "`r Sys.Date()`"
+date: "`r paste0(Sys.Date(), ' - fulltext v', packageVersion('fulltext'))`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
 documentclass: book
