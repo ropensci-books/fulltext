@@ -1,0 +1,21 @@
+# Introduction {#intro}
+
+## Installation
+
+Stable version from CRAN
+
+```{r eval=FALSE}
+install.packages("fulltext")
+```
+
+Development version from GitHub
+
+```{r eval=FALSE}
+devtools::install_github("ropensci/fulltext")
+```
+
+Load library
+
+```{r}
+library('fulltext')
+```

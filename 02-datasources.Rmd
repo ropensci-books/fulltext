@@ -1,0 +1,13 @@
+# Data sources {#data-sources}
+
+Data sources in `fulltext` include:
+
+* [Crossref](http://www.crossref.org/) - via the `rcrossref` package
+* [Public Library of Science (PLOS)](https://www.plos.org/) - via the `rplos` package
+* [Biomed Central](http://www.biomedcentral.com/)
+* [arXiv](https://arxiv.org) - via the `aRxiv` package
+* [bioRxiv](http://biorxiv.org/) - via the `biorxivr` package
+* [PMC/Pubmed via Entrez](http://www.ncbi.nlm.nih.gov/) - via the `rentrez` package
+* Many more are supported via the above sources (e.g., _Royal Society Open Science_ is
+available via Pubmed)
+* We __will__ add more, as publishers open up, and as we have time...See the [master list here](https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743)

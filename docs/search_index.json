@@ -1,12 +1,12 @@
 [
-["index.html", "fulltext manual Chapter 1 fulltext manual", " fulltext manual Scott Chamberlain 2017-12-18 Chapter 1 fulltext manual Hi! "],
-["chunks.html", "Chapter 2 Chunks", " Chapter 2 Chunks chunks "],
-["data-sources.html", "Chapter 3 Data sources", " Chapter 3 Data sources data sources "],
-["fetch.html", "Chapter 4 Fetch", " Chapter 4 Fetch fetch "],
-["intro.html", "Chapter 5 Introduction", " Chapter 5 Introduction An R package to search across and get full text for open access journals "],
-["links.html", "Chapter 6 Links", " Chapter 6 Links links "],
-["literature.html", "Chapter 7 Literature", " Chapter 7 Literature Here is a review of existing methods. "],
-["search.html", "Chapter 8 Search", " Chapter 8 Search search "],
-["supplementary.html", "Chapter 9 Supplementary", " Chapter 9 Supplementary supplementary "],
-["use-cases.html", "Chapter 10 Use cases", " Chapter 10 Use cases use cases "]
+["index.html", "fulltext manual Chapter 1 fulltext manual", " fulltext manual Scott Chamberlain 2017-12-18 Chapter 1 fulltext manual An R package to search across and get full text for open access journals The fulltext package makes it easy to do text-mining by supporting the following steps: Search for articles Fetch articles Get links for full text articles (xml, pdf) Extract text from articles / convert formats Collect bits of articles that you actually need Download supplementary materials from papers "],
+["intro.html", "Chapter 2 Introduction 2.1 Installation", " Chapter 2 Introduction 2.1 Installation Stable version from CRAN install.packages(&quot;fulltext&quot;) Development version from GitHub devtools::install_github(&quot;ropensci/fulltext&quot;) Load library library(&#39;fulltext&#39;) "],
+["data-sources.html", "Chapter 3 Data sources", " Chapter 3 Data sources Data sources in fulltext include: Crossref - via the rcrossref package Public Library of Science (PLOS) - via the rplos package Biomed Central arXiv - via the aRxiv package bioRxiv - via the biorxivr package PMC/Pubmed via Entrez - via the rentrez package Many more are supported via the above sources (e.g., Royal Society Open Science is available via Pubmed) We will add more, as publishers open up, and as we have time…See the master list here "],
+["search.html", "Chapter 4 Search", " Chapter 4 Search search "],
+["links.html", "Chapter 5 Links", " Chapter 5 Links links "],
+["fetch.html", "Chapter 6 Fetch", " Chapter 6 Fetch fetch "],
+["chunks.html", "Chapter 7 Chunks", " Chapter 7 Chunks chunks "],
+["supplementary.html", "Chapter 8 Supplementary", " Chapter 8 Supplementary supplementary "],
+["use-cases.html", "Chapter 9 Use cases", " Chapter 9 Use cases use cases "],
+["literature.html", "Chapter 10 Literature", " Chapter 10 Literature Here is a review of existing methods. "]
 ]

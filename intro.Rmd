@@ -1,3 +1,0 @@
-# Introduction {#intro}
-
-> An R package to search across and get full text for open access journals
