@@ -142,8 +142,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="search.html"><a href="search.html"><i class="fa fa-check"></i><b>5</b> Search</a><ul>
 <li class="chapter" data-level="5.1" data-path="search.html"><a href="search.html#usage"><i class="fa fa-check"></i><b>5.1</b> Usage</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>6</b> Links</a></li>
-<li class="chapter" data-level="7" data-path="fetch.html"><a href="fetch.html"><i class="fa fa-check"></i><b>7</b> Fetch</a></li>
+<li class="chapter" data-level="6" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>6</b> Links</a><ul>
+<li class="chapter" data-level="6.1" data-path="links.html"><a href="links.html#usage-1"><i class="fa fa-check"></i><b>6.1</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="fetch.html"><a href="fetch.html"><i class="fa fa-check"></i><b>7</b> Fetch</a><ul>
+<li class="chapter" data-level="7.1" data-path="fetch.html"><a href="fetch.html#data-formats"><i class="fa fa-check"></i><b>7.1</b> Data formats</a></li>
+<li class="chapter" data-level="7.2" data-path="fetch.html"><a href="fetch.html#how-data-is-stored"><i class="fa fa-check"></i><b>7.2</b> How data is stored</a></li>
+<li class="chapter" data-level="7.3" data-path="fetch.html"><a href="fetch.html#usage-2"><i class="fa fa-check"></i><b>7.3</b> Usage</a></li>
+</ul></li>
 <li class="chapter" data-level="8" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>8</b> Chunks</a></li>
 <li class="chapter" data-level="9" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>9</b> Supplementary</a></li>
 <li class="chapter" data-level="10" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>10</b> Use cases</a></li>
@@ -185,7 +191,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 41094; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 41104; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>and has slots for each data source:</p>
@@ -195,7 +201,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Get data for a single source</p>
 <div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">res<span class="op">$</span>plos</a></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [41094, 10] 
+#&gt; Records found, returned: [41104, 10] 
 #&gt; License: [CC-BY] 
 #&gt;                              id
 #&gt; 1  10.1371/journal.pone.0001248
