@@ -30,8 +30,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="links.html">
-<link rel="next" href="chunks.html">
+<link rel="prev" href="search.html">
+<link rel="next" href="links.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -184,166 +184,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fetch" class="section level1">
-<h1><span class="header-section-number">Chapter 8</span> Fetch</h1>
-<p>The <code>ft_get</code> function makes it easy to fetch full text articles. There are a few different ways to use <code>ft_get</code>:</p>
+<div id="abstract" class="section level1">
+<h1><span class="header-section-number">Chapter 6</span> Abstract</h1>
+<p>Abstracts likely will come after searching for articles with <code>ft_search()</code>. There are a few scenarios in which simply getting abstracts in lieu of full text may be enough.</p>
+<p>For example, if you know that a large portion of the articles you want to mine text from are closed access and you don’t have access to them, you may have access to the abstracts depending on the publisher.</p>
+<p>In addition, there are cases in which you really only need abstracts regardless of whether full text is available or not.</p>
+<p><code>ft_abstract()</code> gives you access to the following data sources:</p>
 <ul>
-<li>Pass in only DOIs - leave <code>from</code> parameter <code>NULL</code>. This route will first query Crossref API for the publisher of the DOI, then we’ll use the appropriate method to fetch full text from the publisher. If a publisher is not found for the DOI, then we’ll throw back a message telling you a publisher was not found.</li>
-<li>Pass in DOIs (or other pub IDs) and use the <code>from</code> parameter. This route means we don’t have to make an extra API call to Crossref (thus, this route is faster) to determine the publisher for each DOI. We go straight to getting full text based on the publisher.</li>
-<li>Use <code>ft_search()</code> to search for articles. Then pass that output to this function, which will use info in that object. This behaves the same as the previous option in that each DOI has publisher info so we know how to get full text for each DOI.</li>
+<li>crossref</li>
+<li>microsoft</li>
+<li>plos</li>
+<li>scopus</li>
 </ul>
-<p>Note that some publishers are available through other data sources, e.g., through Entrez’s Pubmed.</p>
-<p><code>ft_get</code> is a bit complicated. These are just some of the hurdles we’re jumping over:</p>
-<ul>
-<li>Negotiating various user inputs, likely seeing new publishers we’ve not dealt with</li>
-<li>Dealing with authentication and trying to make it easier for users</li>
-<li>Users sometimes being at an IP address that has access to a publisher and sometimes not</li>
-<li>Caching results to avoid unnecessary downloads if the content has already been acquired</li>
-</ul>
-<p>Thus, expect some hiccups here, and please do report problems, and if a certain publisher is not supported yet.</p>
-<div id="fetch-data-formats" class="section level2">
-<h2><span class="header-section-number">8.1</span> Data formats</h2>
-<p>You can specify whether you want PDF, XML or plaint text with the <code>type</code> parameter. It is sometimes ignored, sometimes used, depending on the data source. For certain data sources, they only accept one type. Details by data source/publisher:</p>
-<ul>
-<li>PLOS: pdf and xml</li>
-<li>Entrez: only xml</li>
-<li>eLife: pdf and xml</li>
-<li>Pensoft: pdf and xml</li>
-<li>arXiv: only pdf</li>
-<li>BiorXiv: only pdf</li>
-<li>Elsevier: pdf and plain</li>
-<li>Wiley: only pdf</li>
-<li>Peerj: pdf and xml</li>
-<li>Informa: only pdf</li>
-<li>FrontiersIn: pdf and xml</li>
-<li>Copernicus: pdf and xml</li>
-<li>Scientific Societies: only pdf</li>
-<li>Crossref: depends on the publisher</li>
-<li>other data sources/publishers: there are too many to cover here - will try to make a helper in the future for what is covered by different publishers</li>
-</ul>
-</div>
-<div id="how-data-is-stored" class="section level2">
-<h2><span class="header-section-number">8.2</span> How data is stored</h2>
-<p>This depends on what <code>backend</code> value you use. If you use the default (rds) we store all data in <code>.rds</code> files. These are binary compressed files that are specific to R. Because they are specific to R, you don’t want to use this option if part of your downstream workflow is using another tool/programming language.</p>
-<p>The three types are stored in differnt ways. xml and plain text are parsed to plain text then stored with whatever backend you choose. However, pdf is retrived as raw bytes and stored as such. Thus, we no longer write pdf files to disk. However, you can easily do that yourself with <code>ft_extract()</code> or yourself by using <code>pdftools::pdf_text</code> which accepts a file path to a pdf or raw bytes.</p>
-</div>
-<div id="fetch-usage" class="section level2">
-<h2><span class="header-section-number">8.3</span> Usage</h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">library</span>(fulltext)</a></code></pre></div>
-<p>List backends available</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">ft_get_ls</span>()</a></code></pre></div>
-<pre><code>#&gt;  [1] &quot;aaas&quot;                &quot;arxiv&quot;               &quot;biorxiv&quot;            
-#&gt;  [4] &quot;bmc&quot;                 &quot;copernicus&quot;          &quot;crossref&quot;           
-#&gt;  [7] &quot;elife&quot;               &quot;elsevier&quot;            &quot;entrez&quot;             
-#&gt; [10] &quot;frontiersin&quot;         &quot;ieee&quot;                &quot;informa&quot;            
-#&gt; [13] &quot;peerj&quot;               &quot;pensoft&quot;             &quot;plos&quot;               
-#&gt; [16] &quot;royalsocchem&quot;        &quot;scientificsocieties&quot; &quot;wiley&quot;</code></pre>
-<p>The simplest approach is passing a DOI directly to <code>ft_get</code></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>))</a></code></pre></div>
-<pre><code>#&gt; &lt;fulltext text&gt;
-#&gt; [Docs] 1 
-#&gt; [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#&gt; [IDs] 10.1371/journal.pone.0086169 ...</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">res<span class="op">$</span>plos</a></code></pre></div>
-<pre><code>#&gt; $found
-#&gt; [1] 1
-#&gt; 
-#&gt; $dois
-#&gt; [1] &quot;10.1371/journal.pone.0086169&quot;
-#&gt; 
-#&gt; $data
-#&gt; $data$backend
-#&gt; [1] &quot;ext&quot;
-#&gt; 
-#&gt; $data$cache_path
-#&gt; [1] &quot;/Users/sckott/Library/Caches/R/fulltext&quot;
-#&gt; 
-#&gt; $data$path
-#&gt; $data$path$`10.1371/journal.pone.0086169`
-#&gt; $data$path$`10.1371/journal.pone.0086169`$path
-#&gt; [1] &quot;/Users/sckott/Library/Caches/R/fulltext/10_1371_journal_pone_0086169.xml&quot;
-#&gt; 
-#&gt; $data$path$`10.1371/journal.pone.0086169`$id
-#&gt; [1] &quot;10.1371/journal.pone.0086169&quot;
-#&gt; 
-#&gt; $data$path$`10.1371/journal.pone.0086169`$type
-#&gt; [1] &quot;xml&quot;
-#&gt; 
-#&gt; $data$path$`10.1371/journal.pone.0086169`$error
-#&gt; NULL
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $data$data
-#&gt; NULL
-#&gt; 
-#&gt; 
-#&gt; $opts
-#&gt; $opts$doi
-#&gt; [1] &quot;10.1371/journal.pone.0086169&quot;
-#&gt; 
-#&gt; $opts$type
-#&gt; [1] &quot;xml&quot;</code></pre>
-<p>You can pass many DOIs in at once</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="kw">c</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>, <span class="st">&#39;10.3389/feart.2015.00009&#39;</span>)))</a></code></pre></div>
-<pre><code>#&gt; &lt;fulltext text&gt;
-#&gt; [Docs] 2 
-#&gt; [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
-#&gt; [IDs] 10.3389/fphar.2014.00109 10.3389/feart.2015.00009 ...</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">res<span class="op">$</span>frontiersin</a></code></pre></div>
-<pre><code>#&gt; $found
-#&gt; [1] 2
-#&gt; 
-#&gt; $dois
-#&gt; [1] &quot;10.3389/fphar.2014.00109&quot; &quot;10.3389/feart.2015.00009&quot;
-#&gt; 
-#&gt; $data
-#&gt; $data$backend
-#&gt; [1] &quot;ext&quot;
-#&gt; 
-#&gt; $data$cache_path
-#&gt; [1] &quot;/Users/sckott/Library/Caches/R/fulltext&quot;
-#&gt; 
-#&gt; $data$path
-#&gt; $data$path$`10.3389/fphar.2014.00109`
-#&gt; $data$path$`10.3389/fphar.2014.00109`$path
-#&gt; [1] &quot;/Users/sckott/Library/Caches/R/fulltext/10_3389_fphar_2014_00109.xml&quot;
-#&gt; 
-#&gt; $data$path$`10.3389/fphar.2014.00109`$id
-#&gt; [1] &quot;10.3389/fphar.2014.00109&quot;
-#&gt; 
-#&gt; $data$path$`10.3389/fphar.2014.00109`$type
-#&gt; [1] &quot;xml&quot;
-#&gt; 
-#&gt; $data$path$`10.3389/fphar.2014.00109`$error
-#&gt; NULL
-#&gt; 
-#&gt; 
-#&gt; $data$path$`10.3389/feart.2015.00009`
-#&gt; $data$path$`10.3389/feart.2015.00009`$path
-#&gt; [1] &quot;/Users/sckott/Library/Caches/R/fulltext/10_3389_feart_2015_00009.xml&quot;
-#&gt; 
-#&gt; $data$path$`10.3389/feart.2015.00009`$id
-#&gt; [1] &quot;10.3389/feart.2015.00009&quot;
-#&gt; 
-#&gt; $data$path$`10.3389/feart.2015.00009`$type
-#&gt; [1] &quot;xml&quot;
-#&gt; 
-#&gt; $data$path$`10.3389/feart.2015.00009`$error
-#&gt; NULL
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $data$data
-#&gt; NULL
-#&gt; 
-#&gt; 
-#&gt; $opts
-#&gt; $opts$dois
-#&gt; [1] &quot;10.3389/fphar.2014.00109&quot; &quot;10.3389/feart.2015.00009&quot;
-#&gt; 
-#&gt; $opts$type
-#&gt; [1] &quot;xml&quot;</code></pre>
+<div id="usage" class="section level2">
+<h2><span class="header-section-number">6.1</span> Usage</h2>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1"><span class="kw">library</span>(fulltext)</a></code></pre></div>
+<p>List data sources available</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw">ft_abstract_ls</span>()</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;crossref&quot;  &quot;microsoft&quot; &quot;plos&quot;      &quot;scopus&quot;</code></pre>
+<p>Search - by default searches against PLOS (Public Library of Science)</p>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1">res &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query =</span> <span class="st">&quot;ecology&quot;</span>)</a>
+<a class="sourceLine" id="cb17-2" data-line-number="2">(dois &lt;-<span class="st"> </span>res<span class="op">$</span>plos<span class="op">$</span>data<span class="op">$</span>id)</a></code></pre></div>
+<pre><code>#&gt;  [1] &quot;10.1371/journal.pone.0001248&quot; &quot;10.1371/journal.pone.0059813&quot;
+#&gt;  [3] &quot;10.1371/journal.pone.0155019&quot; &quot;10.1371/journal.pone.0080763&quot;
+#&gt;  [5] &quot;10.1371/journal.pone.0150648&quot; &quot;10.1371/journal.pcbi.1003594&quot;
+#&gt;  [7] &quot;10.1371/journal.pone.0102437&quot; &quot;10.1371/journal.pone.0175014&quot;
+#&gt;  [9] &quot;10.1371/journal.pone.0166559&quot; &quot;10.1371/journal.pone.0054689&quot;</code></pre>
+<p>Take the output of <code>ft_search()</code> and pass to <code>ft_abstract()</code>:</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" data-line-number="1">out &lt;-<span class="st"> </span><span class="kw">ft_abstract</span>(dois)</a></code></pre></div>
+<p>and has slots for each data source:</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">names</span>(out)</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;plos&quot;     &quot;scopus&quot;   &quot;ma&quot;       &quot;crossref&quot;</code></pre>
 
 </div>
 </div>
@@ -352,8 +223,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="links.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="chunks.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="search.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="links.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -382,7 +253,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ropensci/fulltext-book/edit/master/07-fetch.Rmd",
+"link": "https://github.com/ropensci/fulltext-book/edit/master/05-abstracts.Rmd",
 "text": "Edit"
 },
 "download": ["_main.pdf", "_main.epub"],

@@ -17,7 +17,7 @@ Note that some publishers are available through other data sources, e.g., throug
 
 Thus, expect some hiccups here, and please do report problems, and if a certain publisher is not supported yet. 
 
-## Data formats
+## Data formats {#fetch-data-formats}
 
 You can specify whether you want PDF, XML or plaint text with the `type` parameter. It is sometimes ignored, sometimes used, depending on the data source. For certain data sources, they only accept one type. Details by data source/publisher:
 
@@ -37,13 +37,13 @@ You can specify whether you want PDF, XML or plaint text with the `type` paramet
 - Crossref: depends on the publisher
 - other data sources/publishers: there are too many to cover here - will try to make a helper in the future for what is covered by different publishers
 
-## How data is stored
+## How data is stored  {#how-data-is-stored}
 
 This depends on what `backend` value you use. If you use the default (rds) we store all data in `.rds` files. These are binary compressed files that are specific to R. Because they are specific to R, you don't want to use this option if part of your downstream workflow is using another tool/programming language. 
 
 The three types are stored in differnt ways. xml and plain text are parsed to plain text then stored with whatever backend you choose. However, pdf is retrived as raw bytes and stored as such. Thus, we no longer write pdf files to disk. However, you can easily do that yourself with `ft_extract()` or yourself by using `pdftools::pdf_text` which accepts a file path to a pdf or raw bytes. 
 
-## Usage
+## Usage {#fetch-usage}
 
 ```{r}
 library(fulltext)

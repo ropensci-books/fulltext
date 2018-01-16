@@ -2,7 +2,7 @@
 
 The `ft_links` function makes it easy to get URLs for full text versions of articles. You can for instance only use `fulltext` to pass DOIs directly to `ft_links` to get URLs to use elsewhere in your research workflow. Or you may want to search first with `ft_search`, then pass that output directly to `ft_links`. 
 
-## Usage
+## Usage {#links-usage}
 
 ```{r}
 library(fulltext)

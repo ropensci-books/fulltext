@@ -10,7 +10,7 @@ knitr::opts_chunk$set(
 
 Search is what you'll likely start with for a number of reasons. First, search functionality in `fulltext` means that you can start from searching on words like 'ecology' or 'cellular' - and the output of that search can be fed downstream to the next major task: fetching articles.
 
-## Usage
+## Usage {#search-usage}
 
 ```{r}
 library(fulltext)

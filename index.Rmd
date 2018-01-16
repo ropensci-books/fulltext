@@ -27,13 +27,13 @@ The `fulltext` package makes it easy to do text-mining by supporting the followi
 ## Info
 
 * Code: <https://github.com/ropensci/fulltext/>
-* Issues: <https://github.com/ropensci/fulltext/issues>
+* Issues/Bug reports: <https://github.com/ropensci/fulltext/issues>
 * CRAN: <https://cran.rstudio.com/web/packages/fulltext/>
 
 ## Citing fulltext
 
-> Scott Chamberlain & Will Pearse (2017). fulltext: Full Text of 'Scholarly' 
-> Articles Across Many Data Sources. R package version 0.1.9.9621.
+> Scott Chamberlain & Will Pearse (2018). fulltext: Full Text of 'Scholarly' 
+> Articles Across Many Data Sources. R package version 1.0.0.
 > https://github.com/ropensci/fulltext
 
 ## Installation
