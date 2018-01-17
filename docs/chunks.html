@@ -31,7 +31,7 @@
   
   
 <link rel="prev" href="fetch.html">
-<link rel="next" href="supplementary.html">
+<link rel="next" href="table.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -168,9 +168,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="9.1" data-path="chunks.html"><a href="chunks.html#chunks-usage"><i class="fa fa-check"></i><b>9.1</b> Usage</a></li>
 <li class="chapter" data-level="9.2" data-path="chunks.html"><a href="chunks.html#chunks-tabularize"><i class="fa fa-check"></i><b>9.2</b> Tabularize</a></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>10</b> Supplementary</a></li>
-<li class="chapter" data-level="11" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>11</b> Use cases</a></li>
-<li class="chapter" data-level="12" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>12</b> Literature</a></li>
+<li class="chapter" data-level="10" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>10</b> Table</a><ul>
+<li class="chapter" data-level="10.1" data-path="table.html"><a href="table.html#table-usage"><i class="fa fa-check"></i><b>10.1</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>11</b> Supplementary</a></li>
+<li class="chapter" data-level="12" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>12</b> Use cases</a></li>
+<li class="chapter" data-level="13" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>13</b> Literature</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/ropensci/fulltext-book" target="blank">(c) Scott Chamberlain, 2017</a></li>
 
@@ -240,9 +243,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb48-2" data-line-number="2">(dois &lt;-<span class="st"> </span><span class="kw">searchplos</span>(<span class="dt">q=</span><span class="st">&quot;*:*&quot;</span>, <span class="dt">fl=</span><span class="st">&#39;id&#39;</span>,</a>
 <a class="sourceLine" id="cb48-3" data-line-number="3">   <span class="dt">fq=</span><span class="kw">list</span>(<span class="st">&#39;doc_type:full&#39;</span>,<span class="st">&quot;article_type:</span><span class="ch">\&quot;</span><span class="st">research article</span><span class="ch">\&quot;</span><span class="st">&quot;</span>),</a>
 <a class="sourceLine" id="cb48-4" data-line-number="4">     <span class="dt">limit=</span><span class="dv">5</span>)<span class="op">$</span>data<span class="op">$</span>id)</a></code></pre></div>
-<pre><code>#&gt; [1] &quot;10.1371/journal.pone.0109385&quot; &quot;10.1371/journal.pone.0109384&quot;
-#&gt; [3] &quot;10.1371/journal.pone.0067580&quot; &quot;10.1371/journal.pone.0095466&quot;
-#&gt; [5] &quot;10.1371/journal.pone.0137223&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;10.1371/journal.pone.0044136&quot; &quot;10.1371/journal.pone.0155491&quot;
+#&gt; [3] &quot;10.1371/journal.pone.0058100&quot; &quot;10.1371/journal.pone.0168627&quot;
+#&gt; [5] &quot;10.1371/journal.pone.0184491&quot;</code></pre>
 <p>Then get the full text</p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(dois, <span class="dt">from=</span><span class="st">&quot;plos&quot;</span>)</a></code></pre></div>
 <p>Then pull out various sections of each article.</p>
@@ -270,30 +273,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb53-2" data-line-number="2"><span class="st">    </span><span class="kw">ft_chunks</span>(<span class="kw">c</span>(<span class="st">&quot;acknowledgments&quot;</span>, <span class="st">&quot;permissions&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb53-3" data-line-number="3"><span class="st">    </span><span class="kw">ft_tabularize</span>()</a></code></pre></div>
 <pre><code>#&gt; $plos
-#&gt;   permissions.copyright.year permissions.copyright.holder
-#&gt; 1                       2014                    Lin et al
-#&gt; 2                       2014                  Danek et al
-#&gt; 3                       2013               Ndeledje et al
-#&gt; 4                       2014                   Zhou et al
-#&gt; 5                       2015              Johansson et al
+#&gt;                                                                                                                                                                                                                                                                                                                                                                       acknowledgments
+#&gt; 1                                                                                                                                                                                                                                         The authors thank Dr. Tong Huang and Dr. Jingyi Yuan at Zhenhai Lianhua Hospital, Ningbo, China for their valuable work in data collection.
+#&gt; 2                     This study was funded by the National Natural Science Foundation of China (Grant No. 31301222, QY, XZ, YPH, ZGS), Science and Technology Committee of Shanghai (Grant No. 12JC1407601, YG, JMW, HJS, JW), and the Shanghai Municipal Commission of Health and Family Planning Project of Science and Technology Development Fund (Grant No. 2013JG03, XZ, ZGS).
+#&gt; 3                                                                                                                                                                                                                                                                                                                                                                                &lt;NA&gt;
+#&gt; 4 The authors would like to thank Dr. Shin-Ru Shih, Dr. Daniel Hsu, Dr. Hsuan-Yu Chen and the members of the Liu lab for fruitful discussions. The authors would like to thank Yu-Jung Chen, Chin-Shan Loo, Ai-Lin Cheng and Tsui-Yen Fan for technical supports. The authors would also like to thank Academia Sinica Translational Medicine Program for the administrative support.
+#&gt; 5                                                                                                               Derek So had full access to all of the data in the study and takes responsibility for the integrity of the data and the accuracy of the data analysis. We would like to thank ClinicalStudyDataRequest.com for making available the dataset analyzed in this article.
+#&gt;   permissions.copyright.holder
+#&gt; 1                     Xu et al
+#&gt; 2                   Yang et al
+#&gt; 3                   Yang et al
+#&gt; 4                  Huang et al
+#&gt; 5                 So, Knoppers
 #&gt;                                                                                                                                                                                                                           permissions.license
 #&gt; 1 This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
-#&gt; 2 This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+#&gt; 2 This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
 #&gt; 3 This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
-#&gt; 4 This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
-#&gt; 5  This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited
-#&gt;                       permissions.license_url
-#&gt; 1 http://creativecommons.org/licenses/by/4.0/
-#&gt; 2 http://creativecommons.org/licenses/by/4.0/
-#&gt; 3                                        &lt;NA&gt;
-#&gt; 4 http://creativecommons.org/licenses/by/4.0/
-#&gt; 5 http://creativecommons.org/licenses/by/4.0/
-#&gt;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               acknowledgments
-#&gt; 1                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        &lt;NA&gt;
-#&gt; 2                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        &lt;NA&gt;
-#&gt; 3                                                                                                                                                                                                                                                                                                                                                                                                                                                                       We thank Raffaele Mattioli for the useful comments on the manuscript.
-#&gt; 4                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        &lt;NA&gt;
-#&gt; 5 We would like to acknowledge the contributions of Carly Schott, Jon Jakobsson, Simon Eckerström Liedholm, and Lavinia Athanasiu for optimization of PCR reactions and help with preparation and analysis of data from CEL files from different populations. We are also thankful to Maria Isabel Melaragno, Universidade Federal de São Paulo, Brazil, for providing a CEL file from an individual with an isodicentric Y chromosome. Maarten H.D. Larmuseau is a postdoctoral fellow of the FWO-Vlaanderen (Research Foundation-Flanders).</code></pre>
+#&gt; 4 This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+#&gt; 5 This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+#&gt;                       permissions.license_url permissions.copyright.year
+#&gt; 1                                        &lt;NA&gt;                       &lt;NA&gt;
+#&gt; 2 http://creativecommons.org/licenses/by/4.0/                       2016
+#&gt; 3                                        &lt;NA&gt;                       2013
+#&gt; 4 http://creativecommons.org/licenses/by/4.0/                       2016
+#&gt; 5 http://creativecommons.org/licenses/by/4.0/                       2017</code></pre>
 
 </div>
 </div>
@@ -303,7 +306,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="fetch.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="supplementary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="table.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -13,7 +13,7 @@ description: "fulltext manual"
 
 # fulltext manual
 
-An R package to search across and get full text for open access journals
+An R package to search across and get full text for journal articles
 
 The `fulltext` package makes it easy to do text-mining by supporting the following steps:
 
