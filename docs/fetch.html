@@ -159,8 +159,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.3" data-path="fetch.html"><a href="fetch.html#fetch-usage"><i class="fa fa-check"></i><b>8.3</b> Usage</a></li>
 <li class="chapter" data-level="8.4" data-path="fetch.html"><a href="fetch.html#fetch-errors"><i class="fa fa-check"></i><b>8.4</b> Errors</a></li>
 <li class="chapter" data-level="8.5" data-path="fetch.html"><a href="fetch.html#fetch-cleanup"><i class="fa fa-check"></i><b>8.5</b> Cleanup</a></li>
-<li class="chapter" data-level="8.6" data-path="fetch.html"><a href="fetch.html#fetch-notes"><i class="fa fa-check"></i><b>8.6</b> Notes about specific data sources</a><ul>
-<li class="chapter" data-level="8.6.1" data-path="fetch.html"><a href="fetch.html#elsevier"><i class="fa fa-check"></i><b>8.6.1</b> Elsevier</a></li>
+<li class="chapter" data-level="8.6" data-path="fetch.html"><a href="fetch.html#fetch-internals"><i class="fa fa-check"></i><b>8.6</b> Internals</a></li>
+<li class="chapter" data-level="8.7" data-path="fetch.html"><a href="fetch.html#fetch-notes"><i class="fa fa-check"></i><b>8.7</b> Notes about specific data sources</a><ul>
+<li class="chapter" data-level="8.7.1" data-path="fetch.html"><a href="fetch.html#elsevier"><i class="fa fa-check"></i><b>8.7.1</b> Elsevier</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Chunks</a><ul>
@@ -386,10 +387,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The above section about errors suggests that we often run into errors. When we run into errors downloading full text we capture the error message, if there is one, and delete the file we were trying to create. That is, we cleanup upon hitting an error such that you shouldn’t end up with blank files on your machine. Let us know if this isn’t true in your case and we’ll get it fixed.</p>
 <p>Note that even if you exit out of the all to <code>ft_get()</code> it should clean up a file if it is not completey done creating it, so you shouldn’t end up with bad files if you exit out of the function when it’s running.</p>
 </div>
+<div id="fetch-internals" class="section level2">
+<h2><span class="header-section-number">8.6</span> Internals</h2>
+<p>What’s going on under the hood in <code>ft_get()</code>? It goes like this:</p>
+<p>xxxx</p>
+</div>
 <div id="fetch-notes" class="section level2">
-<h2><span class="header-section-number">8.6</span> Notes about specific data sources</h2>
+<h2><span class="header-section-number">8.7</span> Notes about specific data sources</h2>
 <div id="elsevier" class="section level3">
-<h3><span class="header-section-number">8.6.1</span> Elsevier</h3>
+<h3><span class="header-section-number">8.7.1</span> Elsevier</h3>
 <p>When you don’t have access to the full text of Elsevier articles they will often still give you something, but it will sometimes be just metadata of the paper or sometimes an abstract if you’re lucky. When you go to extract the text this will be rather obvious.</p>
 
 </div>

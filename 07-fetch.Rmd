@@ -105,6 +105,11 @@ Note that even if you exit out of the all to `ft_get()` it should clean up a fil
 if it is not completey done creating it, so you shouldn't end up with bad files
 if you exit out of the function when it's running.
 
+## Internals {#fetch-internals}
+
+What's going on under the hood in `ft_get()`? It goes like this:
+
+xxxx
 
 ## Notes about specific data sources {#fetch-notes}
 
