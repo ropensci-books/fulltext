@@ -148,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="search.html"><a href="search.html#search-usage"><i class="fa fa-check"></i><b>5.1</b> Usage</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i><b>6</b> Abstract</a><ul>
-<li class="chapter" data-level="6.1" data-path="abstract.html"><a href="abstract.html#usage"><i class="fa fa-check"></i><b>6.1</b> Usage</a></li>
+<li class="chapter" data-level="6.1" data-path="abstract.html"><a href="abstract.html#abstract-usage"><i class="fa fa-check"></i><b>6.1</b> Usage</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>7</b> Links</a><ul>
 <li class="chapter" data-level="7.1" data-path="links.html"><a href="links.html#links-usage"><i class="fa fa-check"></i><b>7.1</b> Usage</a></li>
@@ -157,9 +157,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="fetch.html"><a href="fetch.html#fetch-data-formats"><i class="fa fa-check"></i><b>8.1</b> Data formats</a></li>
 <li class="chapter" data-level="8.2" data-path="fetch.html"><a href="fetch.html#how-data-is-stored"><i class="fa fa-check"></i><b>8.2</b> How data is stored</a></li>
 <li class="chapter" data-level="8.3" data-path="fetch.html"><a href="fetch.html#fetch-usage"><i class="fa fa-check"></i><b>8.3</b> Usage</a></li>
+<li class="chapter" data-level="8.4" data-path="fetch.html"><a href="fetch.html#fetch-errors"><i class="fa fa-check"></i><b>8.4</b> Errors</a></li>
+<li class="chapter" data-level="8.5" data-path="fetch.html"><a href="fetch.html#fetch-cleanup"><i class="fa fa-check"></i><b>8.5</b> Cleanup</a></li>
+<li class="chapter" data-level="8.6" data-path="fetch.html"><a href="fetch.html#fetch-notes"><i class="fa fa-check"></i><b>8.6</b> Notes about specific data sources</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="fetch.html"><a href="fetch.html#elsevier"><i class="fa fa-check"></i><b>8.6.1</b> Elsevier</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Chunks</a><ul>
 <li class="chapter" data-level="9.1" data-path="chunks.html"><a href="chunks.html#chunks-usage"><i class="fa fa-check"></i><b>9.1</b> Usage</a></li>
+<li class="chapter" data-level="9.2" data-path="chunks.html"><a href="chunks.html#chunks-tabularize"><i class="fa fa-check"></i><b>9.2</b> Tabularize</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>10</b> Supplementary</a></li>
 <li class="chapter" data-level="11" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>11</b> Use cases</a></li>
@@ -223,15 +229,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 140231; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 140275; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>Then pass the output of that directly to <code>ft_links</code></p>
 <div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">(out &lt;-<span class="st"> </span><span class="kw">ft_links</span>(res1))</a></code></pre></div>
 <pre><code>#&gt; &lt;fulltext links&gt;
 #&gt; [Found] 10 
-#&gt; [IDs] ID_29326987 ID_29326983 ID_29326840 ID_29319501 ID_29313491
-#&gt;      ID_29211852 ID_27902363 ID_27758730 ID_27566661 ID_27436048 ...</code></pre>
+#&gt; [IDs] ID_29333349 ID_29333344 ID_29321529 ID_29321528 ID_29321519
+#&gt;      ID_29321473 ID_29319501 ID_29317655 ID_29317639 ID_29317616 ...</code></pre>
 
 </div>
 </div>

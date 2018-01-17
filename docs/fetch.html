@@ -148,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="search.html"><a href="search.html#search-usage"><i class="fa fa-check"></i><b>5.1</b> Usage</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i><b>6</b> Abstract</a><ul>
-<li class="chapter" data-level="6.1" data-path="abstract.html"><a href="abstract.html#usage"><i class="fa fa-check"></i><b>6.1</b> Usage</a></li>
+<li class="chapter" data-level="6.1" data-path="abstract.html"><a href="abstract.html#abstract-usage"><i class="fa fa-check"></i><b>6.1</b> Usage</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>7</b> Links</a><ul>
 <li class="chapter" data-level="7.1" data-path="links.html"><a href="links.html#links-usage"><i class="fa fa-check"></i><b>7.1</b> Usage</a></li>
@@ -157,9 +157,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="fetch.html"><a href="fetch.html#fetch-data-formats"><i class="fa fa-check"></i><b>8.1</b> Data formats</a></li>
 <li class="chapter" data-level="8.2" data-path="fetch.html"><a href="fetch.html#how-data-is-stored"><i class="fa fa-check"></i><b>8.2</b> How data is stored</a></li>
 <li class="chapter" data-level="8.3" data-path="fetch.html"><a href="fetch.html#fetch-usage"><i class="fa fa-check"></i><b>8.3</b> Usage</a></li>
+<li class="chapter" data-level="8.4" data-path="fetch.html"><a href="fetch.html#fetch-errors"><i class="fa fa-check"></i><b>8.4</b> Errors</a></li>
+<li class="chapter" data-level="8.5" data-path="fetch.html"><a href="fetch.html#fetch-cleanup"><i class="fa fa-check"></i><b>8.5</b> Cleanup</a></li>
+<li class="chapter" data-level="8.6" data-path="fetch.html"><a href="fetch.html#fetch-notes"><i class="fa fa-check"></i><b>8.6</b> Notes about specific data sources</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="fetch.html"><a href="fetch.html#elsevier"><i class="fa fa-check"></i><b>8.6.1</b> Elsevier</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Chunks</a><ul>
 <li class="chapter" data-level="9.1" data-path="chunks.html"><a href="chunks.html#chunks-usage"><i class="fa fa-check"></i><b>9.1</b> Usage</a></li>
+<li class="chapter" data-level="9.2" data-path="chunks.html"><a href="chunks.html#chunks-tabularize"><i class="fa fa-check"></i><b>9.2</b> Tabularize</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>10</b> Supplementary</a></li>
 <li class="chapter" data-level="11" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>11</b> Use cases</a></li>
@@ -237,7 +243,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt;  [7] &quot;elife&quot;               &quot;elsevier&quot;            &quot;entrez&quot;             
 #&gt; [10] &quot;frontiersin&quot;         &quot;ieee&quot;                &quot;informa&quot;            
 #&gt; [13] &quot;peerj&quot;               &quot;pensoft&quot;             &quot;plos&quot;               
-#&gt; [16] &quot;royalsocchem&quot;        &quot;scientificsocieties&quot; &quot;wiley&quot;</code></pre>
+#&gt; [16] &quot;pnas&quot;                &quot;royalsocchem&quot;        &quot;scientificsocieties&quot;
+#&gt; [19] &quot;wiley&quot;</code></pre>
 <p>The simplest approach is passing a DOI directly to <code>ft_get</code></p>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>))</a></code></pre></div>
 <pre><code>#&gt; &lt;fulltext text&gt;
@@ -344,7 +351,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 
 #&gt; $opts$type
 #&gt; [1] &quot;xml&quot;</code></pre>
+</div>
+<div id="fetch-errors" class="section level2">
+<h2><span class="header-section-number">8.4</span> Errors</h2>
+<p>A new element of the results of <code>ft_get()</code> is the <code>error</code> slot in each list.</p>
+<p>If the <code>error</code> slot is <code>NULL</code> then there is no error.</p>
+<p>If the <code>error</code> slot is not <code>NULL</code> there was an error, and the error message will be a character string in that slot.</p>
+<p>Possible errors include:</p>
+<ul>
+<li>An error reported by the web service
+<ul>
+<li>e.g. “Timeout was reached: Connection timed out after 10003 milliseconds”</li>
+</ul></li>
+<li>No link found
+<ul>
+<li>e.g. “no link found from Crossref” OR “has no link available”</li>
+</ul></li>
+<li>We attempted to fetch the article but the content type wasn’t what was expected. In this case we skip to the next article.
+<ul>
+<li>e.g. “type was supposed to be <code>pdf</code>, but was <code>text/html; charset=UTF-8</code>”</li>
+</ul></li>
+<li>Weird uninformative errors
+<ul>
+<li>e.g. “Recv failure: Operation timed out” OR “Operation was aborted by an application callback”</li>
+</ul></li>
+<li>An error associated mostly with PLOS. PLOS gives DOIs for parts of articles, like figures, so it doesn’t make sense to get full text of a figure.
+<ul>
+<li>e.g., “was not found or may be a DOI for a part of an article”</li>
+</ul></li>
+</ul>
+</div>
+<div id="fetch-cleanup" class="section level2">
+<h2><span class="header-section-number">8.5</span> Cleanup</h2>
+<p>The above section about errors suggests that we often run into errors. When we run into errors downloading full text we capture the error message, if there is one, and delete the file we were trying to create. That is, we cleanup upon hitting an error such that you shouldn’t end up with blank files on your machine. Let us know if this isn’t true in your case and we’ll get it fixed.</p>
+<p>Note that even if you exit out of the all to <code>ft_get()</code> it should clean up a file if it is not completey done creating it, so you shouldn’t end up with bad files if you exit out of the function when it’s running.</p>
+</div>
+<div id="fetch-notes" class="section level2">
+<h2><span class="header-section-number">8.6</span> Notes about specific data sources</h2>
+<div id="elsevier" class="section level3">
+<h3><span class="header-section-number">8.6.1</span> Elsevier</h3>
+<p>When you don’t have access to the full text of Elsevier articles they will often still give you something, but it will sometimes be just metadata of the paper or sometimes an abstract if you’re lucky. When you go to extract the text this will be rather obvious.</p>
 
+</div>
 </div>
 </div>
             </section>

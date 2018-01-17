@@ -20,7 +20,7 @@ In addition, there are cases in which you really only need abstracts regardless 
 cat(paste(" -", paste(ft_abstract_ls(), collapse = "\n - ")))
 ```
 
-## Usage
+## Usage {#abstract-usage}
 
 ```{r}
 library(fulltext)

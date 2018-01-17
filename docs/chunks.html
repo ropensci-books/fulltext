@@ -148,7 +148,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1" data-path="search.html"><a href="search.html#search-usage"><i class="fa fa-check"></i><b>5.1</b> Usage</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i><b>6</b> Abstract</a><ul>
-<li class="chapter" data-level="6.1" data-path="abstract.html"><a href="abstract.html#usage"><i class="fa fa-check"></i><b>6.1</b> Usage</a></li>
+<li class="chapter" data-level="6.1" data-path="abstract.html"><a href="abstract.html#abstract-usage"><i class="fa fa-check"></i><b>6.1</b> Usage</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>7</b> Links</a><ul>
 <li class="chapter" data-level="7.1" data-path="links.html"><a href="links.html#links-usage"><i class="fa fa-check"></i><b>7.1</b> Usage</a></li>
@@ -157,9 +157,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.1" data-path="fetch.html"><a href="fetch.html#fetch-data-formats"><i class="fa fa-check"></i><b>8.1</b> Data formats</a></li>
 <li class="chapter" data-level="8.2" data-path="fetch.html"><a href="fetch.html#how-data-is-stored"><i class="fa fa-check"></i><b>8.2</b> How data is stored</a></li>
 <li class="chapter" data-level="8.3" data-path="fetch.html"><a href="fetch.html#fetch-usage"><i class="fa fa-check"></i><b>8.3</b> Usage</a></li>
+<li class="chapter" data-level="8.4" data-path="fetch.html"><a href="fetch.html#fetch-errors"><i class="fa fa-check"></i><b>8.4</b> Errors</a></li>
+<li class="chapter" data-level="8.5" data-path="fetch.html"><a href="fetch.html#fetch-cleanup"><i class="fa fa-check"></i><b>8.5</b> Cleanup</a></li>
+<li class="chapter" data-level="8.6" data-path="fetch.html"><a href="fetch.html#fetch-notes"><i class="fa fa-check"></i><b>8.6</b> Notes about specific data sources</a><ul>
+<li class="chapter" data-level="8.6.1" data-path="fetch.html"><a href="fetch.html#elsevier"><i class="fa fa-check"></i><b>8.6.1</b> Elsevier</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Chunks</a><ul>
 <li class="chapter" data-level="9.1" data-path="chunks.html"><a href="chunks.html#chunks-usage"><i class="fa fa-check"></i><b>9.1</b> Usage</a></li>
+<li class="chapter" data-level="9.2" data-path="chunks.html"><a href="chunks.html#chunks-tabularize"><i class="fa fa-check"></i><b>9.2</b> Tabularize</a></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>10</b> Supplementary</a></li>
 <li class="chapter" data-level="11" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>11</b> Use cases</a></li>
@@ -186,10 +192,107 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="chunks" class="section level1">
 <h1><span class="header-section-number">Chapter 9</span> Chunks</h1>
-<p>chunks</p>
+<p>The <code>ft_chunks</code> function tries to make it easy to extract the parts of articles you want. This only works with XML format articles though since although we can get text out of PDFs, there is no machine readable way to say “I want the abstract”.</p>
+<p>In addition to only working with XML, this function only has knowledge about a few select publishers for which we’ve coded knowledge about how to get different sections of the article. Not all publishers use the same format XML - so each publisher is slightly different for how to get to each section. That is, to get to the abstract requires slightly different xpath for publisher A vs. publisher B vs. publisher C.</p>
 <div id="chunks-usage" class="section level2">
 <h2><span class="header-section-number">9.1</span> Usage</h2>
-<p>asdafadf</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">library</span>(fulltext)</a></code></pre></div>
+<p>Get a full text article</p>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>, <span class="dt">from=</span><span class="st">&#39;plos&#39;</span>)</a></code></pre></div>
+<p>Note that unlike previous version of <code>fulltext</code> you now have to collect (<code>ft_collect()</code>) the text from the XML file on disk. Then you can pass to <code>ft_chunks()</code>, here to get authors.</p>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">x <span class="op">%&gt;%</span><span class="st"> </span>ft_collect <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="dt">what=</span><span class="st">&quot;authors&quot;</span>)</a></code></pre></div>
+<pre><code>#&gt; $plos
+#&gt; $plos$`10.1371/journal.pone.0086169`
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[1]]
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[1]]$given_names
+#&gt; [1] &quot;Katie&quot;
+#&gt; 
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[1]]$surname
+#&gt; [1] &quot;Hinde&quot;
+#&gt; 
+#&gt; 
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[2]]
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[2]]$given_names
+#&gt; [1] &quot;Abigail J.&quot;
+#&gt; 
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[2]]$surname
+#&gt; [1] &quot;Carpenter&quot;
+#&gt; 
+#&gt; 
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[3]]
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[3]]$given_names
+#&gt; [1] &quot;John S.&quot;
+#&gt; 
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[3]]$surname
+#&gt; [1] &quot;Clay&quot;
+#&gt; 
+#&gt; 
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[4]]
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[4]]$given_names
+#&gt; [1] &quot;Barry J.&quot;
+#&gt; 
+#&gt; $plos$`10.1371/journal.pone.0086169`$authors[[4]]$surname
+#&gt; [1] &quot;Bradford&quot;</code></pre>
+<p>In another example, let’s search for PLOS articles.</p>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" data-line-number="1"><span class="kw">library</span>(<span class="st">&quot;rplos&quot;</span>)</a>
+<a class="sourceLine" id="cb48-2" data-line-number="2">(dois &lt;-<span class="st"> </span><span class="kw">searchplos</span>(<span class="dt">q=</span><span class="st">&quot;*:*&quot;</span>, <span class="dt">fl=</span><span class="st">&#39;id&#39;</span>,</a>
+<a class="sourceLine" id="cb48-3" data-line-number="3">   <span class="dt">fq=</span><span class="kw">list</span>(<span class="st">&#39;doc_type:full&#39;</span>,<span class="st">&quot;article_type:</span><span class="ch">\&quot;</span><span class="st">research article</span><span class="ch">\&quot;</span><span class="st">&quot;</span>),</a>
+<a class="sourceLine" id="cb48-4" data-line-number="4">     <span class="dt">limit=</span><span class="dv">5</span>)<span class="op">$</span>data<span class="op">$</span>id)</a></code></pre></div>
+<pre><code>#&gt; [1] &quot;10.1371/journal.pone.0044136&quot; &quot;10.1371/journal.pone.0155491&quot;
+#&gt; [3] &quot;10.1371/journal.pone.0058100&quot; &quot;10.1371/journal.pone.0168627&quot;
+#&gt; [5] &quot;10.1371/journal.pone.0184491&quot;</code></pre>
+<p>Then get the full text</p>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(dois, <span class="dt">from=</span><span class="st">&quot;plos&quot;</span>)</a></code></pre></div>
+<p>Then pull out various sections of each article.</p>
+<blockquote>
+<p>remember to pull out the full text first</p>
+</blockquote>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ft_collect</span>(x)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" data-line-number="1">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;front&quot;</span>)</a>
+<a class="sourceLine" id="cb52-2" data-line-number="2">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;body&quot;</span>)</a>
+<a class="sourceLine" id="cb52-3" data-line-number="3">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;back&quot;</span>)</a>
+<a class="sourceLine" id="cb52-4" data-line-number="4">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;history&quot;</span>)</a>
+<a class="sourceLine" id="cb52-5" data-line-number="5">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;authors&quot;</span>)</a>
+<a class="sourceLine" id="cb52-6" data-line-number="6">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="kw">c</span>(<span class="st">&quot;doi&quot;</span>,<span class="st">&quot;categories&quot;</span>))</a>
+<a class="sourceLine" id="cb52-7" data-line-number="7">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;all&quot;</span>)</a>
+<a class="sourceLine" id="cb52-8" data-line-number="8">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;publisher&quot;</span>)</a>
+<a class="sourceLine" id="cb52-9" data-line-number="9">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;acknowledgments&quot;</span>)</a>
+<a class="sourceLine" id="cb52-10" data-line-number="10">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;permissions&quot;</span>)</a>
+<a class="sourceLine" id="cb52-11" data-line-number="11">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;journal_meta&quot;</span>)</a>
+<a class="sourceLine" id="cb52-12" data-line-number="12">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="st">&quot;article_meta&quot;</span>)</a></code></pre></div>
+</div>
+<div id="chunks-tabularize" class="section level2">
+<h2><span class="header-section-number">9.2</span> Tabularize</h2>
+<p>The function <code>ft_tabularize()</code> is useful for coercing the output of <code>ft_chunks()</code> into a data.frame, the lingua franca of data work in R.</p>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">x <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb53-2" data-line-number="2"><span class="st">    </span><span class="kw">ft_chunks</span>(<span class="kw">c</span>(<span class="st">&quot;acknowledgments&quot;</span>, <span class="st">&quot;permissions&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb53-3" data-line-number="3"><span class="st">    </span><span class="kw">ft_tabularize</span>()</a></code></pre></div>
+<pre><code>#&gt; $plos
+#&gt;                                                                                                                                                                                                                                                                                                                                                                       acknowledgments
+#&gt; 1                                                                                                                                                                                                                                         The authors thank Dr. Tong Huang and Dr. Jingyi Yuan at Zhenhai Lianhua Hospital, Ningbo, China for their valuable work in data collection.
+#&gt; 2                     This study was funded by the National Natural Science Foundation of China (Grant No. 31301222, QY, XZ, YPH, ZGS), Science and Technology Committee of Shanghai (Grant No. 12JC1407601, YG, JMW, HJS, JW), and the Shanghai Municipal Commission of Health and Family Planning Project of Science and Technology Development Fund (Grant No. 2013JG03, XZ, ZGS).
+#&gt; 3                                                                                                                                                                                                                                                                                                                                                                                &lt;NA&gt;
+#&gt; 4 The authors would like to thank Dr. Shin-Ru Shih, Dr. Daniel Hsu, Dr. Hsuan-Yu Chen and the members of the Liu lab for fruitful discussions. The authors would like to thank Yu-Jung Chen, Chin-Shan Loo, Ai-Lin Cheng and Tsui-Yen Fan for technical supports. The authors would also like to thank Academia Sinica Translational Medicine Program for the administrative support.
+#&gt; 5                                                                                                               Derek So had full access to all of the data in the study and takes responsibility for the integrity of the data and the accuracy of the data analysis. We would like to thank ClinicalStudyDataRequest.com for making available the dataset analyzed in this article.
+#&gt;   permissions.copyright.holder
+#&gt; 1                     Xu et al
+#&gt; 2                   Yang et al
+#&gt; 3                   Yang et al
+#&gt; 4                  Huang et al
+#&gt; 5                 So, Knoppers
+#&gt;                                                                                                                                                                                                                           permissions.license
+#&gt; 1 This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+#&gt; 2 This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+#&gt; 3 This is an open-access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+#&gt; 4 This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+#&gt; 5 This is an open access article distributed under the terms of the Creative Commons Attribution License, which permits unrestricted use, distribution, and reproduction in any medium, provided the original author and source are credited.
+#&gt;                       permissions.license_url permissions.copyright.year
+#&gt; 1                                        &lt;NA&gt;                       &lt;NA&gt;
+#&gt; 2 http://creativecommons.org/licenses/by/4.0/                       2016
+#&gt; 3                                        &lt;NA&gt;                       2013
+#&gt; 4 http://creativecommons.org/licenses/by/4.0/                       2016
+#&gt; 5 http://creativecommons.org/licenses/by/4.0/                       2017</code></pre>
 
 </div>
 </div>
