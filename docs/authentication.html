@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>fulltext manual</title>
   <meta name="description" content="fulltext manual">
-  <meta name="generator" content="bookdown 0.5.10 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="fulltext manual" />
   <meta property="og:type" content="book" />
@@ -198,12 +198,34 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h1><span class="header-section-number">Chapter 4</span> Authentication</h1>
 <p>Some data sources require authentication. Here’s a breakdown of how to do authentication by data source:</p>
 <ul>
-<li><strong>BMC</strong>: BMC is integrated into Springer Publishers now, and that API requires an API key. Get your key by signing up at <a href="https://dev.springer.com/" class="uri">https://dev.springer.com/</a>, then you’ll get a key. Pass the key to a named parameter <code>key</code> to <code>bmcopts</code>. Or, save your key in your <code>.Renviron</code> file as <code>SPRINGER_KEY</code>, and we’ll read it in for you, and you don’t have to pass in anything.</li>
-<li><strong>Scopus</strong>: Scopus requires an API key to search their service. Go to <a href="https://dev.elsevier.com/index.html" class="uri">https://dev.elsevier.com/index.html</a>, register for an account, then when you’re in your account, create an API key. Pass in as variable <code>key</code> to <code>scopusopts</code>, or store your key under the name <code>ELSEVIER_SCOPUS_KEY</code> as an environment variable in <code>.Renviron</code>, and we’ll read it in for you. See <code>?Startup</code> in R for help.</li>
-<li><strong>Microsoft</strong>: Get a key by creating an Azure account at <a href="https://www.microsoft.com/cognitive-services/en-us/subscriptions" class="uri">https://www.microsoft.com/cognitive-services/en-us/subscriptions</a>, then requesting a key for <strong>Academic Knowledge API</strong> within <strong>Cognitive Services</strong>. Store it as an environment variable in your <code>.Renviron</code> file - see [Startup] for help. Pass your API key into <code>maopts</code> as a named element in a list like <code>list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))</code></li>
-<li><strong>Crossref</strong>: Crossref encourages requests with contact information (an email address) and will forward you to a dedicated API cluster for improved performance when you share your email address with them. <a href="https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service" class="uri">https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service</a> To pass your email address to Crossref via this client, store it as an environment variable in <code>.Renviron</code> like <code>crossref_email = name@example.com</code></li>
+<li><strong>BMC</strong>: BMC is integrated into Springer Publishers now,
+and that API requires an API key. Get your key by signing up at
+<a href="https://dev.springer.com/" class="uri">https://dev.springer.com/</a>, then you’ll get a key. Pass the key to a
+named parameter <code>key</code> to <code>bmcopts</code>. Or, save your key in your <code>.Renviron</code>
+file as <code>SPRINGER_KEY</code>, and we’ll read it in for you, and you don’t
+have to pass in anything.</li>
+<li><strong>Scopus</strong>: Scopus requires an API key to search their service. Go to
+<a href="https://dev.elsevier.com/index.html" class="uri">https://dev.elsevier.com/index.html</a>, register for an account,
+then when you’re in your account, create an API key. Pass in as variable
+<code>key</code> to <code>scopusopts</code>, or store your key under the name
+<code>ELSEVIER_SCOPUS_KEY</code> as an environment variable in <code>.Renviron</code>, and
+we’ll read it in for you. See <code>?Startup</code> in R for help.</li>
+<li><strong>Microsoft</strong>: Get a key by creating an Azure account at
+<a href="https://www.microsoft.com/cognitive-services/en-us/subscriptions" class="uri">https://www.microsoft.com/cognitive-services/en-us/subscriptions</a>,
+then requesting a key for <strong>Academic Knowledge API</strong> within
+<strong>Cognitive Services</strong>. Store it as an environment variable in your
+<code>.Renviron</code> file - see [Startup] for help. Pass your
+API key into <code>maopts</code> as a named element in a list like
+<code>list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))</code></li>
+<li><strong>Crossref</strong>: Crossref encourages requests with contact information
+(an email address) and will forward you to a dedicated API cluster
+for improved performance when you share your email address with them.
+<a href="https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service" class="uri">https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service</a>
+To pass your email address to Crossref via this client, store it
+as an environment variable in <code>.Renviron</code> like <code>crossref_email = name@example.com</code></li>
 </ul>
-<p>None needed for <strong>PLOS</strong>, <strong>eLife</strong>, <strong>arxiv</strong>, <strong>biorxiv</strong>, <strong>Euro PMC</strong>, or <strong>Entrez</strong> (though soon you will get better rate limtits with auth for Entrez)</p>
+<p>None needed for <strong>PLOS</strong>, <strong>eLife</strong>, <strong>arxiv</strong>, <strong>biorxiv</strong>, <strong>Euro PMC</strong>, or
+<strong>Entrez</strong> (though soon you will get better rate limtits with auth for Entrez)</p>
 
 </div>
             </section>

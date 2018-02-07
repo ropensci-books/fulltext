@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>fulltext manual</title>
   <meta name="description" content="fulltext manual">
-  <meta name="generator" content="bookdown 0.5.10 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="fulltext manual" />
   <meta property="og:type" content="book" />
@@ -204,7 +204,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="https://arxiv.org">arXiv</a> - via the <code>aRxiv</code> package</li>
 <li><a href="http://biorxiv.org/">bioRxiv</a> - via the <code>biorxivr</code> package</li>
 <li><a href="http://www.ncbi.nlm.nih.gov/">PMC/Pubmed via Entrez</a> - via the <code>rentrez</code> package</li>
-<li>Many more are supported via the above sources (e.g., <em>Royal Society Open Science</em> is available via Pubmed)</li>
+<li>Many more are supported via the above sources (e.g., <em>Royal Society Open Science</em> is
+available via Pubmed)</li>
 <li>We <strong>will</strong> add more, as publishers open up, and as we have time…See the <a href="https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743">master list here</a></li>
 </ul>
 <p>Data sources will differ by the task you are doing in <code>fulltext</code>.</p>
@@ -276,9 +277,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>wiley</li>
 </ul>
 <p>You can see what plugins there are with <code>ft_get_ls()</code></p>
-<p>But there are also other options within <code>ft_get()</code> that we take advantage of. This is because DOIs (Digital Object Identifiers) which you feed into <code>ft_get()</code> have a prefix that is affiliated with a specific publisher. We can then decide whether to use one of our plugins listed in <code>ft_get_ls()</code> or something else. If we don’t have a plugin we first look to see if Crossref has the full text link to either XML or PDF for the DOI. If not, we then go to an API rOpenSci maintains at <a href="https://ftdoi.org" class="uri">https://ftdoi.org</a><a href="literature.html#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. This API has a set of rules for each publisher - some of which are simple rules like add a URL plus a DOI - but some require an HTTP request then some string manipulation.</p>
+<p>But there are also other options within <code>ft_get()</code> that we take advantage of. This is because DOIs (Digital Object Identifiers) which you feed into <code>ft_get()</code> have a prefix that is affiliated with a specific publisher. We can then decide whether to use one of our plugins listed in <code>ft_get_ls()</code> or something else. If we don’t have a plugin we first look to see if Crossref has the full text link to either XML or PDF for the DOI. If not, we then go to an API rOpenSci maintains at <a href="https://ftdoi.org" class="uri">https://ftdoi.org</a><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. This API has a set of rules for each publisher - some of which are simple rules like add a URL plus a DOI - but some require an HTTP request then some string manipulation.</p>
 
 </div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>You can use the ftdoi API from R with the <a href="https://github.com/ropenscilabs/rftdoi" class="uri">https://github.com/ropenscilabs/rftdoi</a> package.<a href="data-sources.html#fnref1" class="footnote-back">↩</a></p></li>
+</ol>
 </div>
             </section>
 

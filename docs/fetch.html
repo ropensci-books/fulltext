@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>fulltext manual</title>
   <meta name="description" content="fulltext manual">
-  <meta name="generator" content="bookdown 0.5.10 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="fulltext manual" />
   <meta property="og:type" content="book" />
@@ -360,7 +360,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.4</span> Errors</h2>
 <p>A new element of the results of <code>ft_get()</code> is the <code>error</code> slot in each list.</p>
 <p>If the <code>error</code> slot is <code>NULL</code> then there is no error.</p>
-<p>If the <code>error</code> slot is not <code>NULL</code> there was an error, and the error message will be a character string in that slot.</p>
+<p>If the <code>error</code> slot is not <code>NULL</code> there was an error, and the error message
+will be a character string in that slot.</p>
 <p>Possible errors include:</p>
 <ul>
 <li>An error reported by the web service
@@ -387,8 +388,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="fetch-cleanup" class="section level2">
 <h2><span class="header-section-number">8.5</span> Cleanup</h2>
-<p>The above section about errors suggests that we often run into errors. When we run into errors downloading full text we capture the error message, if there is one, and delete the file we were trying to create. That is, we cleanup upon hitting an error such that you shouldn’t end up with blank files on your machine. Let us know if this isn’t true in your case and we’ll get it fixed.</p>
-<p>Note that even if you exit out of the all to <code>ft_get()</code> it should clean up a file if it is not completey done creating it, so you shouldn’t end up with bad files if you exit out of the function when it’s running.</p>
+<p>The above section about errors suggests that we often run into errors. When we run into errors
+downloading full text we capture the error message, if there is one, and delete the file we
+were trying to create. That is, we cleanup upon hitting an error such that you shouldn’t end
+up with blank files on your machine. Let us know if this isn’t true in your case and we’ll
+get it fixed.</p>
+<p>Note that even if you exit out of the all to <code>ft_get()</code> it should clean up a file
+if it is not completey done creating it, so you shouldn’t end up with bad files
+if you exit out of the function when it’s running.</p>
 </div>
 <div id="fetch-internals" class="section level2">
 <h2><span class="header-section-number">8.6</span> Internals</h2>
@@ -399,7 +406,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h2><span class="header-section-number">8.7</span> Notes about specific data sources</h2>
 <div id="elsevier" class="section level3">
 <h3><span class="header-section-number">8.7.1</span> Elsevier</h3>
-<p>When you don’t have access to the full text of Elsevier articles they will often still give you something, but it will sometimes be just metadata of the paper or sometimes an abstract if you’re lucky. When you go to extract the text this will be rather obvious.</p>
+<p>When you don’t have access to the full text of Elsevier articles they will
+often still give you something, but it will sometimes be just metadata
+of the paper or sometimes an abstract if you’re lucky. When you go to extract
+the text this will be rather obvious.</p>
 
 </div>
 </div>

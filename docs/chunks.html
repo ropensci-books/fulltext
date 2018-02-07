@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>fulltext manual</title>
   <meta name="description" content="fulltext manual">
-  <meta name="generator" content="bookdown 0.5.10 and GitBook 2.6.7">
+  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
 
   <meta property="og:title" content="fulltext manual" />
   <meta property="og:type" content="book" />
@@ -203,7 +203,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1"><span class="kw">library</span>(fulltext)</a></code></pre></div>
 <p>Get a full text article</p>
 <div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" data-line-number="1">x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>, <span class="dt">from=</span><span class="st">&#39;plos&#39;</span>)</a></code></pre></div>
-<p>Note that unlike previous version of <code>fulltext</code> you now have to collect (<code>ft_collect()</code>) the text from the XML file on disk. Then you can pass to <code>ft_chunks()</code>, here to get authors.</p>
+<p>Note that unlike previous version of <code>fulltext</code> you now have to collect (<code>ft_collect()</code>) the text from the XML file on disk.
+Then you can pass to <code>ft_chunks()</code>, here to get authors.</p>
 <div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" data-line-number="1">x <span class="op">%&gt;%</span><span class="st"> </span>ft_collect <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">ft_chunks</span>(<span class="dt">what=</span><span class="st">&quot;authors&quot;</span>)</a></code></pre></div>
 <pre><code>#&gt; $plos
 #&gt; $plos$`10.1371/journal.pone.0086169`
@@ -268,7 +269,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="chunks-tabularize" class="section level2">
 <h2><span class="header-section-number">9.2</span> Tabularize</h2>
-<p>The function <code>ft_tabularize()</code> is useful for coercing the output of <code>ft_chunks()</code> into a data.frame, the lingua franca of data work in R.</p>
+<p>The function <code>ft_tabularize()</code> is useful for coercing the output of <code>ft_chunks()</code> into a data.frame,
+the lingua franca of data work in R.</p>
 <div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1">x <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb53-2" data-line-number="2"><span class="st">    </span><span class="kw">ft_chunks</span>(<span class="kw">c</span>(<span class="st">&quot;acknowledgments&quot;</span>, <span class="st">&quot;permissions&quot;</span>)) <span class="op">%&gt;%</span><span class="st"> </span></a>
 <a class="sourceLine" id="cb53-3" data-line-number="3"><span class="st">    </span><span class="kw">ft_tabularize</span>()</a></code></pre></div>

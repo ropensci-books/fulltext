@@ -1,6 +1,5 @@
 --- 
 title: "fulltext manual"
-# author: "Scott Chamberlain"
 date: "`r paste0('built on ', Sys.Date(), ' - for fulltext v', packageVersion('fulltext'))`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -33,7 +32,7 @@ The `fulltext` package makes it easy to do text-mining by supporting the followi
 ## Citing fulltext
 
 > Scott Chamberlain & Will Pearse (2018). fulltext: Full Text of 'Scholarly' 
-> Articles Across Many Data Sources. R package version 1.0.0.
+> Articles Across Many Data Sources. R package version 1.0.1.
 > https://github.com/ropensci/fulltext
 
 ## Installation
