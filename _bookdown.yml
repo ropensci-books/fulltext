@@ -3,3 +3,13 @@ language:
   ui:
     chapter_name: "Chapter "
 delete_merged_file: true
+bookdown::gitbook:
+  config:
+    sharing:
+      twitter: yes
+      facebook: no
+      google: no
+      linkedin: no
+      weibo: no
+      instapaper: no
+      vk: no

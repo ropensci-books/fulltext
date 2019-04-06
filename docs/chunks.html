@@ -5,21 +5,21 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Chapter 9 Chunks | fulltext manual</title>
-  <meta name="description" content="Chapter 9 Chunks | fulltext manual">
+  <title>Chapter 9 Extracting text | fulltext manual</title>
+  <meta name="description" content="Chapter 9 Extracting text | fulltext manual">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="Chapter 9 Chunks | fulltext manual" />
+  <meta property="og:title" content="Chapter 9 Extracting text | fulltext manual" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Chapter 9 Chunks | fulltext manual" />
+  <meta property="og:description" content="Chapter 9 Extracting text | fulltext manual" />
   <meta name="github-repo" content="ropensci/fulltext-book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Chunks | fulltext manual" />
+  <meta name="twitter:title" content="Chapter 9 Extracting text | fulltext manual" />
   
-  <meta name="twitter:description" content="Chapter 9 Chunks | fulltext manual" />
+  <meta name="twitter:description" content="Chapter 9 Extracting text | fulltext manual" />
   
 
 
@@ -163,9 +163,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.7.1" data-path="fetch.html"><a href="fetch.html#elsevier"><i class="fa fa-check"></i><b>8.7.1</b> Elsevier</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Chunks</a><ul>
+<li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Extracting text</a><ul>
 <li class="chapter" data-level="9.1" data-path="chunks.html"><a href="chunks.html#chunks-usage"><i class="fa fa-check"></i><b>9.1</b> Usage</a></li>
 <li class="chapter" data-level="9.2" data-path="chunks.html"><a href="chunks.html#chunks-tabularize"><i class="fa fa-check"></i><b>9.2</b> Tabularize</a></li>
+<li class="chapter" data-level="9.3" data-path="chunks.html"><a href="chunks.html#chunks-other-inputs"><i class="fa fa-check"></i><b>9.3</b> Other inputs</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chunks.html"><a href="chunks.html#files"><i class="fa fa-check"></i><b>9.3.1</b> Files</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chunks.html"><a href="chunks.html#xml-in-a-string"><i class="fa fa-check"></i><b>9.3.2</b> xml in a string</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chunks.html"><a href="chunks.html#xml2-objects"><i class="fa fa-check"></i><b>9.3.3</b> xml2 objects</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>10</b> Table</a><ul>
 <li class="chapter" data-level="10.1" data-path="table.html"><a href="table.html#table-usage"><i class="fa fa-check"></i><b>10.1</b> Usage</a></li>
@@ -194,17 +199,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="chunks" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Chunks</h1>
-<p>The <code>ft_chunks</code> function tries to make it easy to extract the parts of articles you want. This only works with XML format articles though since although we can get text out of PDFs, there is no machine readable way to say “I want the abstract”.</p>
-<p>In addition to only working with XML, this function only has knowledge about a few select publishers for which we’ve coded knowledge about how to get different sections of the article. Not all publishers use the same format XML - so each publisher is slightly different for how to get to each section. That is, to get to the abstract requires slightly different xpath for publisher A vs. publisher B vs. publisher C.</p>
+<h1><span class="header-section-number">Chapter 9</span> Extracting text</h1>
+<p>Functions for extracting parts of texts used to live inside of <code>fulltext</code>, but have now
+moved to the package <a href="https://github.com/ropensci/pubchunks/">pubchunks</a>.</p>
+<p>The <code>pubchunks::pub_chunks</code> function tries to make it easy to extract the parts of
+articles you want. This only works with XML format articles though since although
+we can get text out of PDFs, there is no machine readable way to say
+“I want the abstract”.</p>
+<p>In addition to only working with XML, this function only has knowledge about a
+select set of publishers for which we’ve encoded knowledge about how to get different
+sections of the article. Not all publishers use the same format XML - so each publisher is
+slightly different for how to get to each section. That is, to get to the abstract
+requires slightly different xpath for publisher A vs. publisher B vs. publisher C.</p>
+<p>An alternative to <code>pubchunks</code> is to use xpath or css selectors yourself to slice and
+dice XML.</p>
 <div id="chunks-usage" class="section level2">
 <h2><span class="header-section-number">9.1</span> Usage</h2>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fulltext)
 <span class="kw">library</span>(pubchunks)</code></pre>
 <p>Get a full text article</p>
 <pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>, <span class="dt">from=</span><span class="st">&#39;plos&#39;</span>)</code></pre>
-<p>Note that unlike previous version of <code>fulltext</code> you now have to collect (<code>ft_collect()</code>) the text from the XML file on disk.
-Then you can pass to <code>pub_chunks()</code>, here to get authors.</p>
+<p>Note that unlike previous versions of <code>fulltext</code> you now have to collect (<code>ft_collect()</code>)
+the text from the XML file on disk. Then you can pass to <code>pub_chunks()</code>, here to get
+authors.</p>
 <pre class="sourceCode r"><code class="sourceCode r">x <span class="op">%&gt;%</span><span class="st"> </span>ft_collect <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;authors&quot;</span>)</code></pre>
 <pre><code>#&gt; $plos
 #&gt; $plos$`10.1371/journal.pone.0086169`
@@ -272,7 +289,73 @@ x &lt;-<span class="st"> </span><span class="kw">pub_tabularize</span>(x)
 #&gt; 3:       plos
 #&gt; 4:       plos
 #&gt; 5:       plos</code></pre>
+</div>
+<div id="chunks-other-inputs" class="section level2">
+<h2><span class="header-section-number">9.3</span> Other inputs</h2>
+<p><code>pub_chunks()</code> works with other inputs besides the output of <code>fulltext::ft_get()</code>.</p>
+<div id="files" class="section level3">
+<h3><span class="header-section-number">9.3.1</span> Files</h3>
+<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;examples/10_1016_0021_8928_59_90156_x.xml&quot;</span>, 
+  <span class="dt">package =</span> <span class="st">&quot;pubchunks&quot;</span>)</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pub_chunks</span>(x, <span class="st">&quot;abstract&quot;</span>)</code></pre>
+<pre><code>#&gt; &lt;pub chunks&gt;
+#&gt;   from: file
+#&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
+#&gt;   sections: abstract
+#&gt;   showing up to first 5: 
+#&gt;    abstract (n=1): Abstract
+#&gt;                
+#&gt;                   This pa ...</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pub_chunks</span>(x, <span class="st">&quot;title&quot;</span>)</code></pre>
+<pre><code>#&gt; &lt;pub chunks&gt;
+#&gt;   from: file
+#&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
+#&gt;   sections: title
+#&gt;   showing up to first 5: 
+#&gt;    title (n=1): On the driving of a piston with a rigid collar int ...</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pub_chunks</span>(x, <span class="st">&quot;authors&quot;</span>)</code></pre>
+<pre><code>#&gt; &lt;pub chunks&gt;
+#&gt;   from: file
+#&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
+#&gt;   sections: authors
+#&gt;   showing up to first 5: 
+#&gt;    authors (n=1): Chetaev, D.N</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pub_chunks</span>(x, <span class="kw">c</span>(<span class="st">&quot;title&quot;</span>, <span class="st">&quot;refs&quot;</span>))</code></pre>
+<pre><code>#&gt; &lt;pub chunks&gt;
+#&gt;   from: file
+#&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
+#&gt;   sections: title, refs
+#&gt;   showing up to first 5: 
+#&gt;    title (n=1): On the driving of a piston with a rigid collar int ...
+#&gt;    refs (n=6): 1.G.N.WatsonTeoriia besselevykh funktsiiTheory of</code></pre>
+<p>The output of <code>pub_chunks()</code> is a list with an S3 class <code>pub_chunks</code> to make
+internal work in the package easier. You can easily see the list structure
+by using <code>unclass()</code>.</p>
+</div>
+<div id="xml-in-a-string" class="section level3">
+<h3><span class="header-section-number">9.3.2</span> xml in a string</h3>
+<pre class="sourceCode r"><code class="sourceCode r">xml &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">readLines</span>(x), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)
+<span class="kw">pub_chunks</span>(xml, <span class="st">&quot;title&quot;</span>)</code></pre>
+<pre><code>#&gt; &lt;pub chunks&gt;
+#&gt;   from: character
+#&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
+#&gt;   sections: title
+#&gt;   showing up to first 5: 
+#&gt;    title (n=1): On the driving of a piston with a rigid collar int ...</code></pre>
+</div>
+<div id="xml2-objects" class="section level3">
+<h3><span class="header-section-number">9.3.3</span> xml2 objects</h3>
+<pre class="sourceCode r"><code class="sourceCode r">xml &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">readLines</span>(x), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)
+xml &lt;-<span class="st"> </span>xml2<span class="op">::</span><span class="kw">read_xml</span>(xml)
+<span class="kw">pub_chunks</span>(xml, <span class="st">&quot;title&quot;</span>)</code></pre>
+<pre><code>#&gt; &lt;pub chunks&gt;
+#&gt;   from: xml_document
+#&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
+#&gt;   sections: title
+#&gt;   showing up to first 5: 
+#&gt;    title (n=1): On the driving of a piston with a rigid collar int ...</code></pre>
 
+</div>
 </div>
 </div>
             </section>

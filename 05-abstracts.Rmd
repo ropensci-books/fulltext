@@ -8,7 +8,7 @@ knitr::opts_chunk$set(
 
 # Abstract {#abstract}
 
-Abstracts likely will come after searching for articles with `ft_search()`. There are a few scenarios in which simply getting abstracts in lieu of full text may be enough. 
+Fetching abstracts likely will come after searching for articles with `ft_search()`. There are a few scenarios in which simply getting abstracts in lieu of full text may be enough. 
 
 For example, if you know that a large portion of the articles you want to mine text from are closed access and you don't have access to them, you may have access to the abstracts depending on the publisher. 
 
@@ -43,10 +43,22 @@ Take the output of `ft_search()` and pass to `ft_abstract()`:
 
 ```{r}
 out <- ft_abstract(dois)
+out
 ```
 
-and has slots for each data source:
+The output has slots for each data source:
 
 ```{r}
 names(out)
 ```
+
+Index to the data source you want to get data from, here selecting the first item:
+
+```{r}
+out$plos[[1]]
+```
+
+Which gives a named list, with the DOI as the first element, then the abstract as a single 
+character string.
+
+You can then take these abstracts and use any number of R packages for text mining.

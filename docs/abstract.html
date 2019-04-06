@@ -163,9 +163,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="8.7.1" data-path="fetch.html"><a href="fetch.html#elsevier"><i class="fa fa-check"></i><b>8.7.1</b> Elsevier</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Chunks</a><ul>
+<li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Extracting text</a><ul>
 <li class="chapter" data-level="9.1" data-path="chunks.html"><a href="chunks.html#chunks-usage"><i class="fa fa-check"></i><b>9.1</b> Usage</a></li>
 <li class="chapter" data-level="9.2" data-path="chunks.html"><a href="chunks.html#chunks-tabularize"><i class="fa fa-check"></i><b>9.2</b> Tabularize</a></li>
+<li class="chapter" data-level="9.3" data-path="chunks.html"><a href="chunks.html#chunks-other-inputs"><i class="fa fa-check"></i><b>9.3</b> Other inputs</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="chunks.html"><a href="chunks.html#files"><i class="fa fa-check"></i><b>9.3.1</b> Files</a></li>
+<li class="chapter" data-level="9.3.2" data-path="chunks.html"><a href="chunks.html#xml-in-a-string"><i class="fa fa-check"></i><b>9.3.2</b> xml in a string</a></li>
+<li class="chapter" data-level="9.3.3" data-path="chunks.html"><a href="chunks.html#xml2-objects"><i class="fa fa-check"></i><b>9.3.3</b> xml2 objects</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="10" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>10</b> Table</a><ul>
 <li class="chapter" data-level="10.1" data-path="table.html"><a href="table.html#table-usage"><i class="fa fa-check"></i><b>10.1</b> Usage</a></li>
@@ -195,7 +200,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="abstract" class="section level1">
 <h1><span class="header-section-number">Chapter 6</span> Abstract</h1>
-<p>Abstracts likely will come after searching for articles with <code>ft_search()</code>. There are a few scenarios in which simply getting abstracts in lieu of full text may be enough.</p>
+<p>Fetching abstracts likely will come after searching for articles with <code>ft_search()</code>. There are a few scenarios in which simply getting abstracts in lieu of full text may be enough.</p>
 <p>For example, if you know that a large portion of the articles you want to mine text from are closed access and you don’t have access to them, you may have access to the abstracts depending on the publisher.</p>
 <p>In addition, there are cases in which you really only need abstracts regardless of whether full text is available or not.</p>
 <p><code>ft_abstract()</code> gives you access to the following data sources:</p>
@@ -220,10 +225,24 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt;  [7] &quot;10.1371/journal.pcbi.1003594&quot; &quot;10.1371/journal.pone.0102437&quot;
 #&gt;  [9] &quot;10.1371/journal.pone.0175014&quot; &quot;10.1371/journal.pone.0166559&quot;</code></pre>
 <p>Take the output of <code>ft_search()</code> and pass to <code>ft_abstract()</code>:</p>
-<pre class="sourceCode r"><code class="sourceCode r">out &lt;-<span class="st"> </span><span class="kw">ft_abstract</span>(dois)</code></pre>
-<p>and has slots for each data source:</p>
+<pre class="sourceCode r"><code class="sourceCode r">out &lt;-<span class="st"> </span><span class="kw">ft_abstract</span>(dois)
+out</code></pre>
+<pre><code>#&gt; &lt;fulltext abstracts&gt;
+#&gt; Found:
+#&gt;   [PLOS: 10; Scopus: 0; Microsoft: 0; Crossref: 0]</code></pre>
+<p>The output has slots for each data source:</p>
 <pre class="sourceCode r"><code class="sourceCode r"><span class="kw">names</span>(out)</code></pre>
 <pre><code>#&gt; [1] &quot;plos&quot;     &quot;scopus&quot;   &quot;ma&quot;       &quot;crossref&quot;</code></pre>
+<p>Index to the data source you want to get data from, here selecting the first item:</p>
+<pre class="sourceCode r"><code class="sourceCode r">out<span class="op">$</span>plos[[<span class="dv">1</span>]]</code></pre>
+<pre><code>#&gt; $doi
+#&gt; [1] &quot;10.1371/journal.pone.0001248&quot;
+#&gt; 
+#&gt; $abstract
+#&gt; [1] &quot;Background: Soil ecology has produced a huge corpus of results on relations between soil organisms, ecosystem processes controlled by these organisms and links between belowground and aboveground processes. However, some soil scientists think that soil ecology is short of modelling and evolutionary approaches and has developed too independently from general ecology. We have tested quantitatively these hypotheses through a bibliographic study (about 23000 articles) comparing soil ecology journals, generalist ecology journals, evolutionary ecology journals and theoretical ecology journals. Findings: We have shown that soil ecology is not well represented in generalist ecology journals and that soil ecologists poorly use modelling and evolutionary approaches. Moreover, the articles published by a typical soil ecology journal (Soil Biology and Biochemistry) are cited by and cite low percentages of articles published in generalist ecology journals, evolutionary ecology journals and theoretical ecology journals. Conclusion: This confirms our hypotheses and suggests that soil ecology would benefit from an effort towards modelling and evolutionary approaches. This effort should promote the building of a general conceptual framework for soil ecology and bridges between soil ecology and general ecology. We give some historical reasons for the parsimonious use of modelling and evolutionary approaches by soil ecologists. We finally suggest that a publication system that classifies journals according to their Impact Factors and their level of generality is probably inadequate to integrate “particularity” (empirical observations) and “generality” (general theories), which is the goal of all natural sciences. Such a system might also be particularly detrimental to the development of a science such as ecology that is intrinsically multidisciplinary. &quot;</code></pre>
+<p>Which gives a named list, with the DOI as the first element, then the abstract as a single
+character string.</p>
+<p>You can then take these abstracts and use any number of R packages for text mining.</p>
 
 </div>
 </div>

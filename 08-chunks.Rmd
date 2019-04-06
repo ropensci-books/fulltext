@@ -1,8 +1,21 @@
-# Chunks {#chunks}
+# Extracting text {#chunks}
 
-The `ft_chunks` function tries to make it easy to extract the parts of articles you want. This only works with XML format articles though since although we can get text out of PDFs, there is no machine readable way to say "I want the abstract".  
+Functions for extracting parts of texts used to live inside of `fulltext`, but have now
+moved to the package [pubchunks][].
 
-In addition to only working with XML, this function only has knowledge about a few select publishers for which we've coded knowledge about how to get different sections of the article. Not all publishers use the same format XML - so each publisher is slightly different for how to get to each section. That is, to get to the abstract requires slightly different xpath for publisher A vs. publisher B vs. publisher C. 
+The `pubchunks::pub_chunks` function tries to make it easy to extract the parts of
+articles you want. This only works with XML format articles though since although
+we can get text out of PDFs, there is no machine readable way to say
+"I want the abstract".
+
+In addition to only working with XML, this function only has knowledge about a
+select set of publishers for which we've encoded knowledge about how to get different
+sections of the article. Not all publishers use the same format XML - so each publisher is
+slightly different for how to get to each section. That is, to get to the abstract
+requires slightly different xpath for publisher A vs. publisher B vs. publisher C.
+
+An alternative to `pubchunks` is to use xpath or css selectors yourself to slice and
+dice XML. 
 
 ## Usage {#chunks-usage}
 
@@ -18,14 +31,15 @@ Get a full text article
 x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 ```
 
-Note that unlike previous version of `fulltext` you now have to collect (`ft_collect()`) the text from the XML file on disk.
-Then you can pass to `pub_chunks()`, here to get authors.
+Note that unlike previous versions of `fulltext` you now have to collect (`ft_collect()`)
+the text from the XML file on disk. Then you can pass to `pub_chunks()`, here to get
+authors.
 
 ```{r}
 x %>% ft_collect %>% pub_chunks("authors")
 ```
 
-In another example, let's search for PLOS articles. 
+In another example, let's search for PLOS articles.
 
 ```{r}
 library("rplos")
@@ -42,7 +56,7 @@ x <- ft_get(dois, from="plos")
 
 Then pull out various sections of each article.
 
-> remember to pull out the full text first 
+> remember to pull out the full text first
 
 ```{r}
 x <- ft_collect(x)
@@ -65,7 +79,7 @@ x %>% pub_chunks("article_meta")
 
 ## Tabularize {#chunks-tabularize}
 
-The function `pub_tabularize()` is useful for coercing the output of `pub_chunks()` into a data.frame, 
+The function `pub_tabularize()` is useful for coercing the output of `pub_chunks()` into a data.frame,
 the lingua franca of data work in R.
 
 ```{r}
@@ -74,3 +88,45 @@ x <- pub_chunks(x, c("doi", "title"))
 x <- pub_tabularize(x)
 rbindlist(x$plos, fill = TRUE)
 ```
+
+## Other inputs {#chunks-other-inputs}
+
+`pub_chunks()` works with other inputs besides the output of `fulltext::ft_get()`.
+
+### Files
+
+```{r}
+x <- system.file("examples/10_1016_0021_8928_59_90156_x.xml", 
+  package = "pubchunks")
+```
+
+```{r}
+pub_chunks(x, "abstract")
+pub_chunks(x, "title")
+pub_chunks(x, "authors")
+pub_chunks(x, c("title", "refs"))
+```
+
+The output of `pub_chunks()` is a list with an S3 class `pub_chunks` to make 
+internal work in the package easier. You can easily see the list structure 
+by using `unclass()`.
+
+### xml in a string
+
+```{r}
+xml <- paste0(readLines(x), collapse = "")
+pub_chunks(xml, "title")
+```
+
+### xml2 objects
+
+```{r}
+xml <- paste0(readLines(x), collapse = "")
+xml <- xml2::read_xml(xml)
+pub_chunks(xml, "title")
+```
+
+
+
+[pubchunks]: https://github.com/ropensci/pubchunks/
+
