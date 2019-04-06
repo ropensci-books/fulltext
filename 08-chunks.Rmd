@@ -9,6 +9,7 @@ In addition to only working with XML, this function only has knowledge about a f
 
 ```{r}
 library(fulltext)
+library(pubchunks)
 ```
 
 Get a full text article
@@ -18,10 +19,10 @@ x <- ft_get('10.1371/journal.pone.0086169', from='plos')
 ```
 
 Note that unlike previous version of `fulltext` you now have to collect (`ft_collect()`) the text from the XML file on disk.
-Then you can pass to `ft_chunks()`, here to get authors.
+Then you can pass to `pub_chunks()`, here to get authors.
 
 ```{r}
-x %>% ft_collect %>% ft_chunks(what="authors")
+x %>% ft_collect %>% pub_chunks("authors")
 ```
 
 In another example, let's search for PLOS articles. 
@@ -48,27 +49,28 @@ x <- ft_collect(x)
 ```
 
 ```{r eval = FALSE}
-x %>% ft_chunks("front")
-x %>% ft_chunks("body")
-x %>% ft_chunks("back")
-x %>% ft_chunks("history")
-x %>% ft_chunks("authors")
-x %>% ft_chunks(c("doi","categories"))
-x %>% ft_chunks("all")
-x %>% ft_chunks("publisher")
-x %>% ft_chunks("acknowledgments")
-x %>% ft_chunks("permissions")
-x %>% ft_chunks("journal_meta")
-x %>% ft_chunks("article_meta")
+x %>% pub_chunks("front")
+x %>% pub_chunks("body")
+x %>% pub_chunks("back")
+x %>% pub_chunks("history")
+x %>% pub_chunks("authors")
+x %>% pub_chunks(c("doi","categories"))
+x %>% pub_chunks("all")
+x %>% pub_chunks("publisher")
+x %>% pub_chunks("acknowledgments")
+x %>% pub_chunks("permissions")
+x %>% pub_chunks("journal_meta")
+x %>% pub_chunks("article_meta")
 ```
 
 ## Tabularize {#chunks-tabularize}
 
-The function `ft_tabularize()` is useful for coercing the output of `ft_chunks()` into a data.frame, 
+The function `pub_tabularize()` is useful for coercing the output of `pub_chunks()` into a data.frame, 
 the lingua franca of data work in R.
 
 ```{r}
-x %>% 
-    ft_chunks(c("acknowledgments", "permissions")) %>% 
-    ft_tabularize()
+library(data.table)
+x <- pub_chunks(x, c("doi", "title"))
+x <- pub_tabularize(x)
+rbindlist(x$plos, fill = TRUE)
 ```

@@ -32,7 +32,7 @@ The `fulltext` package makes it easy to do text-mining by supporting the followi
 ## Citing fulltext
 
 > Scott Chamberlain & Will Pearse (2018). fulltext: Full Text of 'Scholarly' 
-> Articles Across Many Data Sources. R package version 1.0.1.
+> Articles Across Many Data Sources. R package version 1.1.0.
 > https://github.com/ropensci/fulltext
 
 ## Installation

@@ -5,21 +5,21 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>fulltext manual</title>
-  <meta name="description" content="fulltext manual">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <title>Chapter 7 Links | fulltext manual</title>
+  <meta name="description" content="Chapter 7 Links | fulltext manual">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="fulltext manual" />
+  <meta property="og:title" content="Chapter 7 Links | fulltext manual" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="fulltext manual" />
+  <meta property="og:description" content="Chapter 7 Links | fulltext manual" />
   <meta name="github-repo" content="ropensci/fulltext-book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="fulltext manual" />
+  <meta name="twitter:title" content="Chapter 7 Links | fulltext manual" />
   
-  <meta name="twitter:description" content="fulltext manual" />
+  <meta name="twitter:description" content="Chapter 7 Links | fulltext manual" />
   
 
 
@@ -34,6 +34,7 @@
 <link rel="next" href="fetch.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -63,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -199,17 +198,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>ft_links</code> function makes it easy to get URLs for full text versions of articles. You can for instance only use <code>fulltext</code> to pass DOIs directly to <code>ft_links</code> to get URLs to use elsewhere in your research workflow. Or you may want to search first with <code>ft_search</code>, then pass that output directly to <code>ft_links</code>.</p>
 <div id="links-usage" class="section level2">
 <h2><span class="header-section-number">7.1</span> Usage</h2>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw">library</span>(fulltext)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fulltext)</code></pre>
 <p>List backends available</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" data-line-number="1"><span class="kw">ft_links_ls</span>()</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ft_links_ls</span>()</code></pre>
 <pre><code>#&gt; [1] &quot;bmc&quot;         &quot;cogent&quot;      &quot;copernicus&quot;  &quot;crossref&quot;    &quot;elife&quot;      
 #&gt; [6] &quot;entrez&quot;      &quot;frontiersin&quot; &quot;peerj&quot;       &quot;plos&quot;</code></pre>
 <p>You can pass DOIs directly to <code>ft_links</code></p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" data-line-number="1">(res &lt;-<span class="st"> </span><span class="kw">ft_links</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">(res &lt;-<span class="st"> </span><span class="kw">ft_links</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>))</code></pre>
 <pre><code>#&gt; &lt;fulltext links&gt;
 #&gt; [Found] 1 
 #&gt; [IDs] 10.3389/fphar.2014.00109 ...</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" data-line-number="1">res<span class="op">$</span>frontiersin</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">res<span class="op">$</span>frontiersin</code></pre>
 <pre><code>#&gt; $found
 #&gt; [1] 1
 #&gt; 
@@ -229,19 +228,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; $opts
 #&gt; list()</code></pre>
 <p>Or search first</p>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" data-line-number="1">(res1 &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;entrez&#39;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">(res1 &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;entrez&#39;</span>))</code></pre>
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 141555; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 168072; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>Then pass the output of that directly to <code>ft_links</code></p>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" data-line-number="1">(out &lt;-<span class="st"> </span><span class="kw">ft_links</span>(res1))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">(out &lt;-<span class="st"> </span><span class="kw">ft_links</span>(res1))</code></pre>
 <pre><code>#&gt; &lt;fulltext links&gt;
-#&gt; [Found] 9 
-#&gt; [IDs] ID_29385567 ID_29361762 ID_29351236 ID_29346588 ID_29346312
-#&gt;      ID_29342852 ID_29301193 ID_29295484 ID_29255013 ...</code></pre>
+#&gt; [Found] 8 
+#&gt; [IDs] ID_30949584 ID_30949543 ID_30926869 ID_30926867 ID_30926861
+#&gt;      ID_30926847 ID_30926838 ID_30926833 ID_30926825 ID_30926823 ...</code></pre>
 
 </div>
 </div>
@@ -269,10 +268,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -282,6 +282,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/ropensci/fulltext-book/edit/master/06-links.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["_main.pdf", "_main.epub"],
 "toc": {

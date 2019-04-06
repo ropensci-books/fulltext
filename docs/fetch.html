@@ -5,21 +5,21 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>fulltext manual</title>
-  <meta name="description" content="fulltext manual">
-  <meta name="generator" content="bookdown 0.6 and GitBook 2.6.7">
+  <title>Chapter 8 Fetch | fulltext manual</title>
+  <meta name="description" content="Chapter 8 Fetch | fulltext manual">
+  <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="fulltext manual" />
+  <meta property="og:title" content="Chapter 8 Fetch | fulltext manual" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="fulltext manual" />
+  <meta property="og:description" content="Chapter 8 Fetch | fulltext manual" />
   <meta name="github-repo" content="ropensci/fulltext-book" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="fulltext manual" />
+  <meta name="twitter:title" content="Chapter 8 Fetch | fulltext manual" />
   
-  <meta name="twitter:description" content="fulltext manual" />
+  <meta name="twitter:description" content="Chapter 8 Fetch | fulltext manual" />
   
 
 
@@ -34,6 +34,7 @@
 <link rel="next" href="chunks.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
@@ -50,7 +51,7 @@
 <style type="text/css">
 a.sourceLine { display: inline-block; line-height: 1.25; }
 a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; position: absolute; }
+a.sourceLine:empty { height: 1.2em; }
 .sourceCode { overflow: visible; }
 code.sourceCode { white-space: pre; position: relative; }
 div.sourceCode { margin: 1em 0; }
@@ -63,13 +64,11 @@ code.sourceCode { white-space: pre-wrap; }
 a.sourceLine { text-indent: -1em; padding-left: 1em; }
 }
 pre.numberSource a.sourceLine
-  { position: relative; }
-pre.numberSource a.sourceLine:empty
-  { position: absolute; }
+  { position: relative; left: -4em; }
 pre.numberSource a.sourceLine::before
   { content: attr(data-line-number);
-    position: absolute; left: -5em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all;
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -239,23 +238,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="fetch-usage" class="section level2">
 <h2><span class="header-section-number">8.3</span> Usage</h2>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" data-line-number="1"><span class="kw">library</span>(fulltext)</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fulltext)</code></pre>
 <p>List backends available</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1"><span class="kw">ft_get_ls</span>()</a></code></pre></div>
-<pre><code>#&gt;  [1] &quot;aaas&quot;                &quot;arxiv&quot;               &quot;biorxiv&quot;            
-#&gt;  [4] &quot;bmc&quot;                 &quot;copernicus&quot;          &quot;crossref&quot;           
-#&gt;  [7] &quot;elife&quot;               &quot;elsevier&quot;            &quot;entrez&quot;             
-#&gt; [10] &quot;frontiersin&quot;         &quot;ieee&quot;                &quot;informa&quot;            
-#&gt; [13] &quot;peerj&quot;               &quot;pensoft&quot;             &quot;plos&quot;               
-#&gt; [16] &quot;pnas&quot;                &quot;royalsocchem&quot;        &quot;scientificsocieties&quot;
-#&gt; [19] &quot;wiley&quot;</code></pre>
+<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ft_get_ls</span>()</code></pre>
+<pre><code>#&gt;  [1] &quot;aaas&quot;                &quot;aip&quot;                 &quot;amersocclinoncol&quot;   
+#&gt;  [4] &quot;amersocmicrobiol&quot;    &quot;arxiv&quot;               &quot;biorxiv&quot;            
+#&gt;  [7] &quot;bmc&quot;                 &quot;copernicus&quot;          &quot;crossref&quot;           
+#&gt; [10] &quot;elife&quot;               &quot;elsevier&quot;            &quot;entrez&quot;             
+#&gt; [13] &quot;frontiersin&quot;         &quot;ieee&quot;                &quot;informa&quot;            
+#&gt; [16] &quot;instinvestfil&quot;       &quot;jama&quot;                &quot;microbiology&quot;       
+#&gt; [19] &quot;peerj&quot;               &quot;pensoft&quot;             &quot;plos&quot;               
+#&gt; [22] &quot;pnas&quot;                &quot;royalsocchem&quot;        &quot;scientificsocieties&quot;
+#&gt; [25] &quot;wiley&quot;</code></pre>
 <p>The simplest approach is passing a DOI directly to <code>ft_get</code></p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>))</code></pre>
 <pre><code>#&gt; &lt;fulltext text&gt;
 #&gt; [Docs] 1 
 #&gt; [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
 #&gt; [IDs] 10.1371/journal.pone.0086169 ...</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1">res<span class="op">$</span>plos</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">res<span class="op">$</span>plos</code></pre>
 <pre><code>#&gt; $found
 #&gt; [1] 1
 #&gt; 
@@ -294,14 +295,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; [1] &quot;10.1371/journal.pone.0086169&quot;
 #&gt; 
 #&gt; $opts$type
-#&gt; [1] &quot;xml&quot;</code></pre>
+#&gt; [1] &quot;xml&quot;
+#&gt; 
+#&gt; $opts$progress
+#&gt; [1] FALSE
+#&gt; 
+#&gt; 
+#&gt; $errors
+#&gt;                             id error
+#&gt; 1 10.1371/journal.pone.0086169  &lt;NA&gt;</code></pre>
 <p>You can pass many DOIs in at once</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="kw">c</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>, <span class="st">&#39;10.3389/feart.2015.00009&#39;</span>)))</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="kw">c</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>, <span class="st">&#39;10.3389/feart.2015.00009&#39;</span>)))</code></pre>
 <pre><code>#&gt; &lt;fulltext text&gt;
 #&gt; [Docs] 2 
 #&gt; [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
 #&gt; [IDs] 10.3389/fphar.2014.00109 10.3389/feart.2015.00009 ...</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1">res<span class="op">$</span>frontiersin</a></code></pre></div>
+<pre class="sourceCode r"><code class="sourceCode r">res<span class="op">$</span>frontiersin</code></pre>
 <pre><code>#&gt; $found
 #&gt; [1] 2
 #&gt; 
@@ -354,11 +363,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; [1] &quot;10.3389/fphar.2014.00109&quot; &quot;10.3389/feart.2015.00009&quot;
 #&gt; 
 #&gt; $opts$type
-#&gt; [1] &quot;xml&quot;</code></pre>
+#&gt; [1] &quot;xml&quot;
+#&gt; 
+#&gt; $opts$progress
+#&gt; [1] FALSE
+#&gt; 
+#&gt; 
+#&gt; $errors
+#&gt;                         id error
+#&gt; 1 10.3389/fphar.2014.00109  &lt;NA&gt;
+#&gt; 2 10.3389/feart.2015.00009  &lt;NA&gt;</code></pre>
 </div>
 <div id="fetch-errors" class="section level2">
 <h2><span class="header-section-number">8.4</span> Errors</h2>
-<p>A new element of the results of <code>ft_get()</code> is the <code>error</code> slot in each list.</p>
+<p><code>ft_get()</code> for each article has an <code>error</code> slot.</p>
 <p>If the <code>error</code> slot is <code>NULL</code> then there is no error.</p>
 <p>If the <code>error</code> slot is not <code>NULL</code> there was an error, and the error message
 will be a character string in that slot.</p>
@@ -385,6 +403,15 @@ will be a character string in that slot.</p>
 <li>e.g., “was not found or may be a DOI for a part of an article”</li>
 </ul></li>
 </ul>
+<p>An additional top level slot called <code>errors</code> has a data.frame of all errors
+from each article, like:</p>
+<pre class="sourceCode r"><code class="sourceCode r">res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="kw">c</span>(<span class="st">&#39;10.7554/eLife.03032&#39;</span>, <span class="st">&#39;10.7554/eLife.aaaa&#39;</span>), <span class="dt">from =</span> <span class="st">&quot;elife&quot;</span>)
+res<span class="op">$</span>elife<span class="op">$</span>errors
+                   id                   error
+<span class="dv">1</span> <span class="fl">10.7554</span><span class="op">/</span>eLife<span class="fl">.03032</span>                    <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span>
+<span class="dv">2</span>  <span class="fl">10.7554</span><span class="op">/</span>eLife.aaaa subscript out of bounds</code></pre>
+<p>Where the second DOI was invalid. Granted the error in the data.frame “subscript out of bounds”
+isn’t very informative, but we can work on that.</p>
 </div>
 <div id="fetch-cleanup" class="section level2">
 <h2><span class="header-section-number">8.5</span> Cleanup</h2>
@@ -400,7 +427,33 @@ if you exit out of the function when it’s running.</p>
 <div id="fetch-internals" class="section level2">
 <h2><span class="header-section-number">8.6</span> Internals</h2>
 <p>What’s going on under the hood in <code>ft_get()</code>? It goes like this:</p>
-<p>xxxx</p>
+<ul>
+<li>If you request data from a specific data source (use of <code>from</code>, only allowed for PLOS, Entrez, eLife, Pensoft, arXiv, BiorXiv, Elsevier and Wiley):
+<ul>
+<li>Grab publisher specific collector function</li>
+<li>Each of these functions has specific code for that publisher to pull full text given an article identifier</li>
+</ul></li>
+<li>If you don’t request a specific data source:
+<ul>
+<li>Guess which publisher the DOI comes from</li>
+<li>If publisher discovered that we have plugins for
+<ul>
+<li>Get publisher specific collector function</li>
+</ul></li>
+<li>If publisher not discovered
+<ul>
+<li>Ping the <a href="https://ftdoi.org" class="uri">https://ftdoi.org</a> API</li>
+<li>If publisher found with ftdoi API:
+<ul>
+<li>Link for full text used from the ftdoi API response</li>
+</ul></li>
+<li>If publisher not found with ftdoi API:
+<ul>
+<li>Attempt fetch via Crossref API - if links found we try those, some work and some don’t</li>
+</ul></li>
+</ul></li>
+</ul></li>
+</ul>
 </div>
 <div id="fetch-notes" class="section level2">
 <h2><span class="header-section-number">8.7</span> Notes about specific data sources</h2>
@@ -438,10 +491,11 @@ gitbook.start({
 "facebook": true,
 "twitter": true,
 "google": false,
+"linkedin": false,
 "weibo": false,
-"instapper": false,
+"instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "weibo", "instapaper"]
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -451,6 +505,10 @@ gitbook.start({
 "edit": {
 "link": "https://github.com/ropensci/fulltext-book/edit/master/07-fetch.Rmd",
 "text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
 },
 "download": ["_main.pdf", "_main.epub"],
 "toc": {

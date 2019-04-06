@@ -72,7 +72,7 @@ res$frontiersin
 ## Errors {#fetch-errors}
 
 
-A new element of the results of `ft_get()` is the `error` slot in each list.
+`ft_get()` for each article has an `error` slot.
 
 If the `error` slot is `NULL` then there is no error. 
 
@@ -92,6 +92,19 @@ Possible errors include:
 - An error associated mostly with PLOS. PLOS gives DOIs for parts of articles, like figures, so it doesn't make sense to get full text of a figure.
     - e.g., "was not found or may be a DOI for a part of an article"
 
+An additional top level slot called `errors` has a data.frame of all errors
+from each article, like:
+
+```r
+res <- ft_get(c('10.7554/eLife.03032', '10.7554/eLife.aaaa'), from = "elife")
+res$elife$errors
+                   id                   error
+1 10.7554/eLife.03032                    <NA>
+2  10.7554/eLife.aaaa subscript out of bounds
+```
+
+Where the second DOI was invalid. Granted the error in the data.frame "subscript out of bounds"
+isn't very informative, but we can work on that.
 
 ## Cleanup {#fetch-cleanup}
 
@@ -109,7 +122,19 @@ if you exit out of the function when it's running.
 
 What's going on under the hood in `ft_get()`? It goes like this:
 
-xxxx
+* If you request data from a specific data source (use of `from`, only allowed for PLOS, Entrez, eLife, Pensoft, arXiv, BiorXiv, Elsevier and Wiley): 
+    * Grab publisher specific collector function
+    * Each of these functions has specific code for that publisher to pull full text given an article identifier
+* If you don't request a specific data source:
+    * Guess which publisher the DOI comes from
+    * If publisher discovered that we have plugins for
+        * Get publisher specific collector function
+    * If publisher not discovered
+        * Ping the <https://ftdoi.org> API 
+        * If publisher found with ftdoi API:
+            * Link for full text used from the ftdoi API response
+        * If publisher not found with ftdoi API:
+            * Attempt fetch via Crossref API - if links found we try those, some work and some don't
 
 ## Notes about specific data sources {#fetch-notes}
 
