@@ -6,7 +6,7 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 biblio-style: apalike
 link-citations: yes
-github-repo: ropensci/fulltext-book
+github-repo: ropensci-books/fulltext
 description: "fulltext manual"
 ---
 
@@ -31,9 +31,10 @@ The `fulltext` package makes it easy to do text-mining by supporting the followi
 
 ## Citing fulltext
 
-> Scott Chamberlain & Will Pearse (2018). fulltext: Full Text of 'Scholarly' 
-> Articles Across Many Data Sources. R package version 1.1.0.
-> https://github.com/ropensci/fulltext
+> Scott Chamberlain (2019). fulltext: Full Text of 'Scholarly' Articles Across
+> Many Data Sources. R package version 1.4.0. https://docs.ropensci.org/fulltext (website)
+> https://github.com/ropensci/fulltext/ (devel)
+> https://books.ropensci.org/fulltext/ (user manual) 
 
 ## Installation
 

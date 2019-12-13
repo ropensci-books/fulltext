@@ -1,20 +1,19 @@
 <!DOCTYPE html>
-<html >
-
+<html lang="" xml:lang="">
 <head>
 
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Extracting text | fulltext manual</title>
-  <meta name="description" content="Chapter 9 Extracting text | fulltext manual">
-  <meta name="generator" content="bookdown  and GitBook 2.6.7">
+  <meta name="description" content="Chapter 9 Extracting text | fulltext manual" />
+  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Extracting text | fulltext manual" />
   <meta property="og:type" content="book" />
   
   
   <meta property="og:description" content="Chapter 9 Extracting text | fulltext manual" />
-  <meta name="github-repo" content="ropensci/fulltext-book" />
+  <meta name="github-repo" content="ropensci-books/fulltext" />
 
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:title" content="Chapter 9 Extracting text | fulltext manual" />
@@ -25,20 +24,24 @@
 
 
 
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="fetch.html">
-<link rel="next" href="table.html">
+<link rel="prev" href="fetch.html"/>
+<link rel="next" href="table.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
 
 
 
@@ -49,26 +52,26 @@
 
 
 <style type="text/css">
-a.sourceLine { display: inline-block; line-height: 1.25; }
-a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
-a.sourceLine:empty { height: 1.2em; }
-.sourceCode { overflow: visible; }
-code.sourceCode { white-space: pre; position: relative; }
-div.sourceCode { margin: 1em 0; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
 div.sourceCode { overflow: auto; }
 }
 @media print {
-code.sourceCode { white-space: pre-wrap; }
-a.sourceLine { text-indent: -1em; padding-left: 1em; }
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
 }
-pre.numberSource a.sourceLine
-  { position: relative; left: -4em; }
-pre.numberSource a.sourceLine::before
-  { content: attr(data-line-number);
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
     position: relative; left: -1em; text-align: right; vertical-align: baseline;
-    border: none; pointer-events: all; display: inline-block;
+    border: none; display: inline-block;
     -webkit-touch-callout: none; -webkit-user-select: none;
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
@@ -77,9 +80,9 @@ pre.numberSource a.sourceLine::before
   }
 pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
 div.sourceCode
-  {  }
+  {   }
 @media screen {
-a.sourceLine::before { text-decoration: underline; }
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 code span.al { color: #ff0000; font-weight: bold; } /* Alert */
 code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
@@ -128,58 +131,69 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><a href="./">fulltext manual</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> fulltext manual</a><ul>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> fulltext manual</a>
+<ul>
 <li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#info"><i class="fa fa-check"></i><b>1.1</b> Info</a></li>
 <li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#citing-fulltext"><i class="fa fa-check"></i><b>1.2</b> Citing fulltext</a></li>
 <li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#installation"><i class="fa fa-check"></i><b>1.3</b> Installation</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a><ul>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
+<ul>
 <li class="chapter" data-level="2.1" data-path="intro.html"><a href="intro.html#user-interface"><i class="fa fa-check"></i><b>2.1</b> User interface</a></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>3</b> Data sources</a><ul>
+<li class="chapter" data-level="3" data-path="data-sources.html"><a href="data-sources.html"><i class="fa fa-check"></i><b>3</b> Data sources</a>
+<ul>
 <li class="chapter" data-level="3.1" data-path="data-sources.html"><a href="data-sources.html#ds-search"><i class="fa fa-check"></i><b>3.1</b> Search</a></li>
 <li class="chapter" data-level="3.2" data-path="data-sources.html"><a href="data-sources.html#ds-abstracts"><i class="fa fa-check"></i><b>3.2</b> Abstracts</a></li>
 <li class="chapter" data-level="3.3" data-path="data-sources.html"><a href="data-sources.html#ds-link"><i class="fa fa-check"></i><b>3.3</b> Links</a></li>
 <li class="chapter" data-level="3.4" data-path="data-sources.html"><a href="data-sources.html#ds-fulltext"><i class="fa fa-check"></i><b>3.4</b> Getting full text</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="authentication.html"><a href="authentication.html"><i class="fa fa-check"></i><b>4</b> Authentication</a></li>
-<li class="chapter" data-level="5" data-path="search.html"><a href="search.html"><i class="fa fa-check"></i><b>5</b> Search</a><ul>
+<li class="chapter" data-level="5" data-path="search.html"><a href="search.html"><i class="fa fa-check"></i><b>5</b> Search</a>
+<ul>
 <li class="chapter" data-level="5.1" data-path="search.html"><a href="search.html#search-usage"><i class="fa fa-check"></i><b>5.1</b> Usage</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i><b>6</b> Abstract</a><ul>
+<li class="chapter" data-level="6" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i><b>6</b> Abstract</a>
+<ul>
 <li class="chapter" data-level="6.1" data-path="abstract.html"><a href="abstract.html#abstract-usage"><i class="fa fa-check"></i><b>6.1</b> Usage</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>7</b> Links</a><ul>
+<li class="chapter" data-level="7" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>7</b> Links</a>
+<ul>
 <li class="chapter" data-level="7.1" data-path="links.html"><a href="links.html#links-usage"><i class="fa fa-check"></i><b>7.1</b> Usage</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="fetch.html"><a href="fetch.html"><i class="fa fa-check"></i><b>8</b> Fetch</a><ul>
+<li class="chapter" data-level="8" data-path="fetch.html"><a href="fetch.html"><i class="fa fa-check"></i><b>8</b> Fetch</a>
+<ul>
 <li class="chapter" data-level="8.1" data-path="fetch.html"><a href="fetch.html#fetch-data-formats"><i class="fa fa-check"></i><b>8.1</b> Data formats</a></li>
 <li class="chapter" data-level="8.2" data-path="fetch.html"><a href="fetch.html#how-data-is-stored"><i class="fa fa-check"></i><b>8.2</b> How data is stored</a></li>
 <li class="chapter" data-level="8.3" data-path="fetch.html"><a href="fetch.html#fetch-usage"><i class="fa fa-check"></i><b>8.3</b> Usage</a></li>
 <li class="chapter" data-level="8.4" data-path="fetch.html"><a href="fetch.html#fetch-errors"><i class="fa fa-check"></i><b>8.4</b> Errors</a></li>
 <li class="chapter" data-level="8.5" data-path="fetch.html"><a href="fetch.html#fetch-cleanup"><i class="fa fa-check"></i><b>8.5</b> Cleanup</a></li>
 <li class="chapter" data-level="8.6" data-path="fetch.html"><a href="fetch.html#fetch-internals"><i class="fa fa-check"></i><b>8.6</b> Internals</a></li>
-<li class="chapter" data-level="8.7" data-path="fetch.html"><a href="fetch.html#fetch-notes"><i class="fa fa-check"></i><b>8.7</b> Notes about specific data sources</a><ul>
+<li class="chapter" data-level="8.7" data-path="fetch.html"><a href="fetch.html#fetch-notes"><i class="fa fa-check"></i><b>8.7</b> Notes about specific data sources</a>
+<ul>
 <li class="chapter" data-level="8.7.1" data-path="fetch.html"><a href="fetch.html#elsevier"><i class="fa fa-check"></i><b>8.7.1</b> Elsevier</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Extracting text</a><ul>
+<li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Extracting text</a>
+<ul>
 <li class="chapter" data-level="9.1" data-path="chunks.html"><a href="chunks.html#chunks-usage"><i class="fa fa-check"></i><b>9.1</b> Usage</a></li>
 <li class="chapter" data-level="9.2" data-path="chunks.html"><a href="chunks.html#chunks-tabularize"><i class="fa fa-check"></i><b>9.2</b> Tabularize</a></li>
-<li class="chapter" data-level="9.3" data-path="chunks.html"><a href="chunks.html#chunks-other-inputs"><i class="fa fa-check"></i><b>9.3</b> Other inputs</a><ul>
+<li class="chapter" data-level="9.3" data-path="chunks.html"><a href="chunks.html#chunks-other-inputs"><i class="fa fa-check"></i><b>9.3</b> Other inputs</a>
+<ul>
 <li class="chapter" data-level="9.3.1" data-path="chunks.html"><a href="chunks.html#files"><i class="fa fa-check"></i><b>9.3.1</b> Files</a></li>
 <li class="chapter" data-level="9.3.2" data-path="chunks.html"><a href="chunks.html#xml-in-a-string"><i class="fa fa-check"></i><b>9.3.2</b> xml in a string</a></li>
 <li class="chapter" data-level="9.3.3" data-path="chunks.html"><a href="chunks.html#xml2-objects"><i class="fa fa-check"></i><b>9.3.3</b> xml2 objects</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>10</b> Table</a><ul>
+<li class="chapter" data-level="10" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>10</b> Table</a>
+<ul>
 <li class="chapter" data-level="10.1" data-path="table.html"><a href="table.html#table-usage"><i class="fa fa-check"></i><b>10.1</b> Usage</a></li>
 </ul></li>
 <li class="chapter" data-level="11" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>11</b> Supplementary</a></li>
 <li class="chapter" data-level="12" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>12</b> Use cases</a></li>
 <li class="chapter" data-level="13" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>13</b> Literature</a></li>
 <li class="divider"></li>
-<li><a href="https://github.com/ropensci/fulltext-book" target="blank">(c) Scott Chamberlain, 2017</a></li>
+<li><a href="https://github.com/ropensci-books/fulltext" target="blank">(c) Scott Chamberlain, 2020</a></li>
 
 </ul>
 
@@ -215,14 +229,14 @@ requires slightly different xpath for publisher A vs. publisher B vs. publishe
 dice XML.</p>
 <div id="chunks-usage" class="section level2">
 <h2><span class="header-section-number">9.1</span> Usage</h2>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(fulltext)
-<span class="kw">library</span>(pubchunks)</code></pre>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="chunks.html#cb48-1"></a><span class="kw">library</span>(fulltext)</span>
+<span id="cb48-2"><a href="chunks.html#cb48-2"></a><span class="kw">library</span>(pubchunks)</span></code></pre></div>
 <p>Get a full text article</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>, <span class="dt">from=</span><span class="st">&#39;plos&#39;</span>)</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="chunks.html#cb49-1"></a>x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>, <span class="dt">from=</span><span class="st">&#39;plos&#39;</span>)</span></code></pre></div>
 <p>Note that unlike previous versions of <code>fulltext</code> you now have to collect (<code>ft_collect()</code>)
 the text from the XML file on disk. Then you can pass to <code>pub_chunks()</code>, here to get
 authors.</p>
-<pre class="sourceCode r"><code class="sourceCode r">x <span class="op">%&gt;%</span><span class="st"> </span>ft_collect <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;authors&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="chunks.html#cb50-1"></a>x <span class="op">%&gt;%</span><span class="st"> </span>ft_collect <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;authors&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; $plos
 #&gt; $plos$`10.1371/journal.pone.0086169`
 #&gt; &lt;pub chunks&gt;
@@ -236,53 +250,53 @@ authors.</p>
 #&gt; attr(,&quot;ft_data&quot;)
 #&gt; [1] TRUE</code></pre>
 <p>In another example, let’s search for PLOS articles.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(<span class="st">&quot;rplos&quot;</span>)
-(dois &lt;-<span class="st"> </span><span class="kw">searchplos</span>(<span class="dt">q=</span><span class="st">&quot;*:*&quot;</span>, <span class="dt">fl=</span><span class="st">&#39;id&#39;</span>,
-   <span class="dt">fq=</span><span class="kw">list</span>(<span class="st">&#39;doc_type:full&#39;</span>,<span class="st">&quot;article_type:</span><span class="ch">\&quot;</span><span class="st">research article</span><span class="ch">\&quot;</span><span class="st">&quot;</span>),
-     <span class="dt">limit=</span><span class="dv">5</span>)<span class="op">$</span>data<span class="op">$</span>id)</code></pre>
-<pre><code>#&gt; [1] &quot;10.1371/journal.pone.0155491&quot; &quot;10.1371/journal.pone.0168627&quot;
-#&gt; [3] &quot;10.1371/journal.pone.0184491&quot; &quot;10.1371/journal.pone.0155489&quot;
-#&gt; [5] &quot;10.1371/journal.pone.0127059&quot;</code></pre>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="chunks.html#cb52-1"></a><span class="kw">library</span>(<span class="st">&quot;rplos&quot;</span>)</span>
+<span id="cb52-2"><a href="chunks.html#cb52-2"></a>(dois &lt;-<span class="st"> </span><span class="kw">searchplos</span>(<span class="dt">q=</span><span class="st">&quot;*:*&quot;</span>, <span class="dt">fl=</span><span class="st">&#39;id&#39;</span>,</span>
+<span id="cb52-3"><a href="chunks.html#cb52-3"></a>   <span class="dt">fq=</span><span class="kw">list</span>(<span class="st">&#39;doc_type:full&#39;</span>,<span class="st">&quot;article_type:</span><span class="ch">\&quot;</span><span class="st">research article</span><span class="ch">\&quot;</span><span class="st">&quot;</span>),</span>
+<span id="cb52-4"><a href="chunks.html#cb52-4"></a>     <span class="dt">limit=</span><span class="dv">5</span>)<span class="op">$</span>data<span class="op">$</span>id)</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;10.1371/journal.pone.0020843&quot; &quot;10.1371/journal.pone.0022257&quot;
+#&gt; [3] &quot;10.1371/journal.pone.0023139&quot; &quot;10.1371/journal.pone.0023138&quot;
+#&gt; [5] &quot;10.1371/journal.pone.0023119&quot;</code></pre>
 <p>Then get the full text</p>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(dois, <span class="dt">from=</span><span class="st">&quot;plos&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="chunks.html#cb54-1"></a>x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(dois, <span class="dt">from=</span><span class="st">&quot;plos&quot;</span>)</span></code></pre></div>
 <p>Then pull out various sections of each article.</p>
 <blockquote>
 <p>remember to pull out the full text first</p>
 </blockquote>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">ft_collect</span>(x)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r">x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;front&quot;</span>)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;body&quot;</span>)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;back&quot;</span>)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;history&quot;</span>)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;authors&quot;</span>)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="kw">c</span>(<span class="st">&quot;doi&quot;</span>,<span class="st">&quot;categories&quot;</span>))
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;all&quot;</span>)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;publisher&quot;</span>)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;acknowledgments&quot;</span>)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;permissions&quot;</span>)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;journal_meta&quot;</span>)
-x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;article_meta&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="chunks.html#cb55-1"></a>x &lt;-<span class="st"> </span><span class="kw">ft_collect</span>(x)</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="chunks.html#cb56-1"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;front&quot;</span>)</span>
+<span id="cb56-2"><a href="chunks.html#cb56-2"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;body&quot;</span>)</span>
+<span id="cb56-3"><a href="chunks.html#cb56-3"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;back&quot;</span>)</span>
+<span id="cb56-4"><a href="chunks.html#cb56-4"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;history&quot;</span>)</span>
+<span id="cb56-5"><a href="chunks.html#cb56-5"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;authors&quot;</span>)</span>
+<span id="cb56-6"><a href="chunks.html#cb56-6"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="kw">c</span>(<span class="st">&quot;doi&quot;</span>,<span class="st">&quot;categories&quot;</span>))</span>
+<span id="cb56-7"><a href="chunks.html#cb56-7"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;all&quot;</span>)</span>
+<span id="cb56-8"><a href="chunks.html#cb56-8"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;publisher&quot;</span>)</span>
+<span id="cb56-9"><a href="chunks.html#cb56-9"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;acknowledgments&quot;</span>)</span>
+<span id="cb56-10"><a href="chunks.html#cb56-10"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;permissions&quot;</span>)</span>
+<span id="cb56-11"><a href="chunks.html#cb56-11"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;journal_meta&quot;</span>)</span>
+<span id="cb56-12"><a href="chunks.html#cb56-12"></a>x <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">pub_chunks</span>(<span class="st">&quot;article_meta&quot;</span>)</span></code></pre></div>
 </div>
 <div id="chunks-tabularize" class="section level2">
 <h2><span class="header-section-number">9.2</span> Tabularize</h2>
 <p>The function <code>pub_tabularize()</code> is useful for coercing the output of <code>pub_chunks()</code> into a data.frame,
 the lingua franca of data work in R.</p>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(data.table)
-x &lt;-<span class="st"> </span><span class="kw">pub_chunks</span>(x, <span class="kw">c</span>(<span class="st">&quot;doi&quot;</span>, <span class="st">&quot;title&quot;</span>))
-x &lt;-<span class="st"> </span><span class="kw">pub_tabularize</span>(x)
-<span class="kw">rbindlist</span>(x<span class="op">$</span>plos, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</code></pre>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="chunks.html#cb57-1"></a><span class="kw">library</span>(data.table)</span>
+<span id="cb57-2"><a href="chunks.html#cb57-2"></a>x &lt;-<span class="st"> </span><span class="kw">pub_chunks</span>(x, <span class="kw">c</span>(<span class="st">&quot;doi&quot;</span>, <span class="st">&quot;title&quot;</span>))</span>
+<span id="cb57-3"><a href="chunks.html#cb57-3"></a>x &lt;-<span class="st"> </span><span class="kw">pub_tabularize</span>(x)</span>
+<span id="cb57-4"><a href="chunks.html#cb57-4"></a><span class="kw">rbindlist</span>(x<span class="op">$</span>plos, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>#&gt;                             doi
-#&gt; 1: 10.1371/journal.pone.0155491
-#&gt; 2: 10.1371/journal.pone.0168627
-#&gt; 3: 10.1371/journal.pone.0184491
-#&gt; 4: 10.1371/journal.pone.0155489
-#&gt; 5: 10.1371/journal.pone.0127059
-#&gt;                                                                                                                                        title
-#&gt; 1:                            Uterine Expression of NDRG4 Is Induced by Estrogen and Up-Regulated during Embryo Implantation Process in Mice
-#&gt; 2:                                                             Galectin-3 and Its Genetic Variation rs4644 Modulate Enterovirus 71 Infection
-#&gt; 3: Ethics approval in applications for open-access clinical trial data: An analysis of researcher statements to clinicalstudydatarequest.com
-#&gt; 4:                                      Risk Factors for Distant Metastasis in Patients with Minimally Invasive Follicular Thyroid Carcinoma
-#&gt; 5:                                   Seasonal Differences in Extinction and Colonization Drive Occupancy Dynamics of an Imperilled Amphibian
+#&gt; 1: 10.1371/journal.pone.0020843
+#&gt; 2: 10.1371/journal.pone.0022257
+#&gt; 3: 10.1371/journal.pone.0023139
+#&gt; 4: 10.1371/journal.pone.0023138
+#&gt; 5: 10.1371/journal.pone.0023119
+#&gt;                                                                                                                                     title
+#&gt; 1:          New Insights into the Evolution of Wolbachia Infections in Filarial Nematodes Inferred from a Large Range of Screened Species
+#&gt; 2:                         Dynamic Distribution of Nuclear Coactivator 4 during Mitosis: Association with Mitotic Apparatus and Midbodies
+#&gt; 3:     Contrasting Expression of Canonical Wnt Signaling Reporters TOPGAL, BATGAL and Axin2LacZ during Murine Lung Development and Repair
+#&gt; 4:                 Regrets Associated with Providing Healthcare: Qualitative Study of Experiences of Hospital-Based Physicians and Nurses
+#&gt; 5: Strategies for Enhancing the Accumulation and Retention of Extracellular Matrix in Tissue-Engineered Cartilage Cultured in Bioreactors
 #&gt;    .publisher
 #&gt; 1:       plos
 #&gt; 2:       plos
@@ -295,9 +309,9 @@ x &lt;-<span class="st"> </span><span class="kw">pub_tabularize</span>(x)
 <p><code>pub_chunks()</code> works with other inputs besides the output of <code>fulltext::ft_get()</code>.</p>
 <div id="files" class="section level3">
 <h3><span class="header-section-number">9.3.1</span> Files</h3>
-<pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;examples/10_1016_0021_8928_59_90156_x.xml&quot;</span>, 
-  <span class="dt">package =</span> <span class="st">&quot;pubchunks&quot;</span>)</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pub_chunks</span>(x, <span class="st">&quot;abstract&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="chunks.html#cb59-1"></a>x &lt;-<span class="st"> </span><span class="kw">system.file</span>(<span class="st">&quot;examples/10_1016_0021_8928_59_90156_x.xml&quot;</span>, </span>
+<span id="cb59-2"><a href="chunks.html#cb59-2"></a>  <span class="dt">package =</span> <span class="st">&quot;pubchunks&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="chunks.html#cb60-1"></a><span class="kw">pub_chunks</span>(x, <span class="st">&quot;abstract&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; &lt;pub chunks&gt;
 #&gt;   from: file
 #&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
@@ -306,21 +320,21 @@ x &lt;-<span class="st"> </span><span class="kw">pub_tabularize</span>(x)
 #&gt;    abstract (n=1): Abstract
 #&gt;                
 #&gt;                   This pa ...</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pub_chunks</span>(x, <span class="st">&quot;title&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="chunks.html#cb62-1"></a><span class="kw">pub_chunks</span>(x, <span class="st">&quot;title&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; &lt;pub chunks&gt;
 #&gt;   from: file
 #&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
 #&gt;   sections: title
 #&gt;   showing up to first 5: 
 #&gt;    title (n=1): On the driving of a piston with a rigid collar int ...</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pub_chunks</span>(x, <span class="st">&quot;authors&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="chunks.html#cb64-1"></a><span class="kw">pub_chunks</span>(x, <span class="st">&quot;authors&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; &lt;pub chunks&gt;
 #&gt;   from: file
 #&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
 #&gt;   sections: authors
 #&gt;   showing up to first 5: 
 #&gt;    authors (n=1): Chetaev, D.N</code></pre>
-<pre class="sourceCode r"><code class="sourceCode r"><span class="kw">pub_chunks</span>(x, <span class="kw">c</span>(<span class="st">&quot;title&quot;</span>, <span class="st">&quot;refs&quot;</span>))</code></pre>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="chunks.html#cb66-1"></a><span class="kw">pub_chunks</span>(x, <span class="kw">c</span>(<span class="st">&quot;title&quot;</span>, <span class="st">&quot;refs&quot;</span>))</span></code></pre></div>
 <pre><code>#&gt; &lt;pub chunks&gt;
 #&gt;   from: file
 #&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
@@ -334,8 +348,8 @@ by using <code>unclass()</code>.</p>
 </div>
 <div id="xml-in-a-string" class="section level3">
 <h3><span class="header-section-number">9.3.2</span> xml in a string</h3>
-<pre class="sourceCode r"><code class="sourceCode r">xml &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">readLines</span>(x), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)
-<span class="kw">pub_chunks</span>(xml, <span class="st">&quot;title&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="chunks.html#cb68-1"></a>xml &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">readLines</span>(x), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb68-2"><a href="chunks.html#cb68-2"></a><span class="kw">pub_chunks</span>(xml, <span class="st">&quot;title&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; &lt;pub chunks&gt;
 #&gt;   from: character
 #&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
@@ -345,9 +359,9 @@ by using <code>unclass()</code>.</p>
 </div>
 <div id="xml2-objects" class="section level3">
 <h3><span class="header-section-number">9.3.3</span> xml2 objects</h3>
-<pre class="sourceCode r"><code class="sourceCode r">xml &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">readLines</span>(x), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)
-xml &lt;-<span class="st"> </span>xml2<span class="op">::</span><span class="kw">read_xml</span>(xml)
-<span class="kw">pub_chunks</span>(xml, <span class="st">&quot;title&quot;</span>)</code></pre>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="chunks.html#cb70-1"></a>xml &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">readLines</span>(x), <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</span>
+<span id="cb70-2"><a href="chunks.html#cb70-2"></a>xml &lt;-<span class="st"> </span>xml2<span class="op">::</span><span class="kw">read_xml</span>(xml)</span>
+<span id="cb70-3"><a href="chunks.html#cb70-3"></a><span class="kw">pub_chunks</span>(xml, <span class="st">&quot;title&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; &lt;pub chunks&gt;
 #&gt;   from: xml_document
 #&gt;   publisher/journal: elsevier/Journal of Applied Mathematics and Mechanics
@@ -369,11 +383,13 @@ xml &lt;-<span class="st"> </span>xml2<span class="op">::</span><span class="kw"
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
 <script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
 <script>
 gitbook.require(["gitbook"], function(gitbook) {
 gitbook.start({
@@ -381,12 +397,11 @@ gitbook.start({
 "github": false,
 "facebook": true,
 "twitter": true,
-"google": false,
 "linkedin": false,
 "weibo": false,
 "instapaper": false,
 "vk": false,
-"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
 "theme": "white",
@@ -394,10 +409,14 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ropensci/fulltext-book/edit/master/08-chunks.Rmd",
+"link": "https://github.com/ropensci-books/fulltext/edit/master/08-chunks.Rmd",
 "text": "Edit"
 },
 "history": {
+"link": null,
+"text": null
+},
+"view": {
 "link": null,
 "text": null
 },
