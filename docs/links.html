@@ -195,10 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.1" data-path="on-disk.html"><a href="on-disk.html#ft_table-usage"><i class="fa fa-check"></i><b>11.1</b> Usage</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>12</b> Supplementary</a></li>
+<li class="chapter" data-level="12" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>12</b> Request debugging/inspection</a></li>
 <li class="chapter" data-level="13" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>13</b> Use cases</a></li>
-<li class="chapter" data-level="14" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>14</b> Request debugging/inspection</a></li>
-<li class="chapter" data-level="15" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>15</b> session info</a></li>
+<li class="chapter" data-level="14" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>14</b> session info</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/ropensci-books/fulltext" target="blank">(c) Scott Chamberlain, 2020</a></li>
 
@@ -224,20 +223,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>ft_links</code> function makes it easy to get URLs for full text versions of articles. You can for instance only use <code>fulltext</code> to pass DOIs directly to <code>ft_links</code> to get URLs to use elsewhere in your research workflow. Or you may want to search first with <code>ft_search</code>, then pass that output directly to <code>ft_links</code>.</p>
 <div id="links-usage" class="section level2">
 <h2><span class="header-section-number">8.1</span> Usage</h2>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="links.html#cb42-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="links.html#cb41-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
 <p>List backends available</p>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb43-1"><a href="links.html#cb43-1"></a><span class="kw">ft_links_ls</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="links.html#cb42-1"></a><span class="kw">ft_links_ls</span>()</span></code></pre></div>
 <pre><code>#&gt;  [1] &quot;bmc&quot;         &quot;cdc&quot;         &quot;cogent&quot;      &quot;copernicus&quot;  &quot;crossref&quot;   
 #&gt;  [6] &quot;elife&quot;       &quot;entrez&quot;      &quot;frontiersin&quot; &quot;peerj&quot;       &quot;plos&quot;       
 #&gt; [11] &quot;rsoc&quot;</code></pre>
 <p>You can pass DOIs directly to <code>ft_links</code></p>
-<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb45-1"><a href="links.html#cb45-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_links</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>)</span>
-<span id="cb45-2"><a href="links.html#cb45-2"></a>res</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="links.html#cb44-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_links</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>)</span>
+<span id="cb44-2"><a href="links.html#cb44-2"></a>res</span></code></pre></div>
 <pre><code>#&gt; &lt;fulltext links&gt;
 #&gt; [Found] 1 
 #&gt; [IDs] 10.3389/fphar.2014.00109 ...</code></pre>
 <p>The output is an S3 object, essentially a list. If you don’t specify a <code>from</code> value, we try to guess the publisher and the named list in the output will match the publisher of the DOI. Here, that’s Frontiers In, lowercased and as one word:</p>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb47-1"><a href="links.html#cb47-1"></a>res<span class="op">$</span>frontiersin</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="links.html#cb46-1"></a>res<span class="op">$</span>frontiersin</span></code></pre></div>
 <pre><code>#&gt; $found
 #&gt; [1] 1
 #&gt; 
@@ -258,25 +257,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; list()</code></pre>
 <p>The output is a named list with number of links found, the id (aka DOI), and in the <code>$data</code> slot is the links, which can include links for pdf, xml, plain (for plain text), unspecified and possibly others (publishers do lots of weird things).</p>
 <p>Instead of passing DOIs directly, you can use <code>ft_search(()</code> to search first:</p>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb49-1"><a href="links.html#cb49-1"></a>(res1 &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;entrez&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="links.html#cb48-1"></a>(res1 &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;entrez&#39;</span>))</span></code></pre></div>
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 203212; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 203408; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>Then pass the output of that directly to <code>ft_links</code></p>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb51-1"><a href="links.html#cb51-1"></a>(out &lt;-<span class="st"> </span><span class="kw">ft_links</span>(res1))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="links.html#cb50-1"></a>(out &lt;-<span class="st"> </span><span class="kw">ft_links</span>(res1))</span></code></pre></div>
 <pre><code>#&gt; &lt;fulltext links&gt;
-#&gt; [Found] 4 
-#&gt; [IDs] ID_32601496 ID_32600472 ID_32600312 ID_32600255 ...</code></pre>
+#&gt; [Found] 6 
+#&gt; [IDs] ID_32605981 ID_32576115 ID_32576107 ID_32554485 ID_32546087 ID_32461236
+#&gt;      ...</code></pre>
 <p>Here, the output name on the list matches the source passed in to <code>ft_links</code> from <code>ft_search</code>.</p>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb53-1"><a href="links.html#cb53-1"></a><span class="kw">names</span>(out)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="links.html#cb52-1"></a><span class="kw">names</span>(out)</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;entrez&quot;</code></pre>
 <p>You can alternatively pass in DOIs directly and specify the data source. Options include “plos”, “bmc”, “crossref”, and “entrez”.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb55-1"><a href="links.html#cb55-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;10.1371/journal.pone.0017342&quot;</span>, <span class="st">&quot;10.1371/journal.pone.0091497&quot;</span>)</span>
-<span id="cb55-2"><a href="links.html#cb55-2"></a>z &lt;-<span class="st"> </span><span class="kw">ft_links</span>(x, <span class="dt">from =</span> <span class="st">&quot;plos&quot;</span>)</span>
-<span id="cb55-3"><a href="links.html#cb55-3"></a>z<span class="op">$</span>plos<span class="op">$</span>data</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="links.html#cb54-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;10.1371/journal.pone.0017342&quot;</span>, <span class="st">&quot;10.1371/journal.pone.0091497&quot;</span>)</span>
+<span id="cb54-2"><a href="links.html#cb54-2"></a>z &lt;-<span class="st"> </span><span class="kw">ft_links</span>(x, <span class="dt">from =</span> <span class="st">&quot;plos&quot;</span>)</span>
+<span id="cb54-3"><a href="links.html#cb54-3"></a>z<span class="op">$</span>plos<span class="op">$</span>data</span></code></pre></div>
 <pre><code>#&gt; $`10.1371/journal.pone.0017342`
 #&gt; $`10.1371/journal.pone.0017342`$xml
 #&gt; [1] &quot;http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0017342&amp;type=manuscript&quot;
@@ -292,7 +292,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; $`10.1371/journal.pone.0091497`$pdf
 #&gt; [1] &quot;http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0091497&amp;type=printable&quot;</code></pre>
 <p>Fetch just the pdf links</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb57-1"><a href="links.html#cb57-1"></a><span class="kw">unname</span>(<span class="kw">vapply</span>(z<span class="op">$</span>plos<span class="op">$</span>data, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;pdf&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="links.html#cb56-1"></a><span class="kw">unname</span>(<span class="kw">vapply</span>(z<span class="op">$</span>plos<span class="op">$</span>data, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;pdf&quot;</span>))</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0017342&amp;type=printable&quot;
 #&gt; [2] &quot;http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0091497&amp;type=printable&quot;</code></pre>
 </div>

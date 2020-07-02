@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 15 session info | fulltext manual</title>
-  <meta name="description" content="Chapter 15 session info | fulltext manual" />
+  <title>Chapter 14 session info | fulltext manual</title>
+  <meta name="description" content="Chapter 14 session info | fulltext manual" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 15 session info | fulltext manual" />
+  <meta property="og:title" content="Chapter 14 session info | fulltext manual" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Chapter 15 session info | fulltext manual" />
+  <meta property="og:description" content="Chapter 14 session info | fulltext manual" />
   <meta name="github-repo" content="ropensci-books/fulltext" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 15 session info | fulltext manual" />
+  <meta name="twitter:title" content="Chapter 14 session info | fulltext manual" />
   
-  <meta name="twitter:description" content="Chapter 15 session info | fulltext manual" />
+  <meta name="twitter:description" content="Chapter 14 session info | fulltext manual" />
   
 
 
@@ -29,7 +29,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="curl-options.html"/>
+<link rel="prev" href="use-cases.html"/>
 
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -195,10 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.1" data-path="on-disk.html"><a href="on-disk.html#ft_table-usage"><i class="fa fa-check"></i><b>11.1</b> Usage</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>12</b> Supplementary</a></li>
+<li class="chapter" data-level="12" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>12</b> Request debugging/inspection</a></li>
 <li class="chapter" data-level="13" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>13</b> Use cases</a></li>
-<li class="chapter" data-level="14" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>14</b> Request debugging/inspection</a></li>
-<li class="chapter" data-level="15" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>15</b> session info</a></li>
+<li class="chapter" data-level="14" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>14</b> session info</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/ropensci-books/fulltext" target="blank">(c) Scott Chamberlain, 2020</a></li>
 
@@ -220,9 +219,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="session-info" class="section level1">
-<h1><span class="header-section-number">Chapter 15</span> session info</h1>
+<h1><span class="header-section-number">Chapter 14</span> session info</h1>
 <p>Session info for this book</p>
-<div class="sourceCode" id="cb104"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb104-1"><a href="session-info.html#cb104-1"></a>sessioninfo<span class="op">::</span><span class="kw">session_info</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="session-info.html#cb103-1"></a>sessioninfo<span class="op">::</span><span class="kw">session_info</span>()</span></code></pre></div>
 <pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
 #&gt;  setting  value                       
 #&gt;  version  R version 4.0.2 (2020-06-22)
@@ -233,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt;  collate  en_US.UTF-8                 
 #&gt;  ctype    en_US.UTF-8                 
 #&gt;  tz       US/Pacific                  
-#&gt;  date     2020-07-01                  
+#&gt;  date     2020-07-02                  
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
 #&gt;  package     * version    date       lib source                         
@@ -254,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt;  evaluate      0.14       2019-05-28 [1] CRAN (R 4.0.0)                 
 #&gt;  fansi         0.4.1      2020-01-08 [1] CRAN (R 4.0.0)                 
 #&gt;  fastmap       1.0.1      2019-10-08 [1] CRAN (R 4.0.0)                 
-#&gt;  fulltext    * 1.5.0      2020-07-01 [1] local                          
+#&gt;  fulltext    * 1.5.0      2020-07-02 [1] local                          
 #&gt;  generics      0.0.2      2018-11-29 [1] CRAN (R 4.0.0)                 
 #&gt;  ggplot2       3.3.2      2020-06-19 [1] CRAN (R 4.0.2)                 
 #&gt;  glue          1.4.1.9000 2020-06-12 [1] Github (tidyverse/glue@a768e8a)
@@ -326,7 +325,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="curl-options.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="use-cases.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 
     </div>
   </div>
@@ -358,7 +357,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ropensci-books/fulltext/edit/master/14-session-info.Rmd",
+"link": "https://github.com/ropensci-books/fulltext/edit/master/13-session-info.Rmd",
 "text": "Edit"
 },
 "history": {

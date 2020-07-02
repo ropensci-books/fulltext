@@ -30,7 +30,7 @@
   
   
 <link rel="prev" href="chunks.html"/>
-<link rel="next" href="supplementary.html"/>
+<link rel="next" href="curl-options.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -195,10 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.1" data-path="on-disk.html"><a href="on-disk.html#ft_table-usage"><i class="fa fa-check"></i><b>11.1</b> Usage</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>12</b> Supplementary</a></li>
+<li class="chapter" data-level="12" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>12</b> Request debugging/inspection</a></li>
 <li class="chapter" data-level="13" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>13</b> Use cases</a></li>
-<li class="chapter" data-level="14" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>14</b> Request debugging/inspection</a></li>
-<li class="chapter" data-level="15" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>15</b> session info</a></li>
+<li class="chapter" data-level="14" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>14</b> session info</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/ropensci-books/fulltext" target="blank">(c) Scott Chamberlain, 2020</a></li>
 
@@ -225,10 +224,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>With the output of <code>ft_table()</code> you can go directly into a text-mining package like <code>quanteda</code>.</p>
 <div id="ft_table-usage" class="section level2">
 <h2><span class="header-section-number">11.1</span> Usage</h2>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="on-disk.html#cb95-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="on-disk.html#cb94-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
 <p>Use <code>ft_table()</code> to pull out text from all articles.</p>
-<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="on-disk.html#cb96-1"></a><span class="kw">ft_table</span>()</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 9 x 4
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="on-disk.html#cb95-1"></a><span class="kw">ft_table</span>()</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 8 x 4
 #&gt;   dois         ids_norm       text                      paths                   
 #&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                     &lt;chr&gt;                   
 #&gt; 1 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
@@ -238,11 +237,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 5 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
 #&gt; 6 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
 #&gt; 7 10.3389/fea… 10_3389_feart… &quot;Front. Earth Sci.Fronti… /Users/sckott/Library/C…
-#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;Front. Pharmacol.Fronti… /Users/sckott/Library/C…
-#&gt; 9 10.7717/pee… 10_7717_peerj… &quot;PeerJPeerJPeerJPeerJ216… /Users/sckott/Library/C…</code></pre>
+#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;Front. Pharmacol.Fronti… /Users/sckott/Library/C…</code></pre>
 <p>You can pull out just text from XML files</p>
-<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="on-disk.html#cb98-1"></a><span class="kw">ft_table</span>(<span class="dt">type =</span> <span class="st">&quot;xml&quot;</span>)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 9 x 4
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="on-disk.html#cb97-1"></a><span class="kw">ft_table</span>(<span class="dt">type =</span> <span class="st">&quot;xml&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 8 x 4
 #&gt;   dois         ids_norm       text                      paths                   
 #&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                     &lt;chr&gt;                   
 #&gt; 1 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
@@ -252,16 +250,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 5 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
 #&gt; 6 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
 #&gt; 7 10.3389/fea… 10_3389_feart… &quot;Front. Earth Sci.Fronti… /Users/sckott/Library/C…
-#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;Front. Pharmacol.Fronti… /Users/sckott/Library/C…
-#&gt; 9 10.7717/pee… 10_7717_peerj… &quot;PeerJPeerJPeerJPeerJ216… /Users/sckott/Library/C…</code></pre>
+#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;Front. Pharmacol.Fronti… /Users/sckott/Library/C…</code></pre>
 <p>You can pull out just text from PDF files</p>
-<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="on-disk.html#cb100-1"></a><span class="kw">ft_table</span>(<span class="dt">type =</span> <span class="st">&quot;pdf&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="on-disk.html#cb99-1"></a><span class="kw">ft_table</span>(<span class="dt">type =</span> <span class="st">&quot;pdf&quot;</span>)</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 0 x 3
 #&gt; # … with 3 variables: ids_norm &lt;chr&gt;, text &lt;chr&gt;, paths &lt;chr&gt;</code></pre>
 <p>You can pull out XML but not extract the text. So you’ll get XML strings
 that you can parse yourself with xpath/css selectors/etc.</p>
-<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="on-disk.html#cb102-1"></a><span class="kw">ft_table</span>(<span class="dt">xml_extract_text =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 9 x 4
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="on-disk.html#cb101-1"></a><span class="kw">ft_table</span>(<span class="dt">xml_extract_text =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 8 x 4
 #&gt;   dois         ids_norm       text                      paths                   
 #&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                     &lt;chr&gt;                   
 #&gt; 1 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
@@ -271,8 +268,7 @@ that you can parse yourself with xpath/css selectors/etc.</p>
 #&gt; 5 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
 #&gt; 6 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
 #&gt; 7 10.3389/fea… 10_3389_feart… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
-#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
-#&gt; 9 10.7717/pee… 10_7717_peerj… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…</code></pre>
+#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…</code></pre>
 
 </div>
 </div>
@@ -282,7 +278,7 @@ that you can parse yourself with xpath/css selectors/etc.</p>
         </div>
       </div>
 <a href="chunks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="supplementary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="curl-options.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

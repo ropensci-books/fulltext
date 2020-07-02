@@ -195,10 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.1" data-path="on-disk.html"><a href="on-disk.html#ft_table-usage"><i class="fa fa-check"></i><b>11.1</b> Usage</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>12</b> Supplementary</a></li>
+<li class="chapter" data-level="12" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>12</b> Request debugging/inspection</a></li>
 <li class="chapter" data-level="13" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>13</b> Use cases</a></li>
-<li class="chapter" data-level="14" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>14</b> Request debugging/inspection</a></li>
-<li class="chapter" data-level="15" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>15</b> session info</a></li>
+<li class="chapter" data-level="14" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>14</b> session info</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/ropensci-books/fulltext" target="blank">(c) Scott Chamberlain, 2020</a></li>
 
@@ -271,7 +270,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 52809; BMC: 0; Crossref: 207573; Entrez: 0; arxiv: 2186; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 52809; BMC: 0; Crossref: 207626; Entrez: 0; arxiv: 2186; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 10; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 10; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>Each source may have different results AND with different columns in each data.frame</p>
@@ -313,7 +312,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; #   journal_ref &lt;chr&gt;, doi &lt;chr&gt;, primary_category &lt;chr&gt;, categories &lt;chr&gt;</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="search.html#cb21-1"></a>res<span class="op">$</span>crossref</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [207573, 10] 
+#&gt; Records found, returned: [207626, 10] 
 #&gt; License: [variable, see individual records] 
 #&gt; # A tibble: 10 x 29
 #&gt;    container.title created deposited published.print doi   indexed issn  issue
@@ -349,7 +348,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="search.html#cb25-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;europmc&#39;</span>)</span>
 <span id="cb25-2"><a href="search.html#cb25-2"></a>res<span class="op">$</span>europmc</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [369024, 25] 
+#&gt; Records found, returned: [369372, 25] 
 #&gt;  
 #&gt; # A tibble: 25 x 29
 #&gt;    id    source pmid  doi   title authorString journalTitle issue journalVolume
@@ -378,7 +377,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 369024; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 369372; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 25; Scopus: 0; Microsoft: 0]</code></pre>
 

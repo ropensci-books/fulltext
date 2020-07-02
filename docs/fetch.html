@@ -195,10 +195,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <ul>
 <li class="chapter" data-level="11.1" data-path="on-disk.html"><a href="on-disk.html#ft_table-usage"><i class="fa fa-check"></i><b>11.1</b> Usage</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>12</b> Supplementary</a></li>
+<li class="chapter" data-level="12" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>12</b> Request debugging/inspection</a></li>
 <li class="chapter" data-level="13" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>13</b> Use cases</a></li>
-<li class="chapter" data-level="14" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>14</b> Request debugging/inspection</a></li>
-<li class="chapter" data-level="15" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>15</b> session info</a></li>
+<li class="chapter" data-level="14" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>14</b> session info</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/ropensci-books/fulltext" target="blank">(c) Scott Chamberlain, 2020</a></li>
 
@@ -264,9 +263,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="fetch-usage" class="section level2">
 <h2><span class="header-section-number">9.3</span> Usage</h2>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="fetch.html#cb59-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="fetch.html#cb58-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
 <p>List backends available</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="fetch.html#cb60-1"></a><span class="kw">ft_get_ls</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="fetch.html#cb59-1"></a><span class="kw">ft_get_ls</span>()</span></code></pre></div>
 <pre><code>#&gt;  [1] &quot;aaas&quot;                &quot;aip&quot;                 &quot;amersocclinoncol&quot;   
 #&gt;  [4] &quot;amersocmicrobiol&quot;    &quot;arxiv&quot;               &quot;biorxiv&quot;            
 #&gt;  [7] &quot;bmc&quot;                 &quot;cambridge&quot;           &quot;cob&quot;                
@@ -278,12 +277,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; [25] &quot;royalsocchem&quot;        &quot;sciencedirect&quot;       &quot;scientificsocieties&quot;
 #&gt; [28] &quot;wiley&quot;</code></pre>
 <p>The simplest approach is passing a DOI directly to <code>ft_get</code></p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb62-1"><a href="fetch.html#cb62-1"></a>(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="fetch.html#cb61-1"></a>(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>))</span></code></pre></div>
 <pre><code>#&gt; &lt;fulltext text&gt;
 #&gt; [Docs] 1 
 #&gt; [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
 #&gt; [IDs] 10.1371/journal.pone.0086169 ...</code></pre>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb64-1"><a href="fetch.html#cb64-1"></a>res<span class="op">$</span>plos</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="fetch.html#cb63-1"></a>res<span class="op">$</span>plos</span></code></pre></div>
 <pre><code>#&gt; $found
 #&gt; [1] 1
 #&gt; 
@@ -332,12 +331,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt;                             id error
 #&gt; 1 10.1371/journal.pone.0086169  &lt;NA&gt;</code></pre>
 <p>You can pass many DOIs in at once</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb66-1"><a href="fetch.html#cb66-1"></a>(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="kw">c</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>, <span class="st">&#39;10.3389/feart.2015.00009&#39;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="fetch.html#cb65-1"></a>(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="kw">c</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>, <span class="st">&#39;10.3389/feart.2015.00009&#39;</span>)))</span></code></pre></div>
 <pre><code>#&gt; &lt;fulltext text&gt;
 #&gt; [Docs] 2 
 #&gt; [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
 #&gt; [IDs] 10.3389/fphar.2014.00109 10.3389/feart.2015.00009 ...</code></pre>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb68-1"><a href="fetch.html#cb68-1"></a>res<span class="op">$</span>frontiersin</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="fetch.html#cb67-1"></a>res<span class="op">$</span>frontiersin</span></code></pre></div>
 <pre><code>#&gt; $found
 #&gt; [1] 2
 #&gt; 
@@ -432,11 +431,11 @@ will be a character string in that slot.</p>
 </ul>
 <p>An additional top level slot called <code>errors</code> has a data.frame of all errors
 from each article, like:</p>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="fetch.html#cb70-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="kw">c</span>(<span class="st">&#39;10.7554/eLife.03032&#39;</span>, <span class="st">&#39;10.7554/eLife.aaaa&#39;</span>), <span class="dt">from =</span> <span class="st">&quot;elife&quot;</span>)</span>
-<span id="cb70-2"><a href="fetch.html#cb70-2"></a>res<span class="op">$</span>elife<span class="op">$</span>errors</span>
-<span id="cb70-3"><a href="fetch.html#cb70-3"></a>                   id                   error</span>
-<span id="cb70-4"><a href="fetch.html#cb70-4"></a><span class="dv">1</span> <span class="fl">10.7554</span><span class="op">/</span>eLife<span class="fl">.03032</span>                    <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span></span>
-<span id="cb70-5"><a href="fetch.html#cb70-5"></a><span class="dv">2</span>  <span class="fl">10.7554</span><span class="op">/</span>eLife.aaaa subscript out of bounds</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="fetch.html#cb69-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="kw">c</span>(<span class="st">&#39;10.7554/eLife.03032&#39;</span>, <span class="st">&#39;10.7554/eLife.aaaa&#39;</span>), <span class="dt">from =</span> <span class="st">&quot;elife&quot;</span>)</span>
+<span id="cb69-2"><a href="fetch.html#cb69-2"></a>res<span class="op">$</span>elife<span class="op">$</span>errors</span>
+<span id="cb69-3"><a href="fetch.html#cb69-3"></a>                   id                   error</span>
+<span id="cb69-4"><a href="fetch.html#cb69-4"></a><span class="dv">1</span> <span class="fl">10.7554</span><span class="op">/</span>eLife<span class="fl">.03032</span>                    <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span></span>
+<span id="cb69-5"><a href="fetch.html#cb69-5"></a><span class="dv">2</span>  <span class="fl">10.7554</span><span class="op">/</span>eLife.aaaa subscript out of bounds</span></code></pre></div>
 <p>Where the second DOI was invalid. Granted the error in the data.frame “subscript out of bounds”
 isn’t very informative, but we can work on that.</p>
 </div>
