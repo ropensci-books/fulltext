@@ -69,7 +69,7 @@ Instead of using `ft_search()` first, and passing those results to `ft_abstract(
 
 Here, we'll fetch abstracts for three articles from arXiv. With Semantic Scholar we need to prefix the string `arXiv` to the ids (if you use DOIs you don't need to prefix any string). 
 
-```{r}
+```{r eval=FALSE}
 arxiv_ids <- c("0710.3491", "0804.0713", "0810.4821", "1003.0315")
 out <- ft_abstract(x = paste0("arXiv:", arxiv_ids), from = "semanticscholar")
 unname(vapply(out$semanticscholar, "[[", "", "abstract"))
