@@ -1,10 +1,18 @@
-# Table {#table}
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+# Summarize articles on disk {#on-disk}
 
 The `ft_table()` function makes it easy to create a data.frame of the text of PDF, plain text, and XML files, together with DOIs/IDs for each article. It's similar to the `readtext::readtext()` function, but is much more specific to just this package.
 
 With the output of `ft_table()` you can go directly into a text-mining package like `quanteda`.
 
-## Usage {#table-usage}
+## Usage {#ft_table-usage}
 
 
 ```{r}

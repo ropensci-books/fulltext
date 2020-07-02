@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Authentication | fulltext manual</title>
   <meta name="description" content="Chapter 4 Authentication | fulltext manual" />
-  <meta name="generator" content="bookdown 0.16.5 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Authentication | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -30,9 +30,8 @@
   
   
 <link rel="prev" href="data-sources.html"/>
-<link rel="next" href="search.html"/>
+<link rel="next" href="rate-limits.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
-<script src="libs/elevate-section-attrs-2.0/elevate-section-attrs.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -49,6 +48,7 @@
 
 
 
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 
 
 <style type="text/css">
@@ -149,49 +149,56 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.4" data-path="data-sources.html"><a href="data-sources.html#ds-fulltext"><i class="fa fa-check"></i><b>3.4</b> Getting full text</a></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="authentication.html"><a href="authentication.html"><i class="fa fa-check"></i><b>4</b> Authentication</a></li>
-<li class="chapter" data-level="5" data-path="search.html"><a href="search.html"><i class="fa fa-check"></i><b>5</b> Search</a>
+<li class="chapter" data-level="5" data-path="rate-limits.html"><a href="rate-limits.html"><i class="fa fa-check"></i><b>5</b> Rate limits</a></li>
+<li class="chapter" data-level="6" data-path="search.html"><a href="search.html"><i class="fa fa-check"></i><b>6</b> Search</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="search.html"><a href="search.html#search-usage"><i class="fa fa-check"></i><b>5.1</b> Usage</a></li>
+<li class="chapter" data-level="6.1" data-path="search.html"><a href="search.html#search-usage"><i class="fa fa-check"></i><b>6.1</b> Usage</a></li>
+<li class="chapter" data-level="6.2" data-path="search.html"><a href="search.html#search-many-sources"><i class="fa fa-check"></i><b>6.2</b> Search many sources</a></li>
+<li class="chapter" data-level="6.3" data-path="search.html"><a href="search.html#search-options"><i class="fa fa-check"></i><b>6.3</b> Search options</a></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="abstract.html"><a href="abstract.html"><i class="fa fa-check"></i><b>6</b> Abstract</a>
+<li class="chapter" data-level="7" data-path="abstracts.html"><a href="abstracts.html"><i class="fa fa-check"></i><b>7</b> Abstracts</a>
 <ul>
-<li class="chapter" data-level="6.1" data-path="abstract.html"><a href="abstract.html#abstract-usage"><i class="fa fa-check"></i><b>6.1</b> Usage</a></li>
+<li class="chapter" data-level="7.1" data-path="abstracts.html"><a href="abstracts.html#abstracts-usage"><i class="fa fa-check"></i><b>7.1</b> Usage</a></li>
+<li class="chapter" data-level="7.2" data-path="abstracts.html"><a href="abstracts.html#abstracts-by-ids"><i class="fa fa-check"></i><b>7.2</b> By Ids</a></li>
+<li class="chapter" data-level="7.3" data-path="abstracts.html"><a href="abstracts.html#abstracts-options"><i class="fa fa-check"></i><b>7.3</b> Abstracts options</a></li>
 </ul></li>
-<li class="chapter" data-level="7" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>7</b> Links</a>
+<li class="chapter" data-level="8" data-path="links.html"><a href="links.html"><i class="fa fa-check"></i><b>8</b> Links</a>
 <ul>
-<li class="chapter" data-level="7.1" data-path="links.html"><a href="links.html#links-usage"><i class="fa fa-check"></i><b>7.1</b> Usage</a></li>
+<li class="chapter" data-level="8.1" data-path="links.html"><a href="links.html#links-usage"><i class="fa fa-check"></i><b>8.1</b> Usage</a></li>
+<li class="chapter" data-level="8.2" data-path="links.html"><a href="links.html#links-options"><i class="fa fa-check"></i><b>8.2</b> Links options</a></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="fetch.html"><a href="fetch.html"><i class="fa fa-check"></i><b>8</b> Fetch</a>
+<li class="chapter" data-level="9" data-path="fetch.html"><a href="fetch.html"><i class="fa fa-check"></i><b>9</b> Fetch</a>
 <ul>
-<li class="chapter" data-level="8.1" data-path="fetch.html"><a href="fetch.html#fetch-data-formats"><i class="fa fa-check"></i><b>8.1</b> Data formats</a></li>
-<li class="chapter" data-level="8.2" data-path="fetch.html"><a href="fetch.html#how-data-is-stored"><i class="fa fa-check"></i><b>8.2</b> How data is stored</a></li>
-<li class="chapter" data-level="8.3" data-path="fetch.html"><a href="fetch.html#fetch-usage"><i class="fa fa-check"></i><b>8.3</b> Usage</a></li>
-<li class="chapter" data-level="8.4" data-path="fetch.html"><a href="fetch.html#fetch-errors"><i class="fa fa-check"></i><b>8.4</b> Errors</a></li>
-<li class="chapter" data-level="8.5" data-path="fetch.html"><a href="fetch.html#fetch-cleanup"><i class="fa fa-check"></i><b>8.5</b> Cleanup</a></li>
-<li class="chapter" data-level="8.6" data-path="fetch.html"><a href="fetch.html#fetch-internals"><i class="fa fa-check"></i><b>8.6</b> Internals</a></li>
-<li class="chapter" data-level="8.7" data-path="fetch.html"><a href="fetch.html#fetch-notes"><i class="fa fa-check"></i><b>8.7</b> Notes about specific data sources</a>
+<li class="chapter" data-level="9.1" data-path="fetch.html"><a href="fetch.html#fetch-data-formats"><i class="fa fa-check"></i><b>9.1</b> Data formats</a></li>
+<li class="chapter" data-level="9.2" data-path="fetch.html"><a href="fetch.html#how-data-is-stored"><i class="fa fa-check"></i><b>9.2</b> How data is stored</a></li>
+<li class="chapter" data-level="9.3" data-path="fetch.html"><a href="fetch.html#fetch-usage"><i class="fa fa-check"></i><b>9.3</b> Usage</a></li>
+<li class="chapter" data-level="9.4" data-path="fetch.html"><a href="fetch.html#fetch-errors"><i class="fa fa-check"></i><b>9.4</b> Errors</a></li>
+<li class="chapter" data-level="9.5" data-path="fetch.html"><a href="fetch.html#fetch-cleanup"><i class="fa fa-check"></i><b>9.5</b> Cleanup</a></li>
+<li class="chapter" data-level="9.6" data-path="fetch.html"><a href="fetch.html#fetch-internals"><i class="fa fa-check"></i><b>9.6</b> Internals</a></li>
+<li class="chapter" data-level="9.7" data-path="fetch.html"><a href="fetch.html#fetch-notes"><i class="fa fa-check"></i><b>9.7</b> Notes about specific data sources</a>
 <ul>
-<li class="chapter" data-level="8.7.1" data-path="fetch.html"><a href="fetch.html#elsevier"><i class="fa fa-check"></i><b>8.7.1</b> Elsevier</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>9</b> Extracting text</a>
-<ul>
-<li class="chapter" data-level="9.1" data-path="chunks.html"><a href="chunks.html#chunks-usage"><i class="fa fa-check"></i><b>9.1</b> Usage</a></li>
-<li class="chapter" data-level="9.2" data-path="chunks.html"><a href="chunks.html#chunks-tabularize"><i class="fa fa-check"></i><b>9.2</b> Tabularize</a></li>
-<li class="chapter" data-level="9.3" data-path="chunks.html"><a href="chunks.html#chunks-other-inputs"><i class="fa fa-check"></i><b>9.3</b> Other inputs</a>
-<ul>
-<li class="chapter" data-level="9.3.1" data-path="chunks.html"><a href="chunks.html#files"><i class="fa fa-check"></i><b>9.3.1</b> Files</a></li>
-<li class="chapter" data-level="9.3.2" data-path="chunks.html"><a href="chunks.html#xml-in-a-string"><i class="fa fa-check"></i><b>9.3.2</b> xml in a string</a></li>
-<li class="chapter" data-level="9.3.3" data-path="chunks.html"><a href="chunks.html#xml2-objects"><i class="fa fa-check"></i><b>9.3.3</b> xml2 objects</a></li>
+<li class="chapter" data-level="9.7.1" data-path="fetch.html"><a href="fetch.html#elsevier"><i class="fa fa-check"></i><b>9.7.1</b> Elsevier</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="table.html"><a href="table.html"><i class="fa fa-check"></i><b>10</b> Table</a>
+<li class="chapter" data-level="10" data-path="chunks.html"><a href="chunks.html"><i class="fa fa-check"></i><b>10</b> Extracting text</a>
 <ul>
-<li class="chapter" data-level="10.1" data-path="table.html"><a href="table.html#table-usage"><i class="fa fa-check"></i><b>10.1</b> Usage</a></li>
+<li class="chapter" data-level="10.1" data-path="chunks.html"><a href="chunks.html#chunks-usage"><i class="fa fa-check"></i><b>10.1</b> Usage</a></li>
+<li class="chapter" data-level="10.2" data-path="chunks.html"><a href="chunks.html#chunks-tabularize"><i class="fa fa-check"></i><b>10.2</b> Tabularize</a></li>
+<li class="chapter" data-level="10.3" data-path="chunks.html"><a href="chunks.html#chunks-other-inputs"><i class="fa fa-check"></i><b>10.3</b> Other inputs</a>
+<ul>
+<li class="chapter" data-level="10.3.1" data-path="chunks.html"><a href="chunks.html#files"><i class="fa fa-check"></i><b>10.3.1</b> Files</a></li>
+<li class="chapter" data-level="10.3.2" data-path="chunks.html"><a href="chunks.html#xml-in-a-string"><i class="fa fa-check"></i><b>10.3.2</b> xml in a string</a></li>
+<li class="chapter" data-level="10.3.3" data-path="chunks.html"><a href="chunks.html#xml2-objects"><i class="fa fa-check"></i><b>10.3.3</b> xml2 objects</a></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>11</b> Supplementary</a></li>
-<li class="chapter" data-level="12" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>12</b> Use cases</a></li>
-<li class="chapter" data-level="13" data-path="literature.html"><a href="literature.html"><i class="fa fa-check"></i><b>13</b> Literature</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="on-disk.html"><a href="on-disk.html"><i class="fa fa-check"></i><b>11</b> Summarize articles on disk</a>
+<ul>
+<li class="chapter" data-level="11.1" data-path="on-disk.html"><a href="on-disk.html#ft_table-usage"><i class="fa fa-check"></i><b>11.1</b> Usage</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="supplementary.html"><a href="supplementary.html"><i class="fa fa-check"></i><b>12</b> Supplementary</a></li>
+<li class="chapter" data-level="13" data-path="use-cases.html"><a href="use-cases.html"><i class="fa fa-check"></i><b>13</b> Use cases</a></li>
+<li class="chapter" data-level="14" data-path="curl-options.html"><a href="curl-options.html"><i class="fa fa-check"></i><b>14</b> Request debugging/inspection</a></li>
+<li class="chapter" data-level="15" data-path="session-info.html"><a href="session-info.html"><i class="fa fa-check"></i><b>15</b> session info</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/ropensci-books/fulltext" target="blank">(c) Scott Chamberlain, 2020</a></li>
 
@@ -215,44 +222,97 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="authentication" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Authentication</h1>
 <p>Some data sources require authentication. Here’s a breakdown of how to do authentication by data source:</p>
-<ul>
-<li><strong>BMC</strong>: BMC is integrated into Springer Publishers now,
+<p><strong>BMC</strong>: BMC is integrated into Springer Publishers now,
 and that API requires an API key. Get your key by signing up at
 <a href="https://dev.springer.com/" class="uri">https://dev.springer.com/</a>, then you’ll get a key. Pass the key to a
 named parameter <code>key</code> to <code>bmcopts</code>. Or, save your key in your <code>.Renviron</code>
 file as <code>SPRINGER_KEY</code>, and we’ll read it in for you, and you don’t
-have to pass in anything.</li>
-<li><strong>Scopus</strong>: Scopus requires an API key to search their service. Go to
-<a href="https://dev.elsevier.com/index.html" class="uri">https://dev.elsevier.com/index.html</a>, register for an account,
-then when you’re in your account, create an API key. Pass in as variable
-<code>key</code> to <code>scopusopts</code>, or store your key under the name
+have to pass in anything.</p>
+<p><strong>Scopus</strong>: Scopus requires two things: an API key and your institution must
+have access. For the API key, go to <a href="https://dev.elsevier.com/index.html" class="uri">https://dev.elsevier.com/index.html</a>,
+register for an account, then when you’re in your account, create an API key.
+Pass in as variable <code>key</code> to <code>scopusopts</code>, or store your key under the name
 <code>ELSEVIER_SCOPUS_KEY</code> as an environment variable in <code>.Renviron</code>, and
-we’ll read it in for you. See <code>?Startup</code> in R for help.</li>
-<li><strong>Microsoft</strong>: Get a key by creating an Azure account at
+we’ll read it in for you. See <code>Startup</code> for help. For the institution access
+go to a browser and see if you have access to the journal(s) you want.
+If you don’t have access in a browser you probably won’t have access via
+this package. If you aren’t physically at your institution you will likely
+need to be on a VPN or similar and eventually require correct proxy settings,
+so that your IP address is in the range
+that the two publishers are accepting for that institution.
+It might be, that the API access seems to work even while
+in the wrong IP range or have wrong proxy settings,
+but you are not able to see the abstracts, they will be empty.
+By using the currect curl options into the calls to ft_search or ft_abstracts even
+the most complex proxy including authentication should work. As an example:</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="authentication.html#cb4-1"></a><span class="kw">ft_abstract</span>(<span class="dt">x =</span> dois, <span class="dt">from =</span> <span class="st">&quot;scopus&quot;</span>, <span class="dt">scopusopts =</span> opts,</span>
+<span id="cb4-2"><a href="authentication.html#cb4-2"></a>  <span class="dt">proxy=</span><span class="st">&quot;proxy-ip-address&quot;</span>,</span>
+<span id="cb4-3"><a href="authentication.html#cb4-3"></a>  <span class="dt">proxyport=</span>your<span class="op">-</span>proxy<span class="op">-</span>port,</span>
+<span id="cb4-4"><a href="authentication.html#cb4-4"></a>  <span class="dt">proxyuserpwd=</span><span class="st">&quot;username:password&quot;</span>, <span class="co"># often the same as your windows login</span></span>
+<span id="cb4-5"><a href="authentication.html#cb4-5"></a>  <span class="dt">proxyauth=</span><span class="dv">8</span>) <span class="co"># ntlm - authentication</span></span></code></pre></div>
+<p><strong>ScienceDirect</strong>: Elsevier ScienceDirect requires two things: an API key
+and your institution must have access. For the API key,
+go to <a href="https://dev.elsevier.com/index.html" class="uri">https://dev.elsevier.com/index.html</a>,
+register for an account, then when you’re in your account, create an API key
+that is allowed to access the TDM API (must accept their TDM policy).
+Pass in as variable <code>key</code> to <code>sciencedirectopts</code>, or store your key under the name
+<code>ELSEVIER_TDM_KEY</code> as an environment variable in <code>.Renviron</code>, and
+we’ll read it in for you. See <code>Startup</code> for help. For the institution access
+go to a browser and see if you have access to the journal(s) you want.
+If you don’t have access in a browser you probably won’t have access via
+this package. If you aren’t physically at your institution you will likely
+need to be on a VPN or similar so that your IP address is in the range
+that the publisher is accepting for that institution.</p>
+<p><strong>Microsoft</strong>: Get a key by creating an Azure account at
 <a href="https://www.microsoft.com/cognitive-services/en-us/subscriptions" class="uri">https://www.microsoft.com/cognitive-services/en-us/subscriptions</a>,
 then requesting a key for <strong>Academic Knowledge API</strong> within
 <strong>Cognitive Services</strong>. Store it as an environment variable in your
-<code>.Renviron</code> file - see [Startup] for help. Pass your
+<code>.Renviron</code> file - see <code>Startup</code> for help. Pass your
 API key into <code>maopts</code> as a named element in a list like
-<code>list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))</code></li>
-<li><strong>Crossref</strong>: Crossref encourages requests with contact information
+<code>list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))</code></p>
+<p><strong>Crossref</strong>: Crossref encourages requests with contact information
 (an email address) and will forward you to a dedicated API cluster
 for improved performance when you share your email address with them.
 <a href="https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service" class="uri">https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service</a>
 To pass your email address to Crossref via this client, store it
-as an environment variable in <code>.Renviron</code> like <code>crossref_email = name@example.com</code></li>
-<li><strong>Entrez</strong>: NCBI limits users to making only 3 requests per second. But, users
+as an environment variable in <code>.Renviron</code> like
+<code>crossref_email = name@example.com</code></p>
+<p><strong>Crossref TDM</strong>: TDM = “Text and Data Mining”. This applies to the few
+publishers - Wiley and Elsevier - that are part of this program (TDM).
+When using <code>ft_get()</code>, and you want to get papers from these two publishers,
+you’ll need two things:
+(1) an API key for the Crossref TDM. Go to
+<a href="https://apps.crossref.org/clickthrough/researchers" class="uri">https://apps.crossref.org/clickthrough/researchers</a> and you’ll be asked to
+login with your ORCID. If you don’t have an ORCID go to <a href="https://orcid.org/" class="uri">https://orcid.org/</a>
+and get one. After logging in with your ORCID, click on the “API token”
+tag and grab your API key. Put your API key in <code>.Renviron</code> file or similar
+(e.g. <code>.zshrc</code> or <code>.bash_profile</code>, etc.) with the entry
+<code>CROSSREF_TDM=yourkey</code>. We’ll look for the environment variable CROSSREF_TDM
+within this package. See <a href="http://tdmsupport.crossref.org/" class="uri">http://tdmsupport.crossref.org/</a> for more
+information on the Crossref TDM program.
+(2) Your institution needs to have access to the journal you’re requesting
+papers from. If you’re not sure about this just go to a browser and see if you
+have access to the journal(s) you want. If you don’t have access in a browser
+you probably won’t have access via this package. If you aren’t physically at
+your institution you will likely need to be on a VPN or similar so that
+your IP address is in the range that the two publishers are accepting for
+that institution. Also talk to your librarian if you aren’t sure about
+access or have questions about it. In some cases, you may also need to request
+that Elsevier removes a “fence” for your institution - that is, your institution
+has access to XYZ journal(s), but they don’t yet allow programmatic access.
+This has happened at least a few times that I know of.</p>
+<p><strong>Entrez</strong>: NCBI limits users to making only 3 requests per second. But, users
 who register for an API key are able to make up to ten requests per second.
 Getting a key is simple; register for a “my ncbi” account then click on a
 button in the account settings page. Once you have an API key, you can pass it
-as the argument <code>api_key</code> to <code>entrezopts</code> in both [ft_get()] and [ft_search()].
+as the argument <code>api_key</code> to <code>entrezopts</code> in both <code>ft_get()</code> and <code>ft_search()</code>.
 However, we advise you use environment variables instead as they are more secure.
 To do that you can set an environment variable for the current R session like
 <code>Sys.setenv(ENTREZ_KEY="yourkey")</code> OR better yet set it in your <code>.Renviron</code>
 or equivalent file with an entry like <code>ENTREZ_KEY=yourkey</code> so that it is
-used across R sessions.</li>
-</ul>
-<p>Not needed for <strong>PLOS</strong>, <strong>eLife</strong>, <strong>arxiv</strong>, <strong>biorxiv</strong>, <strong>Euro PMC</strong></p>
+used across R sessions.</p>
+<p>No authentication needed for <strong>PLOS</strong>, <strong>eLife</strong>, <strong>arxiv</strong>, <strong>biorxiv</strong>,
+<strong>Euro PMC</strong></p>
 
 </div>
             </section>
@@ -261,7 +321,7 @@ used across R sessions.</li>
         </div>
       </div>
 <a href="data-sources.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="search.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="rate-limits.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

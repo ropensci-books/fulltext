@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Data sources | fulltext manual</title>
-  <meta name="description" content="Chapter 3 Data sources | fulltext manual" />
+  <title>Chapter 11 Summarize articles on disk | fulltext manual</title>
+  <meta name="description" content="Chapter 11 Summarize articles on disk | fulltext manual" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Data sources | fulltext manual" />
+  <meta property="og:title" content="Chapter 11 Summarize articles on disk | fulltext manual" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Chapter 3 Data sources | fulltext manual" />
+  <meta property="og:description" content="Chapter 11 Summarize articles on disk | fulltext manual" />
   <meta name="github-repo" content="ropensci-books/fulltext" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Data sources | fulltext manual" />
+  <meta name="twitter:title" content="Chapter 11 Summarize articles on disk | fulltext manual" />
   
-  <meta name="twitter:description" content="Chapter 3 Data sources | fulltext manual" />
+  <meta name="twitter:description" content="Chapter 11 Summarize articles on disk | fulltext manual" />
   
 
 
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intro.html"/>
-<link rel="next" href="authentication.html"/>
+<link rel="prev" href="chunks.html"/>
+<link rel="next" href="supplementary.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -219,118 +219,70 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-sources" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Data sources</h1>
-<p>Data sources in <code>fulltext</code> include:</p>
-<ul>
-<li><a href="http://www.crossref.org/">Crossref</a> - via the <code>rcrossref</code> package</li>
-<li><a href="https://www.plos.org/">Public Library of Science (PLOS)</a> - via the <code>rplos</code> package</li>
-<li><a href="http://www.biomedcentral.com/">Biomed Central</a></li>
-<li><a href="https://arxiv.org">arXiv</a> - via the <code>aRxiv</code> package</li>
-<li><a href="http://biorxiv.org/">bioRxiv</a> - via the <code>biorxivr</code> package</li>
-<li><a href="http://www.ncbi.nlm.nih.gov/">PMC/Pubmed via Entrez</a> - via the <code>rentrez</code> package</li>
-<li>Many more are supported via the above sources (e.g., <em>Royal Society Open Science</em> is
-available via Pubmed)</li>
-<li>We <strong>will</strong> add more, as publishers open up, and as we have time…See the <a href="https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743">master list here</a></li>
-</ul>
-<p>Data sources will differ by the task you are doing in <code>fulltext</code>.</p>
-<div id="ds-search" class="section level2">
-<h2><span class="header-section-number">3.1</span> Search</h2>
-<p>When searching with <code>ft_search()</code> you’ll have access to a specific set of sources and no others, including:</p>
-<ul>
-<li>arxiv</li>
-<li>biorxivr</li>
-<li>bmc</li>
-<li>crossref</li>
-<li>entrez</li>
-<li>europe_pmc</li>
-<li>ma</li>
-<li>plos</li>
-<li>scopus</li>
-</ul>
-<p>You can see what plugins there are with <code>ft_search_ls()</code></p>
-</div>
-<div id="ds-abstracts" class="section level2">
-<h2><span class="header-section-number">3.2</span> Abstracts</h2>
-<p>When using <code>ft_abstract()</code> you have access to:</p>
-<ul>
-<li>crossref</li>
-<li>microsoft</li>
-<li>plos</li>
-<li>scopus</li>
-<li>semanticscholar</li>
-</ul>
-<p>You can see what plugins there are with <code>ft_abstract_ls()</code></p>
-</div>
-<div id="ds-link" class="section level2">
-<h2><span class="header-section-number">3.3</span> Links</h2>
-<p>When using <code>ft_links()</code> to get links to full text, you’ll have access to:</p>
-<ul>
-<li>bmc</li>
-<li>cdc</li>
-<li>cogent</li>
-<li>copernicus</li>
-<li>crossref</li>
-<li>elife</li>
-<li>entrez</li>
-<li>frontiersin</li>
-<li>peerj</li>
-<li>plos</li>
-<li>rsoc</li>
-</ul>
-<p>You can see what plugins there are with <code>ft_links_ls()</code></p>
-</div>
-<div id="ds-fulltext" class="section level2">
-<h2><span class="header-section-number">3.4</span> Getting full text</h2>
-<p>While using <code>ft_get()</code> to fetch full text of articles you’ll have access to a set of specific data sources (in this case publishers) for which we have some coded plugins (i.e., functions):</p>
-<ul>
-<li>aaas</li>
-<li>aip</li>
-<li>amersocclinoncol</li>
-<li>amersocmicrobiol</li>
-<li>arxiv</li>
-<li>biorxiv</li>
-<li>bmc</li>
-<li>cambridge</li>
-<li>cob</li>
-<li>copernicus</li>
-<li>crossref</li>
-<li>elife</li>
-<li>elsevier</li>
-<li>entrez</li>
-<li>frontiersin</li>
-<li>ieee</li>
-<li>informa</li>
-<li>instinvestfil</li>
-<li>jama</li>
-<li>microbiology</li>
-<li>peerj</li>
-<li>pensoft</li>
-<li>plos</li>
-<li>pnas</li>
-<li>royalsocchem</li>
-<li>sciencedirect</li>
-<li>scientificsocieties</li>
-<li>wiley</li>
-</ul>
-<p>You can see what plugins there are with <code>ft_get_ls()</code></p>
-<p>But there are also other options within <code>ft_get()</code> that we take advantage of. This is because DOIs (Digital Object Identifiers) which you feed into <code>ft_get()</code> have a prefix that is affiliated with a specific publisher. We can then decide whether to use one of our plugins listed in <code>ft_get_ls()</code> or something else. If we don’t have a plugin we first look to see if Crossref has the full text link to either XML or PDF for the DOI. If not, we then go to an API rOpenSci maintains at <a href="https://ftdoi.org" class="uri">https://ftdoi.org</a><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. This API has a set of rules for each publisher - some of which are simple rules like add a URL plus a DOI - but some require an HTTP request then some string manipulation.</p>
+<div id="on-disk" class="section level1">
+<h1><span class="header-section-number">Chapter 11</span> Summarize articles on disk</h1>
+<p>The <code>ft_table()</code> function makes it easy to create a data.frame of the text of PDF, plain text, and XML files, together with DOIs/IDs for each article. It’s similar to the <code>readtext::readtext()</code> function, but is much more specific to just this package.</p>
+<p>With the output of <code>ft_table()</code> you can go directly into a text-mining package like <code>quanteda</code>.</p>
+<div id="ft_table-usage" class="section level2">
+<h2><span class="header-section-number">11.1</span> Usage</h2>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="on-disk.html#cb95-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
+<p>Use <code>ft_table()</code> to pull out text from all articles.</p>
+<div class="sourceCode" id="cb96"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb96-1"><a href="on-disk.html#cb96-1"></a><span class="kw">ft_table</span>()</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 9 x 4
+#&gt;   dois         ids_norm       text                      paths                   
+#&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                     &lt;chr&gt;                   
+#&gt; 1 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 2 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 3 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 4 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 5 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 6 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 7 10.3389/fea… 10_3389_feart… &quot;Front. Earth Sci.Fronti… /Users/sckott/Library/C…
+#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;Front. Pharmacol.Fronti… /Users/sckott/Library/C…
+#&gt; 9 10.7717/pee… 10_7717_peerj… &quot;PeerJPeerJPeerJPeerJ216… /Users/sckott/Library/C…</code></pre>
+<p>You can pull out just text from XML files</p>
+<div class="sourceCode" id="cb98"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb98-1"><a href="on-disk.html#cb98-1"></a><span class="kw">ft_table</span>(<span class="dt">type =</span> <span class="st">&quot;xml&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 9 x 4
+#&gt;   dois         ids_norm       text                      paths                   
+#&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                     &lt;chr&gt;                   
+#&gt; 1 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 2 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 3 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 4 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 5 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 6 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
+#&gt; 7 10.3389/fea… 10_3389_feart… &quot;Front. Earth Sci.Fronti… /Users/sckott/Library/C…
+#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;Front. Pharmacol.Fronti… /Users/sckott/Library/C…
+#&gt; 9 10.7717/pee… 10_7717_peerj… &quot;PeerJPeerJPeerJPeerJ216… /Users/sckott/Library/C…</code></pre>
+<p>You can pull out just text from PDF files</p>
+<div class="sourceCode" id="cb100"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb100-1"><a href="on-disk.html#cb100-1"></a><span class="kw">ft_table</span>(<span class="dt">type =</span> <span class="st">&quot;pdf&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 0 x 3
+#&gt; # … with 3 variables: ids_norm &lt;chr&gt;, text &lt;chr&gt;, paths &lt;chr&gt;</code></pre>
+<p>You can pull out XML but not extract the text. So you’ll get XML strings
+that you can parse yourself with xpath/css selectors/etc.</p>
+<div class="sourceCode" id="cb102"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb102-1"><a href="on-disk.html#cb102-1"></a><span class="kw">ft_table</span>(<span class="dt">xml_extract_text =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 9 x 4
+#&gt;   dois         ids_norm       text                      paths                   
+#&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                     &lt;chr&gt;                   
+#&gt; 1 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
+#&gt; 2 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
+#&gt; 3 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
+#&gt; 4 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
+#&gt; 5 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
+#&gt; 6 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
+#&gt; 7 10.3389/fea… 10_3389_feart… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
+#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
+#&gt; 9 10.7717/pee… 10_7717_peerj… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…</code></pre>
 
 </div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>You can use the ftdoi API from R with the <a href="https://github.com/ropenscilabs/rftdoi" class="uri">https://github.com/ropenscilabs/rftdoi</a> package.<a href="data-sources.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="authentication.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="chunks.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="supplementary.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -361,7 +313,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ropensci-books/fulltext/edit/master/02-datasources.Rmd",
+"link": "https://github.com/ropensci-books/fulltext/edit/master/10-table.Rmd",
 "text": "Edit"
 },
 "history": {

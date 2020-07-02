@@ -2,40 +2,104 @@
 
 Some data sources require authentication. Here's a breakdown of how to do authentication by data source:
 
-* **BMC**: BMC is integrated into Springer Publishers now, 
+**BMC**: BMC is integrated into Springer Publishers now, 
 and that API requires an API key.  Get your key by signing up at 
-<https://dev.springer.com/>, then you'll get a key. Pass the key to a 
+https://dev.springer.com/, then you'll get a key. Pass the key to a 
 named parameter `key` to `bmcopts`. Or, save your key in your `.Renviron` 
 file as `SPRINGER_KEY`, and we'll read it in for you, and you don't 
 have to pass in anything.
-* **Scopus**: Scopus requires an API key to search their service. Go to 
-<https://dev.elsevier.com/index.html>, register for an account, 
-then when you're in your account, create an API key. Pass in as variable 
-`key` to `scopusopts`, or store your key under the name 
+
+**Scopus**: Scopus requires two things: an API key and your institution must
+have access. For the API key, go to https://dev.elsevier.com/index.html, 
+register for an account, then when you're in your account, create an API key. 
+Pass in as variable `key` to `scopusopts`, or store your key under the name 
 `ELSEVIER_SCOPUS_KEY` as an environment variable in `.Renviron`, and 
-we'll read it in for you. See `?Startup` in R for help.
-* **Microsoft**: Get a key by creating an Azure account at 
+we'll read it in for you. See `Startup` for help. For the institution access
+go to a browser and see if you have access to the journal(s) you want. 
+If you don't have access in a browser you probably won't have access via 
+this package. If you aren't physically at your institution you will likely 
+need to be on a VPN or similar and eventually require correct proxy settings,
+so that your IP address is in the range 
+that the two publishers are accepting for that institution.
+It might be, that the API access seems to work even while 
+in the wrong IP range or have wrong proxy settings, 
+but you are not able to see the abstracts, they will be empty.
+By using the currect curl options into the calls to ft_search or ft_abstracts even 
+the most complex proxy including authentication should work. As an example:
+
+```r
+ft_abstract(x = dois, from = "scopus", scopusopts = opts,
+  proxy="proxy-ip-address",
+  proxyport=your-proxy-port,
+  proxyuserpwd="username:password", # often the same as your windows login
+  proxyauth=8) # ntlm - authentication
+```
+
+**ScienceDirect**: Elsevier ScienceDirect requires two things: an API key 
+and your institution must have access. For the API key, 
+go to https://dev.elsevier.com/index.html, 
+register for an account, then when you're in your account, create an API key 
+that is allowed to access the TDM API (must accept their TDM policy). 
+Pass in as variable `key` to `sciencedirectopts`, or store your key under the name 
+`ELSEVIER_TDM_KEY` as an environment variable in `.Renviron`, and 
+we'll read it in for you. See `Startup` for help. For the institution access
+go to a browser and see if you have access to the journal(s) you want. 
+If you don't have access in a browser you probably won't have access via 
+this package. If you aren't physically at your institution you will likely 
+need to be on a VPN or similar so that your IP address is in the range 
+that the publisher is accepting for that institution.
+ 
+**Microsoft**: Get a key by creating an Azure account at 
 <https://www.microsoft.com/cognitive-services/en-us/subscriptions>, 
 then requesting a key for **Academic Knowledge API** within 
 **Cognitive Services**. Store it as an environment variable in your 
-`.Renviron` file - see [Startup] for help. Pass your 
+`.Renviron` file - see `Startup` for help. Pass your 
 API key into `maopts` as a named element in a list like 
 `list(key = Sys.getenv('MICROSOFT_ACADEMIC_KEY'))`
-* **Crossref**: Crossref encourages requests with contact information 
+
+**Crossref**: Crossref encourages requests with contact information 
 (an email address) and will forward you to a dedicated API cluster 
 for improved performance when you share your email address with them.
-<https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service>
+https://github.com/CrossRef/rest-api-doc#good-manners--more-reliable-service
 To pass your email address to Crossref via this client, store it 
-as an environment variable in `.Renviron` like `crossref_email = name@example.com`
-* **Entrez**: NCBI limits users to making only 3 requests per second. But, users
-who register for an API key are able to make up to ten requests per second.
-Getting a key is simple; register for a "my ncbi" account then click on a
-button in the account settings page. Once you have an API key, you can pass it
-as the argument `api_key` to `entrezopts` in both [ft_get()] and [ft_search()].
+as an environment variable in `.Renviron` like 
+`crossref_email = name@example.com`
+
+**Crossref TDM**: TDM = "Text and Data Mining". This applies to the few 
+publishers - Wiley and Elsevier - that are part of this program (TDM). 
+When using `ft_get()`, and you want to get papers from these two publishers,
+you'll need two things: 
+(1) an API key for the Crossref TDM. Go to 
+https://apps.crossref.org/clickthrough/researchers and you'll be asked to 
+login with your ORCID. If you don't have an ORCID go to https://orcid.org/
+and get one. After logging in with your ORCID, click on the "API token" 
+tag and grab your API key. Put your API key in `.Renviron` file or similar
+(e.g. `.zshrc` or `.bash_profile`, etc.) with the entry 
+`CROSSREF_TDM=yourkey`. We'll look for the environment variable CROSSREF_TDM
+within this package. See http://tdmsupport.crossref.org/ for more 
+information on the Crossref TDM program.
+(2) Your institution needs to have access to the journal you're requesting
+papers from. If you're not sure about this just go to a browser and see if you
+have access to the journal(s) you want. If you don't have access in a browser 
+you probably won't have access via this package. If you aren't physically at 
+your institution you will likely need to be on a VPN or similar so that 
+your IP address is in the range that the two publishers are accepting for 
+that institution. Also talk to your librarian if you aren't sure about 
+access or have questions about it. In some cases, you may also need to request
+that Elsevier removes a "fence" for your institution - that is, your institution
+has access to XYZ journal(s), but they don't yet allow programmatic access. 
+This has happened at least a few times that I know of.
+
+**Entrez**: NCBI limits users to making only 3 requests per second. But, users 
+who register for an API key are able to make up to ten requests per second. 
+Getting a key is simple; register for a "my ncbi" account then click on a 
+button in the account settings page. Once you have an API key, you can pass it 
+as the argument `api_key` to `entrezopts` in both `ft_get()` and `ft_search()`. 
 However, we advise you use environment variables instead as they are more secure.
-To do that you can set an environment variable for the current R session like
-`Sys.setenv(ENTREZ_KEY="yourkey")` OR better yet set it in your `.Renviron`
-or equivalent file with an entry like `ENTREZ_KEY=yourkey` so that it is
+To do that you can set an environment variable for the current R session like 
+`Sys.setenv(ENTREZ_KEY="yourkey")` OR better yet set it in your `.Renviron` 
+or equivalent file with an entry like `ENTREZ_KEY=yourkey` so that it is 
 used across R sessions.
 
-Not needed for **PLOS**, **eLife**, **arxiv**, **biorxiv**, **Euro PMC**
+No authentication needed for **PLOS**, **eLife**, **arxiv**, **biorxiv**, 
+**Euro PMC**

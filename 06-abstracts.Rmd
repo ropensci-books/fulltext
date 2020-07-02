@@ -6,7 +6,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Abstract {#abstract}
+# Abstracts {#abstracts}
 
 Fetching abstracts likely will come after searching for articles with `ft_search()`. There are a few scenarios in which simply getting abstracts in lieu of full text may be enough. 
 
@@ -20,7 +20,7 @@ In addition, there are cases in which you really only need abstracts regardless 
 cat(paste(" -", paste(ft_abstract_ls(), collapse = "\n - ")))
 ```
 
-## Usage {#abstract-usage}
+## Usage {#abstracts-usage}
 
 ```{r}
 library(fulltext)
@@ -39,7 +39,7 @@ res <- ft_search(query = "ecology")
 (dois <- res$plos$data$id)
 ```
 
-Take the output of `ft_search()` and pass to `ft_abstract()`:
+Take the output of `ft_search()` and pass directly to `ft_abstract()`:
 
 ```{r}
 out <- ft_abstract(dois)
@@ -62,3 +62,23 @@ Which gives a named list, with the DOI as the first element, then the abstract a
 character string.
 
 You can then take these abstracts and use any number of R packages for text mining.
+
+## By Ids {#abstracts-by-ids}
+
+Instead of using `ft_search()` first, and passing those results to `ft_abstract()`, you can pass article ids (character/numeric) to `ft_abstract()`. 
+
+Here, we'll fetch abstracts for three articles from arXiv. With Semantic Scholar we need to prefix the string `arXiv` to the ids (if you use DOIs you don't need to prefix any string). 
+
+```{r}
+arxiv_ids <- c("0710.3491", "0804.0713", "0810.4821", "1003.0315")
+out <- ft_abstract(x = paste0("arXiv:", arxiv_ids), from = "semanticscholar")
+unname(vapply(out$semanticscholar, "[[", "", "abstract"))
+```
+
+## Abstracts options {#abstracts-options}
+
+All data sources for `ft_abstract()` accept configuration options as a named list. For example, if you set `from="plos"` you can set additional PLOS specfiic options by passing a named list to `plosopts`. You can find out what PLOS options are available by looking at the documention for `?rplos::searchplos`.
+
+The only data source that doesn't allow configuration options is Semantic Scholar.
+
+As all functions in `fulltext`, you can pass on curl options to each function call or set them globally for the session, see the [curl options chapter](#curl-options).

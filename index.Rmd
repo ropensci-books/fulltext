@@ -26,13 +26,14 @@ The `fulltext` package makes it easy to do text-mining by supporting the followi
 ## Info
 
 * Code: <https://github.com/ropensci/fulltext/>
+* Package Documentation: <https://docs.ropensci.org/fulltext>
 * Issues/Bug reports: <https://github.com/ropensci/fulltext/issues>
 * CRAN: <https://cran.rstudio.com/web/packages/fulltext/>
 
 ## Citing fulltext
 
 > Scott Chamberlain (2019). fulltext: Full Text of 'Scholarly' Articles Across
-> Many Data Sources. R package version 1.4.0. https://docs.ropensci.org/fulltext (website)
+> Many Data Sources. R package version `r packageVersion("fulltext")`. https://docs.ropensci.org/fulltext (website)
 > https://github.com/ropensci/fulltext/ (devel)
 > https://books.ropensci.org/fulltext/ (user manual) 
 
@@ -47,7 +48,7 @@ install.packages("fulltext")
 Development version from GitHub
 
 ```{r eval=FALSE}
-devtools::install_github("ropensci/fulltext")
+remotes::install_github("ropensci/fulltext")
 ```
 
 Load library

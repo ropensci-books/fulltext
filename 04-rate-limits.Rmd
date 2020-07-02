@@ -1,0 +1,30 @@
+# Rate limits {#rate-limits}
+
+**Scopus**: 20,000 per 7 days. See 
+<https://dev.elsevier.com/api_key_settings.html> for rate 
+limit information. To see what your personal rate limit details are, 
+request verbose HTTP request output - this will vary on the function
+you are using - see the docs for the function. See the response 
+headers `X-RateLimit-Limit`, `X-RateLimit-Remaining`, and 
+`X-RateLimit-Reset` (your limit, those requests remaining, and UTC 
+date/time it will reset)
+
+**Microsoft**: 10,000 per month, and 1 per second. There are no rate 
+limit headers, sorry :(
+
+**PLOS**: There are no known rate limits for PLOS, though if you do 
+hit something let us know.
+
+**Crossref**: From time to time Crossref needs to impose rate limits 
+to ensure that the free API is usable by all. Any rate limits that are in 
+effect will be advertised in the `X-Rate-Limit-Limit` and
+`X-Rate-Limit-Interval` HTTP headers. This boils down to: they allow X 
+number of requests per some time period. The numbers can change so we 
+can't give a rate limit that will always be in effect. If you're curious 
+pass in `verbose = TRUE` to your function call, and you'll get headers 
+that will display these rate limits. See also **Authentication**.
+
+**Semantic Scholar**: Not documented in their docs, and no response
+headers given. At time of this writing (2020-07-01) the rate limit is:
+100 requests per 5-minutes per IP address. or 20 requests per min. Note
+that this rate limit may change.

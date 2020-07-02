@@ -1,0 +1,79 @@
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+# Links {#links}
+
+The `ft_links` function makes it easy to get URLs for full text versions of articles. You can for instance only use `fulltext` to pass DOIs directly to `ft_links` to get URLs to use elsewhere in your research workflow. Or you may want to search first with `ft_search`, then pass that output directly to `ft_links`. 
+
+## Usage {#links-usage}
+
+```{r}
+library(fulltext)
+```
+
+List backends available
+
+```{r}
+ft_links_ls()
+```
+
+You can pass DOIs directly to `ft_links`
+
+```{r}
+res <- ft_links('10.3389/fphar.2014.00109')
+res
+```
+
+The output is an S3 object, essentially a list. If you don't specify a `from` value, we try to guess the publisher and the named list in the output will match the publisher of the DOI. Here, that's Frontiers In, lowercased and as one word:
+
+
+```{r}
+res$frontiersin
+```
+
+The output is a named list with number of links found, the id (aka DOI), and in the `$data` slot is the links, which can include links for pdf, xml, plain (for plain text), unspecified and possibly others (publishers do lots of weird things).
+
+
+
+Instead of passing DOIs directly, you can use `ft_search(()` to search first:
+
+```{r}
+(res1 <- ft_search(query='ecology', from='entrez'))
+```
+
+Then pass the output of that directly to `ft_links`
+
+```{r}
+(out <- ft_links(res1))
+```
+
+Here, the output name on the list matches the source passed in to `ft_links` from `ft_search`. 
+
+```{r}
+names(out)
+```
+
+You can alternatively pass in DOIs directly and specify the data source. Options include "plos", "bmc", "crossref", and "entrez". 
+
+```{r}
+x <- c("10.1371/journal.pone.0017342", "10.1371/journal.pone.0091497")
+z <- ft_links(x, from = "plos")
+z$plos$data
+```
+
+Fetch just the pdf links
+
+```{r}
+unname(vapply(z$plos$data, "[[", "", "pdf"))
+```
+
+## Links options {#links-options}
+
+All data sources for `ft_links()` SHOULD accept configuration options BUT that does not work right now. Fix coming, see <https://github.com/ropensci/fulltext/issues/223>
+
+As all functions in `fulltext`, you can pass on curl options to each function call or set them globally for the session, see the [curl options chapter](#curl-options).

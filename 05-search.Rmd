@@ -1,0 +1,92 @@
+```{r echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  warning = FALSE,
+  message = FALSE
+)
+```
+
+# Search {#search}
+
+Search is what you'll likely start with for a number of reasons. First, search functionality in `fulltext` means that you can start from searching on words like 'ecology' or 'cellular' - and the output of that search can be fed downstream to the next major task: fetching articles.
+
+## Usage {#search-usage}
+
+```{r}
+library(fulltext)
+```
+
+List backends available
+
+```{r}
+ft_search_ls()
+```
+
+Search - by default searches against PLOS (Public Library of Science)
+
+```{r}
+res <- ft_search(query = "ecology")
+```
+
+The output of `ft_search` is a `ft` S3 object, with a summary of the results:
+
+```{r}
+res
+```
+
+and has slots for each data source:
+
+```{r}
+names(res)
+```
+
+Get data for a single source
+
+```{r}
+res$plos
+```
+
+Note how in the metadata section above the data.frame of results we clearly state the license for articles for the given data source. For some data sources, licenses are the same for each paper; sometimes they vary among papers.
+
+## Search many sources {#search-many-sources}
+
+Here, search for the term "ecology" across PLOS, Crossref, and arXiv preprint server.
+
+```{r}
+res <- ft_search(query='ecology', from=c('plos','crossref','arxiv'))
+res
+```
+
+Each source may have different results AND with different columns in each data.frame
+
+```{r}
+res$plos
+res$arxiv
+res$crossref
+```
+
+Note above how licenses for PLOS are all CC-BY, whereas licenses in arXiv and Crossref are variable. For arXiv we don't get any license information in the results. But for Crossref we do get license information. Let's get license information for the first article:
+
+```{r}
+res$crossref$data$license[[1]]
+```
+
+It shows a license specific to Wiley, and gives the URL so you can look it up.
+
+## Search options {#search-options}
+
+Each of the data sources in `ft_search` can accept additional configuration. See the `?ft_search` docs for details. Each data source has a parameter in `ft_search`, e.g, `europmc` data source can be configured with the `euroopts` parameter. Each of the `*opts` parameters expects a named list. 
+
+Here, we search the phrase "ecology" at Europe PMC. 
+
+```{r}
+res <- ft_search(query='ecology', from='europmc')
+res$europmc
+```
+
+Then get the next batch of results, using the `cursorMark` result
+
+```{r}
+ft_search(query='ecology', from='europmc', 
+  euroopts = list(cursorMark = res$europmc$cursorMark))
+```

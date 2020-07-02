@@ -4,21 +4,21 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Data sources | fulltext manual</title>
-  <meta name="description" content="Chapter 3 Data sources | fulltext manual" />
+  <title>Chapter 5 Rate limits | fulltext manual</title>
+  <meta name="description" content="Chapter 5 Rate limits | fulltext manual" />
   <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Data sources | fulltext manual" />
+  <meta property="og:title" content="Chapter 5 Rate limits | fulltext manual" />
   <meta property="og:type" content="book" />
   
   
-  <meta property="og:description" content="Chapter 3 Data sources | fulltext manual" />
+  <meta property="og:description" content="Chapter 5 Rate limits | fulltext manual" />
   <meta name="github-repo" content="ropensci-books/fulltext" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Data sources | fulltext manual" />
+  <meta name="twitter:title" content="Chapter 5 Rate limits | fulltext manual" />
   
-  <meta name="twitter:description" content="Chapter 3 Data sources | fulltext manual" />
+  <meta name="twitter:description" content="Chapter 5 Rate limits | fulltext manual" />
   
 
 
@@ -29,8 +29,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="intro.html"/>
-<link rel="next" href="authentication.html"/>
+<link rel="prev" href="authentication.html"/>
+<link rel="next" href="search.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -219,118 +219,41 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-sources" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Data sources</h1>
-<p>Data sources in <code>fulltext</code> include:</p>
-<ul>
-<li><a href="http://www.crossref.org/">Crossref</a> - via the <code>rcrossref</code> package</li>
-<li><a href="https://www.plos.org/">Public Library of Science (PLOS)</a> - via the <code>rplos</code> package</li>
-<li><a href="http://www.biomedcentral.com/">Biomed Central</a></li>
-<li><a href="https://arxiv.org">arXiv</a> - via the <code>aRxiv</code> package</li>
-<li><a href="http://biorxiv.org/">bioRxiv</a> - via the <code>biorxivr</code> package</li>
-<li><a href="http://www.ncbi.nlm.nih.gov/">PMC/Pubmed via Entrez</a> - via the <code>rentrez</code> package</li>
-<li>Many more are supported via the above sources (e.g., <em>Royal Society Open Science</em> is
-available via Pubmed)</li>
-<li>We <strong>will</strong> add more, as publishers open up, and as we have time…See the <a href="https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743">master list here</a></li>
-</ul>
-<p>Data sources will differ by the task you are doing in <code>fulltext</code>.</p>
-<div id="ds-search" class="section level2">
-<h2><span class="header-section-number">3.1</span> Search</h2>
-<p>When searching with <code>ft_search()</code> you’ll have access to a specific set of sources and no others, including:</p>
-<ul>
-<li>arxiv</li>
-<li>biorxivr</li>
-<li>bmc</li>
-<li>crossref</li>
-<li>entrez</li>
-<li>europe_pmc</li>
-<li>ma</li>
-<li>plos</li>
-<li>scopus</li>
-</ul>
-<p>You can see what plugins there are with <code>ft_search_ls()</code></p>
-</div>
-<div id="ds-abstracts" class="section level2">
-<h2><span class="header-section-number">3.2</span> Abstracts</h2>
-<p>When using <code>ft_abstract()</code> you have access to:</p>
-<ul>
-<li>crossref</li>
-<li>microsoft</li>
-<li>plos</li>
-<li>scopus</li>
-<li>semanticscholar</li>
-</ul>
-<p>You can see what plugins there are with <code>ft_abstract_ls()</code></p>
-</div>
-<div id="ds-link" class="section level2">
-<h2><span class="header-section-number">3.3</span> Links</h2>
-<p>When using <code>ft_links()</code> to get links to full text, you’ll have access to:</p>
-<ul>
-<li>bmc</li>
-<li>cdc</li>
-<li>cogent</li>
-<li>copernicus</li>
-<li>crossref</li>
-<li>elife</li>
-<li>entrez</li>
-<li>frontiersin</li>
-<li>peerj</li>
-<li>plos</li>
-<li>rsoc</li>
-</ul>
-<p>You can see what plugins there are with <code>ft_links_ls()</code></p>
-</div>
-<div id="ds-fulltext" class="section level2">
-<h2><span class="header-section-number">3.4</span> Getting full text</h2>
-<p>While using <code>ft_get()</code> to fetch full text of articles you’ll have access to a set of specific data sources (in this case publishers) for which we have some coded plugins (i.e., functions):</p>
-<ul>
-<li>aaas</li>
-<li>aip</li>
-<li>amersocclinoncol</li>
-<li>amersocmicrobiol</li>
-<li>arxiv</li>
-<li>biorxiv</li>
-<li>bmc</li>
-<li>cambridge</li>
-<li>cob</li>
-<li>copernicus</li>
-<li>crossref</li>
-<li>elife</li>
-<li>elsevier</li>
-<li>entrez</li>
-<li>frontiersin</li>
-<li>ieee</li>
-<li>informa</li>
-<li>instinvestfil</li>
-<li>jama</li>
-<li>microbiology</li>
-<li>peerj</li>
-<li>pensoft</li>
-<li>plos</li>
-<li>pnas</li>
-<li>royalsocchem</li>
-<li>sciencedirect</li>
-<li>scientificsocieties</li>
-<li>wiley</li>
-</ul>
-<p>You can see what plugins there are with <code>ft_get_ls()</code></p>
-<p>But there are also other options within <code>ft_get()</code> that we take advantage of. This is because DOIs (Digital Object Identifiers) which you feed into <code>ft_get()</code> have a prefix that is affiliated with a specific publisher. We can then decide whether to use one of our plugins listed in <code>ft_get_ls()</code> or something else. If we don’t have a plugin we first look to see if Crossref has the full text link to either XML or PDF for the DOI. If not, we then go to an API rOpenSci maintains at <a href="https://ftdoi.org" class="uri">https://ftdoi.org</a><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. This API has a set of rules for each publisher - some of which are simple rules like add a URL plus a DOI - but some require an HTTP request then some string manipulation.</p>
+<div id="rate-limits" class="section level1">
+<h1><span class="header-section-number">Chapter 5</span> Rate limits</h1>
+<p><strong>Scopus</strong>: 20,000 per 7 days. See
+<a href="https://dev.elsevier.com/api_key_settings.html" class="uri">https://dev.elsevier.com/api_key_settings.html</a> for rate
+limit information. To see what your personal rate limit details are,
+request verbose HTTP request output - this will vary on the function
+you are using - see the docs for the function. See the response
+headers <code>X-RateLimit-Limit</code>, <code>X-RateLimit-Remaining</code>, and
+<code>X-RateLimit-Reset</code> (your limit, those requests remaining, and UTC
+date/time it will reset)</p>
+<p><strong>Microsoft</strong>: 10,000 per month, and 1 per second. There are no rate
+limit headers, sorry :(</p>
+<p><strong>PLOS</strong>: There are no known rate limits for PLOS, though if you do
+hit something let us know.</p>
+<p><strong>Crossref</strong>: From time to time Crossref needs to impose rate limits
+to ensure that the free API is usable by all. Any rate limits that are in
+effect will be advertised in the <code>X-Rate-Limit-Limit</code> and
+<code>X-Rate-Limit-Interval</code> HTTP headers. This boils down to: they allow X
+number of requests per some time period. The numbers can change so we
+can’t give a rate limit that will always be in effect. If you’re curious
+pass in <code>verbose = TRUE</code> to your function call, and you’ll get headers
+that will display these rate limits. See also <strong>Authentication</strong>.</p>
+<p><strong>Semantic Scholar</strong>: Not documented in their docs, and no response
+headers given. At time of this writing (2020-07-01) the rate limit is:
+100 requests per 5-minutes per IP address. or 20 requests per min. Note
+that this rate limit may change.</p>
 
-</div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>You can use the ftdoi API from R with the <a href="https://github.com/ropenscilabs/rftdoi" class="uri">https://github.com/ropenscilabs/rftdoi</a> package.<a href="data-sources.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="intro.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="authentication.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="authentication.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="search.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -361,7 +284,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/ropensci-books/fulltext/edit/master/02-datasources.Rmd",
+"link": "https://github.com/ropensci-books/fulltext/edit/master/04-rate-limits.Rmd",
 "text": "Edit"
 },
 "history": {
