@@ -3,9 +3,6 @@ title: "fulltext manual"
 date: "`r paste0('built on ', Sys.Date(), ' - for fulltext v', packageVersion('fulltext'))`"
 site: bookdown::bookdown_site
 documentclass: book
-bibliography: [book.bib, packages.bib]
-biblio-style: apalike
-link-citations: yes
 github-repo: ropensci-books/fulltext
 description: "fulltext manual"
 ---
