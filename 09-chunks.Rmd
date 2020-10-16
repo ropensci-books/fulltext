@@ -27,21 +27,21 @@ library(pubchunks)
 
 Get a full text article
 
-```{r}
-x <- ft_get('10.1371/journal.pone.0086169', from='plos')
+```{r chunks_ft_get}
+x <- ft_get('10.1371/journal.pone.0086169')
 ```
 
 Note that unlike previous versions of `fulltext` you now have to collect (`ft_collect()`)
 the text from the XML file on disk. Then you can pass to `pub_chunks()`, here to get
 authors.
 
-```{r}
+```{r chunks_ft_get_collect}
 x %>% ft_collect %>% pub_chunks("authors")
 ```
 
 In another example, let's search for PLOS articles.
 
-```{r}
+```{r rplos_dois}
 library("rplos")
 (dois <- searchplos(q="*:*", fl='id',
    fq=list('doc_type:full',"article_type:\"research article\""),
@@ -51,7 +51,7 @@ library("rplos")
 Then get the full text
 
 ```{r}
-x <- ft_get(dois, from="plos")
+x <- ft_get(dois)
 ```
 
 Then pull out various sections of each article.

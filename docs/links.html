@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Links | fulltext manual</title>
   <meta name="description" content="Chapter 8 Links | fulltext manual" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Links | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -249,27 +249,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; [1] &quot;http://journal.frontiersin.org/article/10.3389/fphar.2014.00109/xml/nlm&quot;
 #&gt; 
 #&gt; $data$`10.3389/fphar.2014.00109`$pdf
-#&gt; [1] &quot;http://journal.frontiersin.org/article/10.3389/fphar.2014.00109/pdf&quot;
-#&gt; 
-#&gt; 
-#&gt; 
-#&gt; $opts
-#&gt; list()</code></pre>
+#&gt; [1] &quot;http://journal.frontiersin.org/article/10.3389/fphar.2014.00109/pdf&quot;</code></pre>
 <p>The output is a named list with number of links found, the id (aka DOI), and in the <code>$data</code> slot is the links, which can include links for pdf, xml, plain (for plain text), unspecified and possibly others (publishers do lots of weird things).</p>
 <p>Instead of passing DOIs directly, you can use <code>ft_search(()</code> to search first:</p>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="links.html#cb48-1"></a>(res1 &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;entrez&#39;</span>))</span></code></pre></div>
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 203408; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 212097; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>Then pass the output of that directly to <code>ft_links</code></p>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="links.html#cb50-1"></a>(out &lt;-<span class="st"> </span><span class="kw">ft_links</span>(res1))</span></code></pre></div>
 <pre><code>#&gt; &lt;fulltext links&gt;
-#&gt; [Found] 6 
-#&gt; [IDs] ID_32605981 ID_32576115 ID_32576107 ID_32554485 ID_32546087 ID_32461236
-#&gt;      ...</code></pre>
+#&gt; [Found] 10 
+#&gt; [IDs] ID_33047066 ID_33047065 ID_33047058 ID_33047038 ID_33047024 ID_33047023
+#&gt;      ID_33047015 ID_33047010 ID_32900317 ID_32873208 ...</code></pre>
 <p>Here, the output name on the list matches the source passed in to <code>ft_links</code> from <code>ft_search</code>.</p>
 <div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="links.html#cb52-1"></a><span class="kw">names</span>(out)</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;entrez&quot;</code></pre>

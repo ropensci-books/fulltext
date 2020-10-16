@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Search | fulltext manual</title>
   <meta name="description" content="Chapter 6 Search | fulltext manual" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Search | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -235,7 +235,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 52809; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 54176; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>and has slots for each data source:</p>
@@ -245,7 +245,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Get data for a single source</p>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="search.html#cb13-1"></a>res<span class="op">$</span>plos</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [52809, 10] 
+#&gt; Records found, returned: [54176, 10] 
 #&gt; License: [CC-BY] 
 #&gt; # A tibble: 10 x 1
 #&gt;    id                          
@@ -270,13 +270,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 52809; BMC: 0; Crossref: 207626; Entrez: 0; arxiv: 2186; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 54176; BMC: 0; Crossref: 212341; Entrez: 0; arxiv: 2288; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 10; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 10; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>Each source may have different results AND with different columns in each data.frame</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="search.html#cb17-1"></a>res<span class="op">$</span>plos</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [52809, 10] 
+#&gt; Records found, returned: [54176, 10] 
 #&gt; License: [CC-BY] 
 #&gt; # A tibble: 10 x 1
 #&gt;    id                          
@@ -293,7 +293,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 10 10.1371/journal.pone.0102437</code></pre>
 <div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="search.html#cb19-1"></a>res<span class="op">$</span>arxiv</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [2186, 10] 
+#&gt; Records found, returned: [2288, 10] 
 #&gt; License: [variable, but should be free to text-mine, see http://arxiv.org/help/license and http://arxiv.org/help/bulk_data] 
 #&gt; # A tibble: 10 x 15
 #&gt;    id    submitted updated title abstract authors affiliations link_abstract
@@ -312,27 +312,29 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; #   journal_ref &lt;chr&gt;, doi &lt;chr&gt;, primary_category &lt;chr&gt;, categories &lt;chr&gt;</code></pre>
 <div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="search.html#cb21-1"></a>res<span class="op">$</span>crossref</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [207626, 10] 
+#&gt; Records found, returned: [212341, 10] 
 #&gt; License: [variable, see individual records] 
-#&gt; # A tibble: 10 x 29
+#&gt; # A tibble: 10 x 34
 #&gt;    container.title created deposited published.print doi   indexed issn  issue
 #&gt;    &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;
 #&gt;  1 Ecology         2006-0… 2018-08-… 1957-07         10.2… 2020-0… 0012… 3    
 #&gt;  2 Ecology         2006-0… 2018-08-… 1957-10         10.2… 2020-0… 0012… 4    
 #&gt;  3 Ecology         2006-0… 2018-08-… 1966-09         10.2… 2020-0… 0012… 5    
-#&gt;  4 Ecology         2006-0… 2018-08-… 1927-04         10.2… 2020-0… 0012… 2    
-#&gt;  5 Ecology         2006-0… 2018-08-… 1927-10         10.2… 2020-0… 0012… 4    
-#&gt;  6 Ecology         2006-0… 2018-08-… 1942-04         10.2… 2020-0… 0012… 2    
-#&gt;  7 Ecology         2006-0… 2018-08-… 1976-11         10.2… 2020-0… 0012… 6    
-#&gt;  8 Ecology         2017-0… 2019-03-… 2017-06         10.1… 2020-0… 0012… 6    
+#&gt;  4 Ecology         2006-0… 2018-08-… 1927-10         10.2… 2020-0… 0012… 4    
+#&gt;  5 Ecology         2006-0… 2018-08-… 1942-04         10.2… 2020-0… 0012… 2    
+#&gt;  6 Ecology         2006-0… 2018-08-… 1976-11         10.2… 2020-0… 0012… 6    
+#&gt;  7 Ecology         2017-0… 2019-03-… 2017-06         10.1… 2020-0… 0012… 6    
+#&gt;  8 Ecology         2006-0… 2018-08-… 1927-04         10.2… 2020-0… 0012… 2    
 #&gt;  9 Trends in Ecol… 2002-0… 2019-04-… 1997-08         10.1… 2020-0… 0169… 8    
 #&gt; 10 Journal of Ind… 2014-1… 2017-06-… 2014-12         10.1… 2020-0… 1088… 6    
-#&gt; # … with 21 more variables: issued &lt;chr&gt;, member &lt;chr&gt;, page &lt;chr&gt;,
-#&gt; #   prefix &lt;chr&gt;, publisher &lt;chr&gt;, reference.count &lt;chr&gt;, score &lt;chr&gt;,
-#&gt; #   source &lt;chr&gt;, subject &lt;chr&gt;, title &lt;chr&gt;, type &lt;chr&gt;, url &lt;chr&gt;,
-#&gt; #   volume &lt;chr&gt;, author &lt;list&gt;, link &lt;list&gt;, license &lt;list&gt;, archive &lt;chr&gt;,
-#&gt; #   published.online &lt;chr&gt;, alternative.id &lt;chr&gt;, subtitle &lt;chr&gt;,
-#&gt; #   reference &lt;list&gt;</code></pre>
+#&gt; # … with 26 more variables: issued &lt;chr&gt;, member &lt;chr&gt;, page &lt;chr&gt;,
+#&gt; #   prefix &lt;chr&gt;, publisher &lt;chr&gt;, score &lt;chr&gt;, source &lt;chr&gt;,
+#&gt; #   reference.count &lt;chr&gt;, references.count &lt;chr&gt;,
+#&gt; #   is.referenced.by.count &lt;chr&gt;, subject &lt;chr&gt;, title &lt;chr&gt;, type &lt;chr&gt;,
+#&gt; #   url &lt;chr&gt;, volume &lt;chr&gt;, short.container.title &lt;chr&gt;, author &lt;list&gt;,
+#&gt; #   link &lt;list&gt;, content_domain &lt;list&gt;, license &lt;list&gt;, archive &lt;chr&gt;,
+#&gt; #   published.online &lt;chr&gt;, language &lt;chr&gt;, alternative.id &lt;chr&gt;,
+#&gt; #   subtitle &lt;chr&gt;, reference &lt;list&gt;</code></pre>
 <p>Note above how licenses for PLOS are all CC-BY, whereas licenses in arXiv and Crossref are variable. For arXiv we don’t get any license information in the results. But for Crossref we do get license information. Let’s get license information for the first article:</p>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="search.html#cb23-1"></a>res<span class="op">$</span>crossref<span class="op">$</span>data<span class="op">$</span>license[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>#&gt; # A tibble: 1 x 4
@@ -348,36 +350,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="search.html#cb25-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;europmc&#39;</span>)</span>
 <span id="cb25-2"><a href="search.html#cb25-2"></a>res<span class="op">$</span>europmc</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [369372, 25] 
+#&gt; Records found, returned: [389570, 25] 
 #&gt;  
-#&gt; # A tibble: 25 x 29
-#&gt;    id    source pmid  doi   title authorString journalTitle issue journalVolume
-#&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt; &lt;chr&gt;        
-#&gt;  1 3186… MED    3186… 10.1… Ebol… Ntumba HCK,… Lancet       10216 394          
-#&gt;  2 3255… MED    3255… 10.1… Tran… Davy CM, Do… Virulence    1     11           
-#&gt;  3 3245… MED    3245… 10.1… Puta… Grossar D, … Virulence    1     11           
-#&gt;  4 PPR1… PPR    &lt;NA&gt;  10.1… Host… Taylor M, V… &lt;NA&gt;         &lt;NA&gt;  &lt;NA&gt;         
-#&gt;  5 3256… MED    3256… 10.1… Syne… Adomako MO,… Microb Ecol  &lt;NA&gt;  &lt;NA&gt;         
-#&gt;  6 3260… MED    3260… 10.1… Firs… Liang J, Hu… J Fish Dis   &lt;NA&gt;  &lt;NA&gt;         
-#&gt;  7 3257… MED    3257… 10.1… Intr… Honigsbaum … Hist Philos… 3     42           
-#&gt;  8 3253… MED    3253… 10.1… Dist… Morrison BM… Ecology      &lt;NA&gt;  &lt;NA&gt;         
-#&gt;  9 3259… MED    3259… 10.1… Plan… He N, Li Y,… Trends Ecol… &lt;NA&gt;  &lt;NA&gt;         
-#&gt; 10 3258… MED    3258… 10.1… Mole… Li H, Wu X,… Fish Shellf… &lt;NA&gt;  &lt;NA&gt;         
+#&gt; # A tibble: 25 x 28
+#&gt;    id    source pmid  doi   title authorString journalTitle journalVolume
+#&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        
+#&gt;  1 3303… MED    3303… 10.1… &quot;Eff… Chen L, Bao… J Environ M… 277          
+#&gt;  2 3219… MED    3219… 10.1… &quot;Rac… Aby MJ.      Adm Policy … 47           
+#&gt;  3 3271… MED    3271… 10.1… &quot;Hid… Miriti MN, … Nat Ecol Ev… 4            
+#&gt;  4 3299… MED    3299… 10.1… &quot;Evo… O&#39;Keeffe KR… Infect Gene… &lt;NA&gt;         
+#&gt;  5 3271… MED    3271… 10.1… &quot;Rec… Schell CJ, … Nat Ecol Ev… 4            
+#&gt;  6 3273… MED    3273… 10.1… &quot;Aut… Heidrich L,… Nat Ecol Ev… 4            
+#&gt;  7 3299… MED    3299… 10.1… &quot;\&quot;O… Jax K.       Hist Philos… 42           
+#&gt;  8 3298… MED    3298… 10.1… &quot;Uni… Albery GF, … J Anim Ecol  &lt;NA&gt;         
+#&gt;  9 3304… MED    3304… 10.1… &quot;Mov… Carleton KL… Mol Ecol     &lt;NA&gt;         
+#&gt; 10 3304… MED    3304… 10.1… &quot;Imp… Zhang J, Fu… Nat Ecol Ev… &lt;NA&gt;         
 #&gt; # … with 15 more rows, and 21 more variables: pubYear &lt;chr&gt;, journalIssn &lt;chr&gt;,
 #&gt; #   pageInfo &lt;chr&gt;, pubType &lt;chr&gt;, isOpenAccess &lt;chr&gt;, inEPMC &lt;chr&gt;,
 #&gt; #   inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;, hasBook &lt;chr&gt;, hasSuppl &lt;chr&gt;,
 #&gt; #   citedByCount &lt;int&gt;, hasReferences &lt;chr&gt;, hasTextMinedTerms &lt;chr&gt;,
 #&gt; #   hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,
 #&gt; #   hasTMAccessionNumbers &lt;chr&gt;, firstIndexDate &lt;chr&gt;,
-#&gt; #   firstPublicationDate &lt;chr&gt;, bookOrReportDetails$publisher &lt;chr&gt;,
-#&gt; #   $yearOfPublication &lt;int&gt;, pmcid &lt;chr&gt;</code></pre>
+#&gt; #   firstPublicationDate &lt;chr&gt;, issue &lt;chr&gt;,
+#&gt; #   bookOrReportDetails$publisher &lt;chr&gt;, $yearOfPublication &lt;int&gt;</code></pre>
 <p>Then get the next batch of results, using the <code>cursorMark</code> result</p>
 <div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="search.html#cb27-1"></a><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;europmc&#39;</span>, </span>
 <span id="cb27-2"><a href="search.html#cb27-2"></a>  <span class="dt">euroopts =</span> <span class="kw">list</span>(<span class="dt">cursorMark =</span> res<span class="op">$</span>europmc<span class="op">$</span>cursorMark))</span></code></pre></div>
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 369372; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 389570; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 25; Scopus: 0; Microsoft: 0]</code></pre>
 

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 10 Extracting text | fulltext manual</title>
   <meta name="description" content="Chapter 10 Extracting text | fulltext manual" />
-  <meta name="generator" content="bookdown 0.20 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 10 Extracting text | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -238,7 +238,7 @@ dice XML.</p>
 <div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb70-1"><a href="chunks.html#cb70-1"></a><span class="kw">library</span>(fulltext)</span>
 <span id="cb70-2"><a href="chunks.html#cb70-2"></a><span class="kw">library</span>(pubchunks)</span></code></pre></div>
 <p>Get a full text article</p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="chunks.html#cb71-1"></a>x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>, <span class="dt">from=</span><span class="st">&#39;plos&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb71-1"><a href="chunks.html#cb71-1"></a>x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>)</span></code></pre></div>
 <p>Note that unlike previous versions of <code>fulltext</code> you now have to collect (<code>ft_collect()</code>)
 the text from the XML file on disk. Then you can pass to <code>pub_chunks()</code>, here to get
 authors.</p>
@@ -260,11 +260,11 @@ authors.</p>
 <span id="cb74-2"><a href="chunks.html#cb74-2"></a>(dois &lt;-<span class="st"> </span><span class="kw">searchplos</span>(<span class="dt">q=</span><span class="st">&quot;*:*&quot;</span>, <span class="dt">fl=</span><span class="st">&#39;id&#39;</span>,</span>
 <span id="cb74-3"><a href="chunks.html#cb74-3"></a>   <span class="dt">fq=</span><span class="kw">list</span>(<span class="st">&#39;doc_type:full&#39;</span>,<span class="st">&quot;article_type:</span><span class="ch">\&quot;</span><span class="st">research article</span><span class="ch">\&quot;</span><span class="st">&quot;</span>),</span>
 <span id="cb74-4"><a href="chunks.html#cb74-4"></a>     <span class="dt">limit=</span><span class="dv">5</span>)<span class="op">$</span>data<span class="op">$</span>id)</span></code></pre></div>
-<pre><code>#&gt; [1] &quot;10.1371/journal.pone.0020843&quot; &quot;10.1371/journal.pone.0022257&quot;
-#&gt; [3] &quot;10.1371/journal.pone.0023139&quot; &quot;10.1371/journal.pone.0023138&quot;
-#&gt; [5] &quot;10.1371/journal.pone.0023119&quot;</code></pre>
+<pre><code>#&gt; [1] &quot;10.1371/journal.pcbi.0040029&quot; &quot;10.1371/journal.pcbi.0040032&quot;
+#&gt; [3] &quot;10.1371/journal.pcbi.0040036&quot; &quot;10.1371/journal.pcbi.0040038&quot;
+#&gt; [5] &quot;10.1371/journal.pcbi.1000009&quot;</code></pre>
 <p>Then get the full text</p>
-<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="chunks.html#cb76-1"></a>x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(dois, <span class="dt">from=</span><span class="st">&quot;plos&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb76"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb76-1"><a href="chunks.html#cb76-1"></a>x &lt;-<span class="st"> </span><span class="kw">ft_get</span>(dois)</span></code></pre></div>
 <p>Then pull out various sections of each article.</p>
 <blockquote>
 <p>remember to pull out the full text first</p>
@@ -292,17 +292,17 @@ the lingua franca of data work in R.</p>
 <span id="cb79-3"><a href="chunks.html#cb79-3"></a>x &lt;-<span class="st"> </span><span class="kw">pub_tabularize</span>(x)</span>
 <span id="cb79-4"><a href="chunks.html#cb79-4"></a><span class="kw">rbindlist</span>(x<span class="op">$</span>plos, <span class="dt">fill =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <pre><code>#&gt;                             doi
-#&gt; 1: 10.1371/journal.pone.0020843
-#&gt; 2: 10.1371/journal.pone.0022257
-#&gt; 3: 10.1371/journal.pone.0023139
-#&gt; 4: 10.1371/journal.pone.0023138
-#&gt; 5: 10.1371/journal.pone.0023119
-#&gt;                                                                                                                                     title
-#&gt; 1:          New Insights into the Evolution of Wolbachia Infections in Filarial Nematodes Inferred from a Large Range of Screened Species
-#&gt; 2:                         Dynamic Distribution of Nuclear Coactivator 4 during Mitosis: Association with Mitotic Apparatus and Midbodies
-#&gt; 3:     Contrasting Expression of Canonical Wnt Signaling Reporters TOPGAL, BATGAL and Axin2LacZ during Murine Lung Development and Repair
-#&gt; 4:                 Regrets Associated with Providing Healthcare: Qualitative Study of Experiences of Hospital-Based Physicians and Nurses
-#&gt; 5: Strategies for Enhancing the Accumulation and Retention of Extracellular Matrix in Tissue-Engineered Cartilage Cultured in Bioreactors
+#&gt; 1: 10.1371/journal.pcbi.0040029
+#&gt; 2: 10.1371/journal.pcbi.0040032
+#&gt; 3: 10.1371/journal.pcbi.0040036
+#&gt; 4: 10.1371/journal.pcbi.0040038
+#&gt; 5: 10.1371/journal.pcbi.1000009
+#&gt;                                                                                                          title
+#&gt; 1:            Selective Adaptation in Networks of Heterogeneous Populations: Model, Simulation, and Experiment
+#&gt; 2:                                           Synaptic Plasticity Can Produce and Enhance Direction Selectivity
+#&gt; 3: Computational and Experimental Analysis of Redundancy in the Central Metabolism of Geobacter sulfurreducens
+#&gt; 4:                                                    Modeling an Evolutionary Conserved Circadian Cis-Element
+#&gt; 5:                                               Computer-Based Screening of Functional Conformers of Proteins
 #&gt;    .publisher
 #&gt; 1:       plos
 #&gt; 2:       plos
@@ -347,7 +347,7 @@ the lingua franca of data work in R.</p>
 #&gt;   sections: title, refs
 #&gt;   showing up to first 5: 
 #&gt;    title (n=1): On the driving of a piston with a rigid collar int ...
-#&gt;    refs (n=6): 1.G.N.WatsonTeoriia besselevykh funktsiiTheory of</code></pre>
+#&gt;    refs (n=6): Watson G.N.. 1949. Teoriia besselevykh funktsii. N</code></pre>
 <p>The output of <code>pub_chunks()</code> is a list with an S3 class <code>pub_chunks</code> to make
 internal work in the package easier. You can easily see the list structure
 by using <code>unclass()</code>.</p>
