@@ -63,7 +63,7 @@ cat(paste(" -", paste(ft_get_ls(), collapse = "\n - ")))
 
 You can see what plugins there are with `ft_get_ls()`
 
-But there are also other options within `ft_get()` that we take advantage of. This is because DOIs (Digital Object Identifiers) which you feed into `ft_get()` have a prefix that is affiliated with a specific publisher. We can then decide whether to use one of our plugins listed in `ft_get_ls()` or something else. If we don't have a plugin we first look to see if Crossref has the full text link to either XML or PDF for the DOI. If not, we then go to an API rOpenSci maintains at <https://ftdoi.org>[^1]. This API has a set of rules for each publisher - some of which are simple rules like add a URL plus a DOI - but some require an HTTP request then some string manipulation. 
+But there are also other options within `ft_get()` that we take advantage of. This is because DOIs (Digital Object Identifiers) which you feed into `ft_get()` have a prefix that is affiliated with a specific publisher. We can then decide whether to use one of our plugins listed in `ft_get_ls()` or something else. If we don't have a plugin we first look to see if Crossref has the full text link to either XML or PDF for the DOI. If not, we then go to an API rOpenSci maintains. This API has a set of rules for each publisher - some of which are simple rules like add a URL plus a DOI - but some require an HTTP request then some string manipulation. 
 
 
 [^1]: You can use the ftdoi API from R with the <https://github.com/ropenscilabs/rftdoi> package.
