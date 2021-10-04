@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 7 Abstracts | fulltext manual</title>
   <meta name="description" content="Chapter 7 Abstracts | fulltext manual" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 7 Abstracts | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,9 @@
   
 <link rel="prev" href="search.html"/>
 <link rel="next" href="links.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,14 +49,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -114,6 +117,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -218,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="abstracts" class="section level1">
+<div id="abstracts" class="section level1" number="7">
 <h1><span class="header-section-number">Chapter 7</span> Abstracts</h1>
 <p>Fetching abstracts likely will come after searching for articles with <code>ft_search()</code>. There are a few scenarios in which simply getting abstracts in lieu of full text may be enough.</p>
 <p>For example, if you know that a large portion of the articles you want to mine text from are closed access and you don’t have access to them, you may have access to the abstracts depending on the publisher.</p>
@@ -231,51 +235,51 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>scopus</li>
 <li>semanticscholar</li>
 </ul>
-<div id="abstracts-usage" class="section level2">
+<div id="abstracts-usage" class="section level2" number="7.1">
 <h2><span class="header-section-number">7.1</span> Usage</h2>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="abstracts.html#cb29-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="abstracts.html#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fulltext)</span></code></pre></div>
 <p>List data sources available</p>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="abstracts.html#cb30-1"></a><span class="kw">ft_abstract_ls</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb30-1"><a href="abstracts.html#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ft_abstract_ls</span>()</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;crossref&quot;        &quot;microsoft&quot;       &quot;plos&quot;            &quot;scopus&quot;         
 #&gt; [5] &quot;semanticscholar&quot;</code></pre>
 <p>Search - by default searches against PLOS (Public Library of Science)</p>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="abstracts.html#cb32-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query =</span> <span class="st">&quot;ecology&quot;</span>)</span>
-<span id="cb32-2"><a href="abstracts.html#cb32-2"></a>(dois &lt;-<span class="st"> </span>res<span class="op">$</span>plos<span class="op">$</span>data<span class="op">$</span>id)</span></code></pre></div>
-<pre><code>#&gt;  [1] &quot;10.1371/journal.pone.0001248&quot; &quot;10.1371/journal.pone.0059813&quot;
-#&gt;  [3] &quot;10.1371/journal.pone.0080763&quot; &quot;10.1371/journal.pone.0220747&quot;
-#&gt;  [5] &quot;10.1371/journal.pone.0155019&quot; &quot;10.1371/journal.pone.0175014&quot;
-#&gt;  [7] &quot;10.1371/journal.pone.0150648&quot; &quot;10.1371/journal.pone.0208370&quot;
-#&gt;  [9] &quot;10.1371/journal.pcbi.1003594&quot; &quot;10.1371/journal.pone.0102437&quot;</code></pre>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb32-1"><a href="abstracts.html#cb32-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">ft_search</span>(<span class="at">query =</span> <span class="st">&quot;ecology&quot;</span>)</span>
+<span id="cb32-2"><a href="abstracts.html#cb32-2" aria-hidden="true" tabindex="-1"></a>(dois <span class="ot">&lt;-</span> res<span class="sc">$</span>plos<span class="sc">$</span>data<span class="sc">$</span>id)</span></code></pre></div>
+<pre><code>#&gt;  [1] &quot;10.1371/journal.pone.0001248&quot; &quot;10.1371/journal.pone.0248090&quot;
+#&gt;  [3] &quot;10.1371/journal.pone.0059813&quot; &quot;10.1371/journal.pone.0080763&quot;
+#&gt;  [5] &quot;10.1371/journal.pone.0246749&quot; &quot;10.1371/journal.pone.0254411&quot;
+#&gt;  [7] &quot;10.1371/journal.pone.0220747&quot; &quot;10.1371/journal.pone.0155019&quot;
+#&gt;  [9] &quot;10.1371/journal.pone.0175014&quot; &quot;10.1371/journal.pone.0241618&quot;</code></pre>
 <p>Take the output of <code>ft_search()</code> and pass directly to <code>ft_abstract()</code>:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="abstracts.html#cb34-1"></a>out &lt;-<span class="st"> </span><span class="kw">ft_abstract</span>(dois)</span>
-<span id="cb34-2"><a href="abstracts.html#cb34-2"></a>out</span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="abstracts.html#cb34-1" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">ft_abstract</span>(dois)</span>
+<span id="cb34-2"><a href="abstracts.html#cb34-2" aria-hidden="true" tabindex="-1"></a>out</span></code></pre></div>
 <pre><code>#&gt; &lt;fulltext abstracts&gt;
 #&gt; Found:
-#&gt;   [PLOS: 10; Scopus: 0; Microsoft: 0; Crossref: 0; Semantic Scholar: 0]</code></pre>
+#&gt;   [Crossref: 4; Scopus: 0; Microsoft: 0; PLOS: 0; Semantic Scholar: 0]</code></pre>
 <p>The output has slots for each data source:</p>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="abstracts.html#cb36-1"></a><span class="kw">names</span>(out)</span></code></pre></div>
-<pre><code>#&gt; [1] &quot;plos&quot;            &quot;scopus&quot;          &quot;ma&quot;              &quot;crossref&quot;       
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="abstracts.html#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(out)</span></code></pre></div>
+<pre><code>#&gt; [1] &quot;crossref&quot;        &quot;plos&quot;            &quot;scopus&quot;          &quot;ma&quot;             
 #&gt; [5] &quot;semanticscholar&quot;</code></pre>
 <p>Index to the data source you want to get data from, here selecting the first item:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="abstracts.html#cb38-1"></a>out<span class="op">$</span>plos[[<span class="dv">1</span>]]</span></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="abstracts.html#cb38-1" aria-hidden="true" tabindex="-1"></a>out<span class="sc">$</span>plos[[<span class="dv">1</span>]]</span></code></pre></div>
 <pre><code>#&gt; $doi
 #&gt; [1] &quot;10.1371/journal.pone.0001248&quot;
 #&gt; 
 #&gt; $abstract
-#&gt; [1] &quot;Background: Soil ecology has produced a huge corpus of results on relations between soil organisms, ecosystem processes controlled by these organisms and links between belowground and aboveground processes. However, some soil scientists think that soil ecology is short of modelling and evolutionary approaches and has developed too independently from general ecology. We have tested quantitatively these hypotheses through a bibliographic study (about 23000 articles) comparing soil ecology journals, generalist ecology journals, evolutionary ecology journals and theoretical ecology journals. Findings: We have shown that soil ecology is not well represented in generalist ecology journals and that soil ecologists poorly use modelling and evolutionary approaches. Moreover, the articles published by a typical soil ecology journal (Soil Biology and Biochemistry) are cited by and cite low percentages of articles published in generalist ecology journals, evolutionary ecology journals and theoretical ecology journals. Conclusion: This confirms our hypotheses and suggests that soil ecology would benefit from an effort towards modelling and evolutionary approaches. This effort should promote the building of a general conceptual framework for soil ecology and bridges between soil ecology and general ecology. We give some historical reasons for the parsimonious use of modelling and evolutionary approaches by soil ecologists. We finally suggest that a publication system that classifies journals according to their Impact Factors and their level of generality is probably inadequate to integrate “particularity” (empirical observations) and “generality” (general theories), which is the goal of all natural sciences. Such a system might also be particularly detrimental to the development of a science such as ecology that is intrinsically multidisciplinary. &quot;</code></pre>
+#&gt; [1] &quot;&quot;</code></pre>
 <p>Which gives a named list, with the DOI as the first element, then the abstract as a single
 character string.</p>
 <p>You can then take these abstracts and use any number of R packages for text mining.</p>
 </div>
-<div id="abstracts-by-ids" class="section level2">
+<div id="abstracts-by-ids" class="section level2" number="7.2">
 <h2><span class="header-section-number">7.2</span> By Ids</h2>
 <p>Instead of using <code>ft_search()</code> first, and passing those results to <code>ft_abstract()</code>, you can pass article ids (character/numeric) to <code>ft_abstract()</code>.</p>
 <p>Here, we’ll fetch abstracts for three articles from arXiv. With Semantic Scholar we need to prefix the string <code>arXiv</code> to the ids (if you use DOIs you don’t need to prefix any string).</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="abstracts.html#cb40-1"></a>arxiv_ids &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;0710.3491&quot;</span>, <span class="st">&quot;0804.0713&quot;</span>, <span class="st">&quot;0810.4821&quot;</span>, <span class="st">&quot;1003.0315&quot;</span>)</span>
-<span id="cb40-2"><a href="abstracts.html#cb40-2"></a>out &lt;-<span class="st"> </span><span class="kw">ft_abstract</span>(<span class="dt">x =</span> <span class="kw">paste0</span>(<span class="st">&quot;arXiv:&quot;</span>, arxiv_ids), <span class="dt">from =</span> <span class="st">&quot;semanticscholar&quot;</span>)</span>
-<span id="cb40-3"><a href="abstracts.html#cb40-3"></a><span class="kw">unname</span>(<span class="kw">vapply</span>(out<span class="op">$</span>semanticscholar, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;abstract&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb40-1"><a href="abstracts.html#cb40-1" aria-hidden="true" tabindex="-1"></a>arxiv_ids <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;0710.3491&quot;</span>, <span class="st">&quot;0804.0713&quot;</span>, <span class="st">&quot;0810.4821&quot;</span>, <span class="st">&quot;1003.0315&quot;</span>)</span>
+<span id="cb40-2"><a href="abstracts.html#cb40-2" aria-hidden="true" tabindex="-1"></a>out <span class="ot">&lt;-</span> <span class="fu">ft_abstract</span>(<span class="at">x =</span> <span class="fu">paste0</span>(<span class="st">&quot;arXiv:&quot;</span>, arxiv_ids), <span class="at">from =</span> <span class="st">&quot;semanticscholar&quot;</span>)</span>
+<span id="cb40-3"><a href="abstracts.html#cb40-3" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">vapply</span>(out<span class="sc">$</span>semanticscholar, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;abstract&quot;</span>))</span></code></pre></div>
 </div>
-<div id="abstracts-options" class="section level2">
+<div id="abstracts-options" class="section level2" number="7.3">
 <h2><span class="header-section-number">7.3</span> Abstracts options</h2>
 <p>All data sources for <code>ft_abstract()</code> accept configuration options as a named list. For example, if you set <code>from="plos"</code> you can set additional PLOS specfiic options by passing a named list to <code>plosopts</code>. You can find out what PLOS options are available by looking at the documention for <code>?rplos::searchplos</code>.</p>
 <p>The only data source that doesn’t allow configuration options is Semantic Scholar.</p>
@@ -293,7 +297,6 @@ character string.</p>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -312,6 +315,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -332,6 +336,10 @@ gitbook.start({
 "text": null
 },
 "download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

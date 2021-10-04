@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 3 Data sources | fulltext manual</title>
   <meta name="description" content="Chapter 3 Data sources | fulltext manual" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 3 Data sources | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,9 @@
   
 <link rel="prev" href="intro.html"/>
 <link rel="next" href="authentication.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,14 +49,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -114,6 +117,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -218,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="data-sources" class="section level1">
+<div id="data-sources" class="section level1" number="3">
 <h1><span class="header-section-number">Chapter 3</span> Data sources</h1>
 <p>Data sources in <code>fulltext</code> include:</p>
 <ul>
@@ -233,7 +237,7 @@ available via Pubmed)</li>
 <li>We <strong>will</strong> add more, as publishers open up, and as we have time…See the <a href="https://github.com/ropensci/fulltext/issues/4#issuecomment-52376743">master list here</a></li>
 </ul>
 <p>Data sources will differ by the task you are doing in <code>fulltext</code>.</p>
-<div id="ds-search" class="section level2">
+<div id="ds-search" class="section level2" number="3.1">
 <h2><span class="header-section-number">3.1</span> Search</h2>
 <p>When searching with <code>ft_search()</code> you’ll have access to a specific set of sources and no others, including:</p>
 <ul>
@@ -249,7 +253,7 @@ available via Pubmed)</li>
 </ul>
 <p>You can see what plugins there are with <code>ft_search_ls()</code></p>
 </div>
-<div id="ds-abstracts" class="section level2">
+<div id="ds-abstracts" class="section level2" number="3.2">
 <h2><span class="header-section-number">3.2</span> Abstracts</h2>
 <p>When using <code>ft_abstract()</code> you have access to:</p>
 <ul>
@@ -261,7 +265,7 @@ available via Pubmed)</li>
 </ul>
 <p>You can see what plugins there are with <code>ft_abstract_ls()</code></p>
 </div>
-<div id="ds-link" class="section level2">
+<div id="ds-link" class="section level2" number="3.3">
 <h2><span class="header-section-number">3.3</span> Links</h2>
 <p>When using <code>ft_links()</code> to get links to full text, you’ll have access to:</p>
 <ul>
@@ -279,7 +283,7 @@ available via Pubmed)</li>
 </ul>
 <p>You can see what plugins there are with <code>ft_links_ls()</code></p>
 </div>
-<div id="ds-fulltext" class="section level2">
+<div id="ds-fulltext" class="section level2" number="3.4">
 <h2><span class="header-section-number">3.4</span> Getting full text</h2>
 <p>While using <code>ft_get()</code> to fetch full text of articles you’ll have access to a set of specific data sources (in this case publishers) for which we have some coded plugins (i.e., functions):</p>
 <ul>
@@ -311,18 +315,13 @@ available via Pubmed)</li>
 <li>roysoc</li>
 <li>sciencedirect</li>
 <li>scientificsocieties</li>
+<li>transtech</li>
 <li>wiley</li>
 </ul>
 <p>You can see what plugins there are with <code>ft_get_ls()</code></p>
-<p>But there are also other options within <code>ft_get()</code> that we take advantage of. This is because DOIs (Digital Object Identifiers) which you feed into <code>ft_get()</code> have a prefix that is affiliated with a specific publisher. We can then decide whether to use one of our plugins listed in <code>ft_get_ls()</code> or something else. If we don’t have a plugin we first look to see if Crossref has the full text link to either XML or PDF for the DOI. If not, we then go to an API rOpenSci maintains at <a href="https://ftdoi.org" class="uri">https://ftdoi.org</a><a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a>. This API has a set of rules for each publisher - some of which are simple rules like add a URL plus a DOI - but some require an HTTP request then some string manipulation.</p>
+<p>But there are also other options within <code>ft_get()</code> that we take advantage of. This is because DOIs (Digital Object Identifiers) which you feed into <code>ft_get()</code> have a prefix that is affiliated with a specific publisher. We can then decide whether to use one of our plugins listed in <code>ft_get_ls()</code> or something else. If we don’t have a plugin we first look to see if Crossref has the full text link to either XML or PDF for the DOI. If not, we then go to an API rOpenSci maintains. This API has a set of rules for each publisher - some of which are simple rules like add a URL plus a DOI - but some require an HTTP request then some string manipulation.</p>
 
 </div>
-</div>
-<div class="footnotes">
-<hr />
-<ol start="1">
-<li id="fn1"><p>You can use the ftdoi API from R with the <a href="https://github.com/ropenscilabs/rftdoi" class="uri">https://github.com/ropenscilabs/rftdoi</a> package.<a href="data-sources.html#fnref1" class="footnote-back">↩︎</a></p></li>
-</ol>
 </div>
             </section>
 
@@ -334,7 +333,6 @@ available via Pubmed)</li>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -353,6 +351,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -373,6 +372,10 @@ gitbook.start({
 "text": null
 },
 "download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

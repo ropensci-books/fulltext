@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 9 Fetch | fulltext manual</title>
   <meta name="description" content="Chapter 9 Fetch | fulltext manual" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 9 Fetch | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,9 @@
   
 <link rel="prev" href="links.html"/>
 <link rel="next" href="chunks.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,14 +49,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -114,6 +117,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -218,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="fetch" class="section level1">
+<div id="fetch" class="section level1" number="9">
 <h1><span class="header-section-number">Chapter 9</span> Fetch</h1>
 <p>The <code>ft_get</code> function makes it easy to fetch full text articles. There are a few different ways to use <code>ft_get</code>:</p>
 <ul>
@@ -235,7 +239,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Caching results to avoid unnecessary downloads if the content has already been acquired</li>
 </ul>
 <p>Thus, expect some hiccups here, and please do report problems, and if a certain publisher is not supported yet.</p>
-<div id="fetch-data-formats" class="section level2">
+<div id="fetch-data-formats" class="section level2" number="9.1">
 <h2><span class="header-section-number">9.1</span> Data formats</h2>
 <p>You can specify whether you want PDF, XML or plaint text with the <code>type</code> parameter. It is sometimes ignored, sometimes used, depending on the data source. For certain data sources, they only accept one type. Details by data source/publisher:</p>
 <ul>
@@ -256,16 +260,16 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>other data sources/publishers: there are too many to cover here - will try to make a helper in the future for what is covered by different publishers</li>
 </ul>
 </div>
-<div id="how-data-is-stored" class="section level2">
+<div id="how-data-is-stored" class="section level2" number="9.2">
 <h2><span class="header-section-number">9.2</span> How data is stored</h2>
 <p>This depends on what <code>backend</code> value you use. If you use the default (rds) we store all data in <code>.rds</code> files. These are binary compressed files that are specific to R. Because they are specific to R, you don’t want to use this option if part of your downstream workflow is using another tool/programming language.</p>
 <p>The three types are stored in differnt ways. xml and plain text are parsed to plain text then stored with whatever backend you choose. However, pdf is retrived as raw bytes and stored as such. Thus, we no longer write pdf files to disk. However, you can easily do that yourself with <code>ft_extract()</code> or yourself by using <code>pdftools::pdf_text</code> which accepts a file path to a pdf or raw bytes.</p>
 </div>
-<div id="fetch-usage" class="section level2">
+<div id="fetch-usage" class="section level2" number="9.3">
 <h2><span class="header-section-number">9.3</span> Usage</h2>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="fetch.html#cb58-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="fetch.html#cb58-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fulltext)</span></code></pre></div>
 <p>List backends available</p>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="fetch.html#cb59-1"></a><span class="kw">ft_get_ls</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb59-1"><a href="fetch.html#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ft_get_ls</span>()</span></code></pre></div>
 <pre><code>#&gt;  [1] &quot;aaas&quot;                &quot;aip&quot;                 &quot;amersocclinoncol&quot;   
 #&gt;  [4] &quot;amersocmicrobiol&quot;    &quot;arxiv&quot;               &quot;biorxiv&quot;            
 #&gt;  [7] &quot;bmc&quot;                 &quot;cambridge&quot;           &quot;cob&quot;                
@@ -275,14 +279,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; [19] &quot;jama&quot;                &quot;microbiology&quot;        &quot;peerj&quot;              
 #&gt; [22] &quot;pensoft&quot;             &quot;plos&quot;                &quot;pnas&quot;               
 #&gt; [25] &quot;royalsocchem&quot;        &quot;roysoc&quot;              &quot;sciencedirect&quot;      
-#&gt; [28] &quot;scientificsocieties&quot; &quot;wiley&quot;</code></pre>
+#&gt; [28] &quot;scientificsocieties&quot; &quot;transtech&quot;           &quot;wiley&quot;</code></pre>
 <p>The simplest approach is passing a DOI directly to <code>ft_get</code></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="fetch.html#cb61-1"></a>(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb61-1"><a href="fetch.html#cb61-1" aria-hidden="true" tabindex="-1"></a>(res <span class="ot">&lt;-</span> <span class="fu">ft_get</span>(<span class="st">&#39;10.1371/journal.pone.0086169&#39;</span>))</span></code></pre></div>
 <pre><code>#&gt; &lt;fulltext text&gt;
 #&gt; [Docs] 1 
 #&gt; [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
 #&gt; [IDs] 10.1371/journal.pone.0086169 ...</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="fetch.html#cb63-1"></a>res<span class="op">$</span>plos</span></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb63-1"><a href="fetch.html#cb63-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>plos</span></code></pre></div>
 <pre><code>#&gt; $found
 #&gt; [1] 1
 #&gt; 
@@ -294,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; [1] &quot;ext&quot;
 #&gt; 
 #&gt; $data$cache_path
-#&gt; [1] &quot;/Users/sckott/Library/Caches/R/fulltext&quot;
+#&gt; [1] &quot;~/Library/Caches/R/fulltext&quot;
 #&gt; 
 #&gt; $data$path
 #&gt; $data$path$`10.1371/journal.pone.0086169`
@@ -331,12 +335,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt;                             id error
 #&gt; 1 10.1371/journal.pone.0086169  &lt;NA&gt;</code></pre>
 <p>You can pass many DOIs in at once</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="fetch.html#cb65-1"></a>(res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="kw">c</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>, <span class="st">&#39;10.3389/feart.2015.00009&#39;</span>)))</span></code></pre></div>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb65-1"><a href="fetch.html#cb65-1" aria-hidden="true" tabindex="-1"></a>(res <span class="ot">&lt;-</span> <span class="fu">ft_get</span>(<span class="fu">c</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>, <span class="st">&#39;10.3389/feart.2015.00009&#39;</span>)))</span></code></pre></div>
 <pre><code>#&gt; &lt;fulltext text&gt;
 #&gt; [Docs] 2 
 #&gt; [Source] ext - /Users/sckott/Library/Caches/R/fulltext 
 #&gt; [IDs] 10.3389/fphar.2014.00109 10.3389/feart.2015.00009 ...</code></pre>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="fetch.html#cb67-1"></a>res<span class="op">$</span>frontiersin</span></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb67-1"><a href="fetch.html#cb67-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>frontiersin</span></code></pre></div>
 <pre><code>#&gt; $found
 #&gt; [1] 2
 #&gt; 
@@ -348,7 +352,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; [1] &quot;ext&quot;
 #&gt; 
 #&gt; $data$cache_path
-#&gt; [1] &quot;/Users/sckott/Library/Caches/R/fulltext&quot;
+#&gt; [1] &quot;~/Library/Caches/R/fulltext&quot;
 #&gt; 
 #&gt; $data$path
 #&gt; $data$path$`10.3389/fphar.2014.00109`
@@ -400,7 +404,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; 1 10.3389/fphar.2014.00109  &lt;NA&gt;
 #&gt; 2 10.3389/feart.2015.00009  &lt;NA&gt;</code></pre>
 </div>
-<div id="fetch-errors" class="section level2">
+<div id="fetch-errors" class="section level2" number="9.4">
 <h2><span class="header-section-number">9.4</span> Errors</h2>
 <p><code>ft_get()</code> for each article has an <code>error</code> slot.</p>
 <p>If the <code>error</code> slot is <code>NULL</code> then there is no error.</p>
@@ -431,15 +435,15 @@ will be a character string in that slot.</p>
 </ul>
 <p>An additional top level slot called <code>errors</code> has a data.frame of all errors
 from each article, like:</p>
-<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="fetch.html#cb69-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_get</span>(<span class="kw">c</span>(<span class="st">&#39;10.7554/eLife.03032&#39;</span>, <span class="st">&#39;10.7554/eLife.aaaa&#39;</span>), <span class="dt">from =</span> <span class="st">&quot;elife&quot;</span>)</span>
-<span id="cb69-2"><a href="fetch.html#cb69-2"></a>res<span class="op">$</span>elife<span class="op">$</span>errors</span>
-<span id="cb69-3"><a href="fetch.html#cb69-3"></a>                   id                   error</span>
-<span id="cb69-4"><a href="fetch.html#cb69-4"></a><span class="dv">1</span> <span class="fl">10.7554</span><span class="op">/</span>eLife<span class="fl">.03032</span>                    <span class="op">&lt;</span><span class="ot">NA</span><span class="op">&gt;</span></span>
-<span id="cb69-5"><a href="fetch.html#cb69-5"></a><span class="dv">2</span>  <span class="fl">10.7554</span><span class="op">/</span>eLife.aaaa subscript out of bounds</span></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb69-1"><a href="fetch.html#cb69-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">ft_get</span>(<span class="fu">c</span>(<span class="st">&#39;10.7554/eLife.03032&#39;</span>, <span class="st">&#39;10.7554/eLife.aaaa&#39;</span>), <span class="at">from =</span> <span class="st">&quot;elife&quot;</span>)</span>
+<span id="cb69-2"><a href="fetch.html#cb69-2" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>elife<span class="sc">$</span>errors</span>
+<span id="cb69-3"><a href="fetch.html#cb69-3" aria-hidden="true" tabindex="-1"></a>                   id                   error</span>
+<span id="cb69-4"><a href="fetch.html#cb69-4" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span> <span class="fl">10.7554</span><span class="sc">/</span>eLife<span class="fl">.03032</span>                    <span class="sc">&lt;</span><span class="cn">NA</span><span class="sc">&gt;</span></span>
+<span id="cb69-5"><a href="fetch.html#cb69-5" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>  <span class="fl">10.7554</span><span class="sc">/</span>eLife.aaaa subscript out of bounds</span></code></pre></div>
 <p>Where the second DOI was invalid. Granted the error in the data.frame “subscript out of bounds”
 isn’t very informative, but we can work on that.</p>
 </div>
-<div id="fetch-cleanup" class="section level2">
+<div id="fetch-cleanup" class="section level2" number="9.5">
 <h2><span class="header-section-number">9.5</span> Cleanup</h2>
 <p>The above section about errors suggests that we often run into errors. When we run into errors
 downloading full text we capture the error message, if there is one, and delete the file we
@@ -450,7 +454,7 @@ get it fixed.</p>
 if it is not completey done creating it, so you shouldn’t end up with bad files
 if you exit out of the function when it’s running.</p>
 </div>
-<div id="fetch-internals" class="section level2">
+<div id="fetch-internals" class="section level2" number="9.6">
 <h2><span class="header-section-number">9.6</span> Internals</h2>
 <p>What’s going on under the hood in <code>ft_get()</code>? It goes like this:</p>
 <ul>
@@ -481,9 +485,9 @@ if you exit out of the function when it’s running.</p>
 </ul></li>
 </ul>
 </div>
-<div id="fetch-notes" class="section level2">
+<div id="fetch-notes" class="section level2" number="9.7">
 <h2><span class="header-section-number">9.7</span> Notes about specific data sources</h2>
-<div id="elsevier" class="section level3">
+<div id="elsevier" class="section level3" number="9.7.1">
 <h3><span class="header-section-number">9.7.1</span> Elsevier</h3>
 <p>When you don’t have access to the full text of Elsevier articles they will
 often still give you something, but it will sometimes be just metadata
@@ -503,7 +507,6 @@ the text this will be rather obvious.</p>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -522,6 +525,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -542,6 +546,10 @@ gitbook.start({
 "text": null
 },
 "download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

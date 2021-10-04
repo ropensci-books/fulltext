@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 4 Authentication | fulltext manual</title>
   <meta name="description" content="Chapter 4 Authentication | fulltext manual" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 4 Authentication | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,9 @@
   
 <link rel="prev" href="data-sources.html"/>
 <link rel="next" href="rate-limits.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,14 +49,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -114,6 +117,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -218,7 +222,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="authentication" class="section level1">
+<div id="authentication" class="section level1" number="4">
 <h1><span class="header-section-number">Chapter 4</span> Authentication</h1>
 <p>Some data sources require authentication. Here’s a breakdown of how to do authentication by data source:</p>
 <p><strong>BMC</strong>: BMC is integrated into Springer Publishers now,
@@ -244,11 +248,11 @@ in the wrong IP range or have wrong proxy settings,
 but you are not able to see the abstracts, they will be empty.
 By using the currect curl options into the calls to ft_search or ft_abstracts even
 the most complex proxy including authentication should work. As an example:</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="authentication.html#cb4-1"></a><span class="kw">ft_abstract</span>(<span class="dt">x =</span> dois, <span class="dt">from =</span> <span class="st">&quot;scopus&quot;</span>, <span class="dt">scopusopts =</span> opts,</span>
-<span id="cb4-2"><a href="authentication.html#cb4-2"></a>  <span class="dt">proxy=</span><span class="st">&quot;proxy-ip-address&quot;</span>,</span>
-<span id="cb4-3"><a href="authentication.html#cb4-3"></a>  <span class="dt">proxyport=</span>your<span class="op">-</span>proxy<span class="op">-</span>port,</span>
-<span id="cb4-4"><a href="authentication.html#cb4-4"></a>  <span class="dt">proxyuserpwd=</span><span class="st">&quot;username:password&quot;</span>, <span class="co"># often the same as your windows login</span></span>
-<span id="cb4-5"><a href="authentication.html#cb4-5"></a>  <span class="dt">proxyauth=</span><span class="dv">8</span>) <span class="co"># ntlm - authentication</span></span></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb4-1"><a href="authentication.html#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ft_abstract</span>(<span class="at">x =</span> dois, <span class="at">from =</span> <span class="st">&quot;scopus&quot;</span>, <span class="at">scopusopts =</span> opts,</span>
+<span id="cb4-2"><a href="authentication.html#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">proxy=</span><span class="st">&quot;proxy-ip-address&quot;</span>,</span>
+<span id="cb4-3"><a href="authentication.html#cb4-3" aria-hidden="true" tabindex="-1"></a>  <span class="at">proxyport=</span>your<span class="sc">-</span>proxy<span class="sc">-</span>port,</span>
+<span id="cb4-4"><a href="authentication.html#cb4-4" aria-hidden="true" tabindex="-1"></a>  <span class="at">proxyuserpwd=</span><span class="st">&quot;username:password&quot;</span>, <span class="co"># often the same as your windows login</span></span>
+<span id="cb4-5"><a href="authentication.html#cb4-5" aria-hidden="true" tabindex="-1"></a>  <span class="at">proxyauth=</span><span class="dv">8</span>) <span class="co"># ntlm - authentication</span></span></code></pre></div>
 <p><strong>ScienceDirect</strong>: Elsevier ScienceDirect requires two things: an API key
 and your institution must have access. For the API key,
 go to <a href="https://dev.elsevier.com/index.html" class="uri">https://dev.elsevier.com/index.html</a>,
@@ -324,7 +328,6 @@ used across R sessions.</p>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -343,6 +346,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -363,6 +367,10 @@ gitbook.start({
 "text": null
 },
 "download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

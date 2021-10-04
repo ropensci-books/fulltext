@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 6 Search | fulltext manual</title>
   <meta name="description" content="Chapter 6 Search | fulltext manual" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 6 Search | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,9 @@
   
 <link rel="prev" href="rate-limits.html"/>
 <link rel="next" href="abstracts.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,14 +49,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -114,6 +117,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -218,170 +222,167 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="search" class="section level1">
+<div id="search" class="section level1" number="6">
 <h1><span class="header-section-number">Chapter 6</span> Search</h1>
 <p>Search is what you’ll likely start with for a number of reasons. First, search functionality in <code>fulltext</code> means that you can start from searching on words like ‘ecology’ or ‘cellular’ - and the output of that search can be fed downstream to the next major task: fetching articles.</p>
-<div id="search-usage" class="section level2">
+<div id="search-usage" class="section level2" number="6.1">
 <h2><span class="header-section-number">6.1</span> Usage</h2>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="search.html#cb5-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="search.html#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fulltext)</span></code></pre></div>
 <p>List backends available</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="search.html#cb6-1"></a><span class="kw">ft_search_ls</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="search.html#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ft_search_ls</span>()</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;arxiv&quot;      &quot;biorxivr&quot;   &quot;bmc&quot;        &quot;crossref&quot;   &quot;entrez&quot;    
 #&gt; [6] &quot;europe_pmc&quot; &quot;ma&quot;         &quot;plos&quot;       &quot;scopus&quot;</code></pre>
 <p>Search - by default searches against PLOS (Public Library of Science)</p>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="search.html#cb8-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query =</span> <span class="st">&quot;ecology&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="search.html#cb8-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">ft_search</span>(<span class="at">query =</span> <span class="st">&quot;ecology&quot;</span>)</span></code></pre></div>
 <p>The output of <code>ft_search</code> is a <code>ft</code> S3 object, with a summary of the results:</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="search.html#cb9-1"></a>res</span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="search.html#cb9-1" aria-hidden="true" tabindex="-1"></a>res</span></code></pre></div>
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 54176; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 58840; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 10; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>and has slots for each data source:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="search.html#cb11-1"></a><span class="kw">names</span>(res)</span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="search.html#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(res)</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;plos&quot;     &quot;bmc&quot;      &quot;crossref&quot; &quot;entrez&quot;   &quot;arxiv&quot;    &quot;biorxiv&quot;  &quot;europmc&quot; 
 #&gt; [8] &quot;scopus&quot;   &quot;ma&quot;</code></pre>
 <p>Get data for a single source</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="search.html#cb13-1"></a>res<span class="op">$</span>plos</span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="search.html#cb13-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>plos</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [54176, 10] 
+#&gt; Records found, returned: [58840, 10] 
 #&gt; License: [CC-BY] 
-#&gt; # A tibble: 10 x 1
+#&gt; # A tibble: 10 × 1
 #&gt;    id                          
 #&gt;    &lt;chr&gt;                       
 #&gt;  1 10.1371/journal.pone.0001248
-#&gt;  2 10.1371/journal.pone.0059813
-#&gt;  3 10.1371/journal.pone.0080763
-#&gt;  4 10.1371/journal.pone.0220747
-#&gt;  5 10.1371/journal.pone.0155019
-#&gt;  6 10.1371/journal.pone.0175014
-#&gt;  7 10.1371/journal.pone.0150648
-#&gt;  8 10.1371/journal.pone.0208370
-#&gt;  9 10.1371/journal.pcbi.1003594
-#&gt; 10 10.1371/journal.pone.0102437</code></pre>
+#&gt;  2 10.1371/journal.pone.0248090
+#&gt;  3 10.1371/journal.pone.0059813
+#&gt;  4 10.1371/journal.pone.0080763
+#&gt;  5 10.1371/journal.pone.0246749
+#&gt;  6 10.1371/journal.pone.0254411
+#&gt;  7 10.1371/journal.pone.0220747
+#&gt;  8 10.1371/journal.pone.0155019
+#&gt;  9 10.1371/journal.pone.0175014
+#&gt; 10 10.1371/journal.pone.0241618</code></pre>
 <p>Note how in the metadata section above the data.frame of results we clearly state the license for articles for the given data source. For some data sources, licenses are the same for each paper; sometimes they vary among papers.</p>
 </div>
-<div id="search-many-sources" class="section level2">
+<div id="search-many-sources" class="section level2" number="6.2">
 <h2><span class="header-section-number">6.2</span> Search many sources</h2>
 <p>Here, search for the term “ecology” across PLOS, Crossref, and arXiv preprint server.</p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="search.html#cb15-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="kw">c</span>(<span class="st">&#39;plos&#39;</span>,<span class="st">&#39;crossref&#39;</span>,<span class="st">&#39;arxiv&#39;</span>))</span>
-<span id="cb15-2"><a href="search.html#cb15-2"></a>res</span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="search.html#cb15-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">ft_search</span>(<span class="at">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="at">from=</span><span class="fu">c</span>(<span class="st">&#39;plos&#39;</span>,<span class="st">&#39;crossref&#39;</span>,<span class="st">&#39;arxiv&#39;</span>))</span>
+<span id="cb15-2"><a href="search.html#cb15-2" aria-hidden="true" tabindex="-1"></a>res</span></code></pre></div>
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 54176; BMC: 0; Crossref: 212341; Entrez: 0; arxiv: 2288; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 58840; BMC: 0; Crossref: 229003; Entrez: 0; arxiv: 2629; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 10; BMC: 0; Crossref: 10; Entrez: 0; arxiv: 10; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>Each source may have different results AND with different columns in each data.frame</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="search.html#cb17-1"></a>res<span class="op">$</span>plos</span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="search.html#cb17-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>plos</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [54176, 10] 
+#&gt; Records found, returned: [58840, 10] 
 #&gt; License: [CC-BY] 
-#&gt; # A tibble: 10 x 1
+#&gt; # A tibble: 10 × 1
 #&gt;    id                          
 #&gt;    &lt;chr&gt;                       
 #&gt;  1 10.1371/journal.pone.0001248
-#&gt;  2 10.1371/journal.pone.0059813
-#&gt;  3 10.1371/journal.pone.0080763
-#&gt;  4 10.1371/journal.pone.0220747
-#&gt;  5 10.1371/journal.pone.0155019
-#&gt;  6 10.1371/journal.pone.0175014
-#&gt;  7 10.1371/journal.pone.0150648
-#&gt;  8 10.1371/journal.pone.0208370
-#&gt;  9 10.1371/journal.pcbi.1003594
-#&gt; 10 10.1371/journal.pone.0102437</code></pre>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="search.html#cb19-1"></a>res<span class="op">$</span>arxiv</span></code></pre></div>
+#&gt;  2 10.1371/journal.pone.0248090
+#&gt;  3 10.1371/journal.pone.0059813
+#&gt;  4 10.1371/journal.pone.0080763
+#&gt;  5 10.1371/journal.pone.0246749
+#&gt;  6 10.1371/journal.pone.0254411
+#&gt;  7 10.1371/journal.pone.0220747
+#&gt;  8 10.1371/journal.pone.0155019
+#&gt;  9 10.1371/journal.pone.0175014
+#&gt; 10 10.1371/journal.pone.0241618</code></pre>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="search.html#cb19-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>arxiv</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [2288, 10] 
+#&gt; Records found, returned: [2629, 10] 
 #&gt; License: [variable, but should be free to text-mine, see http://arxiv.org/help/license and http://arxiv.org/help/bulk_data] 
-#&gt; # A tibble: 10 x 15
-#&gt;    id    submitted updated title abstract authors affiliations link_abstract
-#&gt;    &lt;chr&gt; &lt;chr&gt;     &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;        
-#&gt;  1 hep-… 1993-03-… 1993-0… &quot;Cou… &quot;  We e… John E… &quot;&quot;           http://arxiv…
-#&gt;  2 cond… 1993-09-… 1994-0… &quot;The… &quot;  Natu… Dallas… &quot;&quot;           http://arxiv…
-#&gt;  3 chao… 1993-11-… 1993-1… &quot;Rel… &quot;  Netw… Kunihi… &quot;University… http://arxiv…
-#&gt;  4 adap… 1993-11-… 1993-1… &quot;Cha… &quot;  The … Kunihi… &quot;University… http://arxiv…
-#&gt;  5 chao… 1994-08-… 1994-0… &quot;Wea… &quot;  Popu… Shin-i… &quot;Department… http://arxiv…
-#&gt;  6 adap… 1994-12-… 1994-1… &quot;Pre… &quot;  Part… Dan As… &quot;Dept. of M… http://arxiv…
-#&gt;  7 comp… 1995-06-… 1995-0… &quot;Pre… &quot;  In p… H. P. … &quot;Institute … http://arxiv…
-#&gt;  8 math… 1995-07-… 1995-0… &quot;Nec… &quot;  This… Robert… &quot;&quot;           http://arxiv…
-#&gt;  9 cond… 1996-02-… 1996-0… &quot;Mas… &quot;  It i… Per Ba… &quot;&quot;           http://arxiv…
-#&gt; 10 cond… 1996-07-… 1998-0… &quot;Sim… &quot;  A ma… Susann… &quot;&quot;           http://arxiv…
+#&gt; # A tibble: 10 × 15
+#&gt;    id     submitted  updated  title  abstract authors affiliations link_abstract
+#&gt;    &lt;chr&gt;  &lt;chr&gt;      &lt;chr&gt;    &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt;   &lt;chr&gt;        &lt;chr&gt;        
+#&gt;  1 hep-p… 1993-03-0… 1993-03… &quot;Coul… &quot;  We e… John E… &quot;&quot;           http://arxiv…
+#&gt;  2 cond-… 1993-09-2… 1994-01… &quot;The … &quot;  Natu… Dallas… &quot;&quot;           http://arxiv…
+#&gt;  3 chao-… 1993-11-2… 1993-11… &quot;Rele… &quot;  Netw… Kunihi… &quot;University… http://arxiv…
+#&gt;  4 adap-… 1993-11-2… 1993-11… &quot;Chao… &quot;  The … Kunihi… &quot;University… http://arxiv…
+#&gt;  5 chao-… 1994-08-1… 1994-08… &quot;Weak… &quot;  Popu… Shin-i… &quot;Department… http://arxiv…
+#&gt;  6 adap-… 1994-12-2… 1994-12… &quot;Pref… &quot;  Part… Dan As… &quot;Dept. of M… http://arxiv…
+#&gt;  7 comp-… 1995-06-0… 1995-06… &quot;Pred… &quot;  In p… H. P. … &quot;Institute … http://arxiv…
+#&gt;  8 math/… 1995-07-0… 1995-07… &quot;Nece… &quot;  This… Robert… &quot;&quot;           http://arxiv…
+#&gt;  9 cond-… 1996-02-0… 1996-02… &quot;Mass… &quot;  It i… Per Ba… &quot;&quot;           http://arxiv…
+#&gt; 10 cond-… 1996-07-0… 1998-09… &quot;Simp… &quot;  A ma… Susann… &quot;&quot;           http://arxiv…
 #&gt; # … with 7 more variables: link_pdf &lt;chr&gt;, link_doi &lt;chr&gt;, comment &lt;chr&gt;,
 #&gt; #   journal_ref &lt;chr&gt;, doi &lt;chr&gt;, primary_category &lt;chr&gt;, categories &lt;chr&gt;</code></pre>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="search.html#cb21-1"></a>res<span class="op">$</span>crossref</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="search.html#cb21-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>crossref</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [212341, 10] 
+#&gt; Records found, returned: [229003, 10] 
 #&gt; License: [variable, see individual records] 
-#&gt; # A tibble: 10 x 34
-#&gt;    container.title created deposited published.print doi   indexed issn  issue
-#&gt;    &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;
-#&gt;  1 Ecology         2006-0… 2018-08-… 1957-07         10.2… 2020-0… 0012… 3    
-#&gt;  2 Ecology         2006-0… 2018-08-… 1957-10         10.2… 2020-0… 0012… 4    
-#&gt;  3 Ecology         2006-0… 2018-08-… 1966-09         10.2… 2020-0… 0012… 5    
-#&gt;  4 Ecology         2006-0… 2018-08-… 1927-10         10.2… 2020-0… 0012… 4    
-#&gt;  5 Ecology         2006-0… 2018-08-… 1942-04         10.2… 2020-0… 0012… 2    
-#&gt;  6 Ecology         2006-0… 2018-08-… 1976-11         10.2… 2020-0… 0012… 6    
-#&gt;  7 Ecology         2017-0… 2019-03-… 2017-06         10.1… 2020-0… 0012… 6    
-#&gt;  8 Ecology         2006-0… 2018-08-… 1927-04         10.2… 2020-0… 0012… 2    
-#&gt;  9 Trends in Ecol… 2002-0… 2019-04-… 1997-08         10.1… 2020-0… 0169… 8    
-#&gt; 10 Journal of Ind… 2014-1… 2017-06-… 2014-12         10.1… 2020-0… 1088… 6    
-#&gt; # … with 26 more variables: issued &lt;chr&gt;, member &lt;chr&gt;, page &lt;chr&gt;,
+#&gt; # A tibble: 10 × 32
+#&gt;    container.title  created  deposited published.print doi   indexed issn  issue
+#&gt;    &lt;chr&gt;            &lt;chr&gt;    &lt;chr&gt;     &lt;chr&gt;           &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;
+#&gt;  1 Functional Ecol… 2009-01… 2021-07-… 2009-02         10.1… 2021-0… 0269… 1    
+#&gt;  2 Ecology          2006-05… 2018-08-… 1957-10         10.2… 2021-0… 0012… 4    
+#&gt;  3 Ecology          2006-05… 2018-08-… 1957-07         10.2… 2021-0… 0012… 3    
+#&gt;  4 Journal of Indu… 2014-11… 2021-07-… 2014-12         10.1… 2021-0… 1088… 6    
+#&gt;  5 Ecology          2006-05… 2018-08-… 1942-04         10.2… 2021-0… 0012… 2    
+#&gt;  6 Ecology          2017-04… 2021-07-… 2017-06         10.1… 2021-0… 0012… 6    
+#&gt;  7 Ecology          2006-05… 2018-08-… 1966-09         10.2… 2021-0… 0012… 5    
+#&gt;  8 Ecology          2006-05… 2018-08-… 1927-10         10.2… 2021-0… 0012… 4    
+#&gt;  9 Ecology          2006-05… 2018-08-… 1976-11         10.2… 2021-0… 0012… 6    
+#&gt; 10 Ecology          2006-05… 2018-08-… 1927-04         10.2… 2021-0… 0012… 2    
+#&gt; # … with 24 more variables: issued &lt;chr&gt;, member &lt;chr&gt;, page &lt;chr&gt;,
 #&gt; #   prefix &lt;chr&gt;, publisher &lt;chr&gt;, score &lt;chr&gt;, source &lt;chr&gt;,
 #&gt; #   reference.count &lt;chr&gt;, references.count &lt;chr&gt;,
 #&gt; #   is.referenced.by.count &lt;chr&gt;, subject &lt;chr&gt;, title &lt;chr&gt;, type &lt;chr&gt;,
-#&gt; #   url &lt;chr&gt;, volume &lt;chr&gt;, short.container.title &lt;chr&gt;, author &lt;list&gt;,
-#&gt; #   link &lt;list&gt;, content_domain &lt;list&gt;, license &lt;list&gt;, archive &lt;chr&gt;,
-#&gt; #   published.online &lt;chr&gt;, language &lt;chr&gt;, alternative.id &lt;chr&gt;,
-#&gt; #   subtitle &lt;chr&gt;, reference &lt;list&gt;</code></pre>
+#&gt; #   url &lt;chr&gt;, volume &lt;chr&gt;, language &lt;chr&gt;, author &lt;list&gt;, link &lt;list&gt;,
+#&gt; #   license &lt;list&gt;, reference &lt;list&gt;, short.container.title &lt;chr&gt;,
+#&gt; #   archive &lt;chr&gt;, published.online &lt;chr&gt;, subtitle &lt;chr&gt;</code></pre>
 <p>Note above how licenses for PLOS are all CC-BY, whereas licenses in arXiv and Crossref are variable. For arXiv we don’t get any license information in the results. But for Crossref we do get license information. Let’s get license information for the first article:</p>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="search.html#cb23-1"></a>res<span class="op">$</span>crossref<span class="op">$</span>data<span class="op">$</span>license[[<span class="dv">1</span>]]</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 1 x 4
-#&gt;   date       URL                                   delay.in.days content.version
-#&gt;   &lt;chr&gt;      &lt;chr&gt;                                         &lt;int&gt; &lt;chr&gt;          
-#&gt; 1 2015-09-01 http://doi.wiley.com/10.1002/tdm_lic…         21246 tdm</code></pre>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="search.html#cb23-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>crossref<span class="sc">$</span>data<span class="sc">$</span>license[[<span class="dv">1</span>]]</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 1 × 4
+#&gt;   date       content.version delay.in.days URL                                  
+#&gt;   &lt;chr&gt;      &lt;chr&gt;                   &lt;int&gt; &lt;chr&gt;                                
+#&gt; 1 2015-09-01 tdm                      2403 http://doi.wiley.com/10.1002/tdm_lic…</code></pre>
 <p>It shows a license specific to Wiley, and gives the URL so you can look it up.</p>
 </div>
-<div id="search-options" class="section level2">
+<div id="search-options" class="section level2" number="6.3">
 <h2><span class="header-section-number">6.3</span> Search options</h2>
 <p>Each of the data sources in <code>ft_search</code> can accept additional configuration. See the <code>?ft_search</code> docs for details. Each data source has a parameter in <code>ft_search</code>, e.g, <code>europmc</code> data source can be configured with the <code>euroopts</code> parameter. Each of the <code>*opts</code> parameters expects a named list.</p>
 <p>Here, we search the phrase “ecology” at Europe PMC.</p>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="search.html#cb25-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;europmc&#39;</span>)</span>
-<span id="cb25-2"><a href="search.html#cb25-2"></a>res<span class="op">$</span>europmc</span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="search.html#cb25-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">ft_search</span>(<span class="at">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="at">from=</span><span class="st">&#39;europmc&#39;</span>)</span>
+<span id="cb25-2"><a href="search.html#cb25-2" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>europmc</span></code></pre></div>
 <pre><code>#&gt; Query: [ecology] 
-#&gt; Records found, returned: [389570, 25] 
+#&gt; Records found, returned: [425357, 10] 
 #&gt;  
-#&gt; # A tibble: 25 x 28
-#&gt;    id    source pmid  doi   title authorString journalTitle journalVolume
-#&gt;    &lt;chr&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        
-#&gt;  1 3303… MED    3303… 10.1… &quot;Eff… Chen L, Bao… J Environ M… 277          
-#&gt;  2 3219… MED    3219… 10.1… &quot;Rac… Aby MJ.      Adm Policy … 47           
-#&gt;  3 3271… MED    3271… 10.1… &quot;Hid… Miriti MN, … Nat Ecol Ev… 4            
-#&gt;  4 3299… MED    3299… 10.1… &quot;Evo… O&#39;Keeffe KR… Infect Gene… &lt;NA&gt;         
-#&gt;  5 3271… MED    3271… 10.1… &quot;Rec… Schell CJ, … Nat Ecol Ev… 4            
-#&gt;  6 3273… MED    3273… 10.1… &quot;Aut… Heidrich L,… Nat Ecol Ev… 4            
-#&gt;  7 3299… MED    3299… 10.1… &quot;\&quot;O… Jax K.       Hist Philos… 42           
-#&gt;  8 3298… MED    3298… 10.1… &quot;Uni… Albery GF, … J Anim Ecol  &lt;NA&gt;         
-#&gt;  9 3304… MED    3304… 10.1… &quot;Mov… Carleton KL… Mol Ecol     &lt;NA&gt;         
-#&gt; 10 3304… MED    3304… 10.1… &quot;Imp… Zhang J, Fu… Nat Ecol Ev… &lt;NA&gt;         
-#&gt; # … with 15 more rows, and 21 more variables: pubYear &lt;chr&gt;, journalIssn &lt;chr&gt;,
-#&gt; #   pageInfo &lt;chr&gt;, pubType &lt;chr&gt;, isOpenAccess &lt;chr&gt;, inEPMC &lt;chr&gt;,
-#&gt; #   inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;, hasBook &lt;chr&gt;, hasSuppl &lt;chr&gt;,
-#&gt; #   citedByCount &lt;int&gt;, hasReferences &lt;chr&gt;, hasTextMinedTerms &lt;chr&gt;,
-#&gt; #   hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,
+#&gt; # A tibble: 10 × 27
+#&gt;    id           source pmid     doi   title authorString journalTitle journalVolume
+#&gt;    &lt;chr&gt;        &lt;chr&gt;  &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;        &lt;chr&gt;        &lt;chr&gt;        
+#&gt;  1 34563792     MED    34563792 10.1… &quot;Fre… Yin B, Li J… J Plant Phy… 266          
+#&gt;  2 34593996     MED    34593996 10.1… &quot;Mic… Mason-Jones… ISME J       &lt;NA&gt;         
+#&gt;  3 34579579     MED    34579579 10.1… &quot;Mic… Frederickso… mBio         &lt;NA&gt;         
+#&gt;  4 34583083     MED    34583083 10.1… &quot;Cor… Yin X, Zhan… Sci Total E… 806          
+#&gt;  5 34597569     MED    34597569 10.1… &quot;New… Stockmann M… Sci Total E… &lt;NA&gt;         
+#&gt;  6 34129698     MED    34129698 10.1… &quot;Low… Kreider MR,… Ecology      102          
+#&gt;  7 34498255     MED    34498255 10.1… &quot;Err… &lt;NA&gt;         Ecology      102          
+#&gt;  8 34600006     MED    34600006 10.1… &quot;Eff… Deng J, Zho… Chemosphere  &lt;NA&gt;         
+#&gt;  9 34523534     MED    34523534 10.1… &quot;Bis… Zhou Y, Guo… Environ Pol… 290          
+#&gt; 10 IND607357494 AGR    &lt;NA&gt;     10.1… &quot;Soi… Vieira AF, … Appl Soil E… 167          
+#&gt; # … with 19 more variables: pubYear &lt;chr&gt;, journalIssn &lt;chr&gt;, pageInfo &lt;chr&gt;,
+#&gt; #   pubType &lt;chr&gt;, isOpenAccess &lt;chr&gt;, inEPMC &lt;chr&gt;, inPMC &lt;chr&gt;, hasPDF &lt;chr&gt;,
+#&gt; #   hasBook &lt;chr&gt;, hasSuppl &lt;chr&gt;, citedByCount &lt;int&gt;, hasReferences &lt;chr&gt;,
+#&gt; #   hasTextMinedTerms &lt;chr&gt;, hasDbCrossReferences &lt;chr&gt;, hasLabsLinks &lt;chr&gt;,
 #&gt; #   hasTMAccessionNumbers &lt;chr&gt;, firstIndexDate &lt;chr&gt;,
-#&gt; #   firstPublicationDate &lt;chr&gt;, issue &lt;chr&gt;,
-#&gt; #   bookOrReportDetails$publisher &lt;chr&gt;, $yearOfPublication &lt;int&gt;</code></pre>
+#&gt; #   firstPublicationDate &lt;chr&gt;, issue &lt;chr&gt;</code></pre>
 <p>Then get the next batch of results, using the <code>cursorMark</code> result</p>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="search.html#cb27-1"></a><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;europmc&#39;</span>, </span>
-<span id="cb27-2"><a href="search.html#cb27-2"></a>  <span class="dt">euroopts =</span> <span class="kw">list</span>(<span class="dt">cursorMark =</span> res<span class="op">$</span>europmc<span class="op">$</span>cursorMark))</span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="search.html#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ft_search</span>(<span class="at">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="at">from=</span><span class="st">&#39;europmc&#39;</span>, </span>
+<span id="cb27-2"><a href="search.html#cb27-2" aria-hidden="true" tabindex="-1"></a>  <span class="at">euroopts =</span> <span class="fu">list</span>(<span class="at">cursorMark =</span> res<span class="sc">$</span>europmc<span class="sc">$</span>cursorMark))</span></code></pre></div>
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 389570; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 425357; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
-#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 25; Scopus: 0; Microsoft: 0]</code></pre>
+#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 0; arxiv: 0; biorxiv: 0; Europe PMC: 10; Scopus: 0; Microsoft: 0]</code></pre>
 
 </div>
 </div>
@@ -395,7 +396,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -414,6 +414,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -434,6 +435,10 @@ gitbook.start({
 "text": null
 },
 "download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 8 Links | fulltext manual</title>
   <meta name="description" content="Chapter 8 Links | fulltext manual" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 8 Links | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,9 @@
   
 <link rel="prev" href="abstracts.html"/>
 <link rel="next" href="fetch.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,14 +49,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -114,6 +117,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -218,25 +222,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="links" class="section level1">
+<div id="links" class="section level1" number="8">
 <h1><span class="header-section-number">Chapter 8</span> Links</h1>
 <p>The <code>ft_links</code> function makes it easy to get URLs for full text versions of articles. You can for instance only use <code>fulltext</code> to pass DOIs directly to <code>ft_links</code> to get URLs to use elsewhere in your research workflow. Or you may want to search first with <code>ft_search</code>, then pass that output directly to <code>ft_links</code>.</p>
-<div id="links-usage" class="section level2">
+<div id="links-usage" class="section level2" number="8.1">
 <h2><span class="header-section-number">8.1</span> Usage</h2>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="links.html#cb41-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb41-1"><a href="links.html#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fulltext)</span></code></pre></div>
 <p>List backends available</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="links.html#cb42-1"></a><span class="kw">ft_links_ls</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="links.html#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ft_links_ls</span>()</span></code></pre></div>
 <pre><code>#&gt;  [1] &quot;bmc&quot;         &quot;cdc&quot;         &quot;cogent&quot;      &quot;copernicus&quot;  &quot;crossref&quot;   
 #&gt;  [6] &quot;elife&quot;       &quot;entrez&quot;      &quot;frontiersin&quot; &quot;peerj&quot;       &quot;plos&quot;       
 #&gt; [11] &quot;rsoc&quot;</code></pre>
 <p>You can pass DOIs directly to <code>ft_links</code></p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="links.html#cb44-1"></a>res &lt;-<span class="st"> </span><span class="kw">ft_links</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>)</span>
-<span id="cb44-2"><a href="links.html#cb44-2"></a>res</span></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="links.html#cb44-1" aria-hidden="true" tabindex="-1"></a>res <span class="ot">&lt;-</span> <span class="fu">ft_links</span>(<span class="st">&#39;10.3389/fphar.2014.00109&#39;</span>)</span>
+<span id="cb44-2"><a href="links.html#cb44-2" aria-hidden="true" tabindex="-1"></a>res</span></code></pre></div>
 <pre><code>#&gt; &lt;fulltext links&gt;
 #&gt; [Found] 1 
 #&gt; [IDs] 10.3389/fphar.2014.00109 ...</code></pre>
 <p>The output is an S3 object, essentially a list. If you don’t specify a <code>from</code> value, we try to guess the publisher and the named list in the output will match the publisher of the DOI. Here, that’s Frontiers In, lowercased and as one word:</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="links.html#cb46-1"></a>res<span class="op">$</span>frontiersin</span></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb46-1"><a href="links.html#cb46-1" aria-hidden="true" tabindex="-1"></a>res<span class="sc">$</span>frontiersin</span></code></pre></div>
 <pre><code>#&gt; $found
 #&gt; [1] 1
 #&gt; 
@@ -252,26 +256,25 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; [1] &quot;http://journal.frontiersin.org/article/10.3389/fphar.2014.00109/pdf&quot;</code></pre>
 <p>The output is a named list with number of links found, the id (aka DOI), and in the <code>$data</code> slot is the links, which can include links for pdf, xml, plain (for plain text), unspecified and possibly others (publishers do lots of weird things).</p>
 <p>Instead of passing DOIs directly, you can use <code>ft_search(()</code> to search first:</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="links.html#cb48-1"></a>(res1 &lt;-<span class="st"> </span><span class="kw">ft_search</span>(<span class="dt">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="dt">from=</span><span class="st">&#39;entrez&#39;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="links.html#cb48-1" aria-hidden="true" tabindex="-1"></a>(res1 <span class="ot">&lt;-</span> <span class="fu">ft_search</span>(<span class="at">query=</span><span class="st">&#39;ecology&#39;</span>, <span class="at">from=</span><span class="st">&#39;entrez&#39;</span>))</span></code></pre></div>
 <pre><code>#&gt; Query:
 #&gt;   [ecology] 
 #&gt; Found:
-#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 212097; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
+#&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 248883; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0] 
 #&gt; Returned:
 #&gt;   [PLoS: 0; BMC: 0; Crossref: 0; Entrez: 10; arxiv: 0; biorxiv: 0; Europe PMC: 0; Scopus: 0; Microsoft: 0]</code></pre>
 <p>Then pass the output of that directly to <code>ft_links</code></p>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="links.html#cb50-1"></a>(out &lt;-<span class="st"> </span><span class="kw">ft_links</span>(res1))</span></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="links.html#cb50-1" aria-hidden="true" tabindex="-1"></a>(out <span class="ot">&lt;-</span> <span class="fu">ft_links</span>(res1))</span></code></pre></div>
 <pre><code>#&gt; &lt;fulltext links&gt;
-#&gt; [Found] 10 
-#&gt; [IDs] ID_33047066 ID_33047065 ID_33047058 ID_33047038 ID_33047024 ID_33047023
-#&gt;      ID_33047015 ID_33047010 ID_32900317 ID_32873208 ...</code></pre>
+#&gt; [Found] 5 
+#&gt; [IDs] ID_34597326 ID_34597314 ID_34597310 ID_34529679 ID_32360945 ...</code></pre>
 <p>Here, the output name on the list matches the source passed in to <code>ft_links</code> from <code>ft_search</code>.</p>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="links.html#cb52-1"></a><span class="kw">names</span>(out)</span></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb52-1"><a href="links.html#cb52-1" aria-hidden="true" tabindex="-1"></a><span class="fu">names</span>(out)</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;entrez&quot;</code></pre>
 <p>You can alternatively pass in DOIs directly and specify the data source. Options include “plos”, “bmc”, “crossref”, and “entrez”.</p>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="links.html#cb54-1"></a>x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;10.1371/journal.pone.0017342&quot;</span>, <span class="st">&quot;10.1371/journal.pone.0091497&quot;</span>)</span>
-<span id="cb54-2"><a href="links.html#cb54-2"></a>z &lt;-<span class="st"> </span><span class="kw">ft_links</span>(x, <span class="dt">from =</span> <span class="st">&quot;plos&quot;</span>)</span>
-<span id="cb54-3"><a href="links.html#cb54-3"></a>z<span class="op">$</span>plos<span class="op">$</span>data</span></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="links.html#cb54-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="st">&quot;10.1371/journal.pone.0017342&quot;</span>, <span class="st">&quot;10.1371/journal.pone.0091497&quot;</span>)</span>
+<span id="cb54-2"><a href="links.html#cb54-2" aria-hidden="true" tabindex="-1"></a>z <span class="ot">&lt;-</span> <span class="fu">ft_links</span>(x, <span class="at">from =</span> <span class="st">&quot;plos&quot;</span>)</span>
+<span id="cb54-3"><a href="links.html#cb54-3" aria-hidden="true" tabindex="-1"></a>z<span class="sc">$</span>plos<span class="sc">$</span>data</span></code></pre></div>
 <pre><code>#&gt; $`10.1371/journal.pone.0017342`
 #&gt; $`10.1371/journal.pone.0017342`$xml
 #&gt; [1] &quot;http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0017342&amp;type=manuscript&quot;
@@ -287,11 +290,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 #&gt; $`10.1371/journal.pone.0091497`$pdf
 #&gt; [1] &quot;http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0091497&amp;type=printable&quot;</code></pre>
 <p>Fetch just the pdf links</p>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="links.html#cb56-1"></a><span class="kw">unname</span>(<span class="kw">vapply</span>(z<span class="op">$</span>plos<span class="op">$</span>data, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;pdf&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb56-1"><a href="links.html#cb56-1" aria-hidden="true" tabindex="-1"></a><span class="fu">unname</span>(<span class="fu">vapply</span>(z<span class="sc">$</span>plos<span class="sc">$</span>data, <span class="st">&quot;[[&quot;</span>, <span class="st">&quot;&quot;</span>, <span class="st">&quot;pdf&quot;</span>))</span></code></pre></div>
 <pre><code>#&gt; [1] &quot;http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0017342&amp;type=printable&quot;
 #&gt; [2] &quot;http://journals.plos.org/plosone/article/file?id=10.1371/journal.pone.0091497&amp;type=printable&quot;</code></pre>
 </div>
-<div id="links-options" class="section level2">
+<div id="links-options" class="section level2" number="8.2">
 <h2><span class="header-section-number">8.2</span> Links options</h2>
 <p>All data sources for <code>ft_links()</code> SHOULD accept configuration options BUT that does not work right now. Fix coming, see <a href="https://github.com/ropensci/fulltext/issues/223" class="uri">https://github.com/ropensci/fulltext/issues/223</a></p>
 <p>As all functions in <code>fulltext</code>, you can pass on curl options to each function call or set them globally for the session, see the <a href="curl-options.html#curl-options">curl options chapter</a>.</p>
@@ -308,7 +311,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -327,6 +329,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -347,6 +350,10 @@ gitbook.start({
 "text": null
 },
 "download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

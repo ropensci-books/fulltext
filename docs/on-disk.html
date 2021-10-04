@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 11 Summarize articles on disk | fulltext manual</title>
   <meta name="description" content="Chapter 11 Summarize articles on disk | fulltext manual" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 11 Summarize articles on disk | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,9 @@
   
 <link rel="prev" href="chunks.html"/>
 <link rel="next" href="curl-options.html"/>
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,14 +49,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -114,6 +117,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -218,60 +222,60 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="on-disk" class="section level1">
+<div id="on-disk" class="section level1" number="11">
 <h1><span class="header-section-number">Chapter 11</span> Summarize articles on disk</h1>
 <p>The <code>ft_table()</code> function makes it easy to create a data.frame of the text of PDF, plain text, and XML files, together with DOIs/IDs for each article. It’s similar to the <code>readtext::readtext()</code> function, but is much more specific to just this package.</p>
 <p>With the output of <code>ft_table()</code> you can go directly into a text-mining package like <code>quanteda</code>.</p>
-<div id="ft_table-usage" class="section level2">
+<div id="ft_table-usage" class="section level2" number="11.1">
 <h2><span class="header-section-number">11.1</span> Usage</h2>
-<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="on-disk.html#cb94-1"></a><span class="kw">library</span>(fulltext)</span></code></pre></div>
+<div class="sourceCode" id="cb94"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb94-1"><a href="on-disk.html#cb94-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(fulltext)</span></code></pre></div>
 <p>Use <code>ft_table()</code> to pull out text from all articles.</p>
-<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="on-disk.html#cb95-1"></a><span class="kw">ft_table</span>()</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 9 x 4
-#&gt;   dois         ids_norm       text                      paths                   
-#&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                     &lt;chr&gt;                   
-#&gt; 1 10.1371/jou… 10_1371_journ… &quot;plospcbiplcbPLoS Comput… /Users/sckott/Library/C…
-#&gt; 2 10.1371/jou… 10_1371_journ… &quot;plospcbiplcbPLoS Comput… /Users/sckott/Library/C…
-#&gt; 3 10.1371/jou… 10_1371_journ… &quot;plospcbiplcbPLoS Comput… /Users/sckott/Library/C…
-#&gt; 4 10.1371/jou… 10_1371_journ… &quot;plospcbiplcbPLoS Comput… /Users/sckott/Library/C…
-#&gt; 5 10.1371/jou… 10_1371_journ… &quot;pcbiplcbPLoS Comput Bio… /Users/sckott/Library/C…
-#&gt; 6 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
-#&gt; 7 10.3389/fea… 10_3389_feart… &quot;Front. Earth Sci.Fronti… /Users/sckott/Library/C…
-#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;Front. Pharmacol.Fronti… /Users/sckott/Library/C…
-#&gt; 9 10.7717/pee… 10_7717_peerj… &quot;PeerJPeerJPeerJPeerJ216… /Users/sckott/Library/C…</code></pre>
+<div class="sourceCode" id="cb95"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb95-1"><a href="on-disk.html#cb95-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ft_table</span>()</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 9 × 4
+#&gt;   dois                         ids_norm                     text       paths    
+#&gt;   &lt;chr&gt;                        &lt;chr&gt;                        &lt;chr&gt;      &lt;chr&gt;    
+#&gt; 1 10.1371/journal.pbio.1000153 10_1371_journal_pbio_1000153 &quot;plosPLoS… /Users/s…
+#&gt; 2 10.1371/journal.pbio.1000159 10_1371_journal_pbio_1000159 &quot;plosPLoS… /Users/s…
+#&gt; 3 10.1371/journal.pbio.1000167 10_1371_journal_pbio_1000167 &quot;plosPLoS… /Users/s…
+#&gt; 4 10.1371/journal.pbio.1000173 10_1371_journal_pbio_1000173 &quot;plosPLoS… /Users/s…
+#&gt; 5 10.1371/journal.pbio.1000176 10_1371_journal_pbio_1000176 &quot;plosPLoS… /Users/s…
+#&gt; 6 10.1371/journal.pone.0086169 10_1371_journal_pone_0086169 &quot;PLoS ONE… /Users/s…
+#&gt; 7 10.3389/feart.2015.00009     10_3389_feart_2015_00009     &quot;Front. E… /Users/s…
+#&gt; 8 10.3389/fphar.2014.00109     10_3389_fphar_2014_00109     &quot;Front. P… /Users/s…
+#&gt; 9 3399982                      3399982                      &quot;03727252… /Users/s…</code></pre>
 <p>You can pull out just text from XML files</p>
-<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="on-disk.html#cb97-1"></a><span class="kw">ft_table</span>(<span class="dt">type =</span> <span class="st">&quot;xml&quot;</span>)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 9 x 4
-#&gt;   dois         ids_norm       text                      paths                   
-#&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                     &lt;chr&gt;                   
-#&gt; 1 10.1371/jou… 10_1371_journ… &quot;plospcbiplcbPLoS Comput… /Users/sckott/Library/C…
-#&gt; 2 10.1371/jou… 10_1371_journ… &quot;plospcbiplcbPLoS Comput… /Users/sckott/Library/C…
-#&gt; 3 10.1371/jou… 10_1371_journ… &quot;plospcbiplcbPLoS Comput… /Users/sckott/Library/C…
-#&gt; 4 10.1371/jou… 10_1371_journ… &quot;plospcbiplcbPLoS Comput… /Users/sckott/Library/C…
-#&gt; 5 10.1371/jou… 10_1371_journ… &quot;pcbiplcbPLoS Comput Bio… /Users/sckott/Library/C…
-#&gt; 6 10.1371/jou… 10_1371_journ… &quot;PLoS ONEplosplosonePLoS… /Users/sckott/Library/C…
-#&gt; 7 10.3389/fea… 10_3389_feart… &quot;Front. Earth Sci.Fronti… /Users/sckott/Library/C…
-#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;Front. Pharmacol.Fronti… /Users/sckott/Library/C…
-#&gt; 9 10.7717/pee… 10_7717_peerj… &quot;PeerJPeerJPeerJPeerJ216… /Users/sckott/Library/C…</code></pre>
+<div class="sourceCode" id="cb97"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb97-1"><a href="on-disk.html#cb97-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ft_table</span>(<span class="at">type =</span> <span class="st">&quot;xml&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 9 × 4
+#&gt;   dois                         ids_norm                     text       paths    
+#&gt;   &lt;chr&gt;                        &lt;chr&gt;                        &lt;chr&gt;      &lt;chr&gt;    
+#&gt; 1 10.1371/journal.pbio.1000153 10_1371_journal_pbio_1000153 &quot;plosPLoS… /Users/s…
+#&gt; 2 10.1371/journal.pbio.1000159 10_1371_journal_pbio_1000159 &quot;plosPLoS… /Users/s…
+#&gt; 3 10.1371/journal.pbio.1000167 10_1371_journal_pbio_1000167 &quot;plosPLoS… /Users/s…
+#&gt; 4 10.1371/journal.pbio.1000173 10_1371_journal_pbio_1000173 &quot;plosPLoS… /Users/s…
+#&gt; 5 10.1371/journal.pbio.1000176 10_1371_journal_pbio_1000176 &quot;plosPLoS… /Users/s…
+#&gt; 6 10.1371/journal.pone.0086169 10_1371_journal_pone_0086169 &quot;PLoS ONE… /Users/s…
+#&gt; 7 10.3389/feart.2015.00009     10_3389_feart_2015_00009     &quot;Front. E… /Users/s…
+#&gt; 8 10.3389/fphar.2014.00109     10_3389_fphar_2014_00109     &quot;Front. P… /Users/s…
+#&gt; 9 3399982                      3399982                      &quot;03727252… /Users/s…</code></pre>
 <p>You can pull out just text from PDF files</p>
-<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="on-disk.html#cb99-1"></a><span class="kw">ft_table</span>(<span class="dt">type =</span> <span class="st">&quot;pdf&quot;</span>)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 0 x 3
+<div class="sourceCode" id="cb99"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb99-1"><a href="on-disk.html#cb99-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ft_table</span>(<span class="at">type =</span> <span class="st">&quot;pdf&quot;</span>)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 0 × 3
 #&gt; # … with 3 variables: ids_norm &lt;chr&gt;, text &lt;chr&gt;, paths &lt;chr&gt;</code></pre>
 <p>You can pull out XML but not extract the text. So you’ll get XML strings
 that you can parse yourself with xpath/css selectors/etc.</p>
-<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="on-disk.html#cb101-1"></a><span class="kw">ft_table</span>(<span class="dt">xml_extract_text =</span> <span class="ot">FALSE</span>)</span></code></pre></div>
-<pre><code>#&gt; # A tibble: 9 x 4
-#&gt;   dois         ids_norm       text                      paths                   
-#&gt;   &lt;chr&gt;        &lt;chr&gt;          &lt;chr&gt;                     &lt;chr&gt;                   
-#&gt; 1 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
-#&gt; 2 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
-#&gt; 3 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
-#&gt; 4 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
-#&gt; 5 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
-#&gt; 6 10.1371/jou… 10_1371_journ… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
-#&gt; 7 10.3389/fea… 10_3389_feart… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
-#&gt; 8 10.3389/fph… 10_3389_fphar… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…
-#&gt; 9 10.7717/pee… 10_7717_peerj… &quot;&lt;?xml version=\&quot;1.0\&quot; e… /Users/sckott/Library/C…</code></pre>
+<div class="sourceCode" id="cb101"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb101-1"><a href="on-disk.html#cb101-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ft_table</span>(<span class="at">xml_extract_text =</span> <span class="cn">FALSE</span>)</span></code></pre></div>
+<pre><code>#&gt; # A tibble: 9 × 4
+#&gt;   dois                         ids_norm                     text       paths    
+#&gt;   &lt;chr&gt;                        &lt;chr&gt;                        &lt;chr&gt;      &lt;chr&gt;    
+#&gt; 1 10.1371/journal.pbio.1000153 10_1371_journal_pbio_1000153 &quot;&lt;?xml ve… /Users/s…
+#&gt; 2 10.1371/journal.pbio.1000159 10_1371_journal_pbio_1000159 &quot;&lt;?xml ve… /Users/s…
+#&gt; 3 10.1371/journal.pbio.1000167 10_1371_journal_pbio_1000167 &quot;&lt;?xml ve… /Users/s…
+#&gt; 4 10.1371/journal.pbio.1000173 10_1371_journal_pbio_1000173 &quot;&lt;?xml ve… /Users/s…
+#&gt; 5 10.1371/journal.pbio.1000176 10_1371_journal_pbio_1000176 &quot;&lt;?xml ve… /Users/s…
+#&gt; 6 10.1371/journal.pone.0086169 10_1371_journal_pone_0086169 &quot;&lt;?xml ve… /Users/s…
+#&gt; 7 10.3389/feart.2015.00009     10_3389_feart_2015_00009     &quot;&lt;?xml ve… /Users/s…
+#&gt; 8 10.3389/fphar.2014.00109     10_3389_fphar_2014_00109     &quot;&lt;?xml ve… /Users/s…
+#&gt; 9 3399982                      3399982                      &quot;&lt;?xml ve… /Users/s…</code></pre>
 
 </div>
 </div>
@@ -285,7 +289,6 @@ that you can parse yourself with xpath/css selectors/etc.</p>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -304,6 +307,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -324,6 +328,10 @@ gitbook.start({
 "text": null
 },
 "download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }

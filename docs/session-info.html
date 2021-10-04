@@ -6,7 +6,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <title>Chapter 14 session info | fulltext manual</title>
   <meta name="description" content="Chapter 14 session info | fulltext manual" />
-  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
   <meta property="og:title" content="Chapter 14 session info | fulltext manual" />
   <meta property="og:type" content="book" />
@@ -31,7 +31,9 @@
   
 <link rel="prev" href="use-cases.html"/>
 
-<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<script src="libs/header-attrs-2.10/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
@@ -47,14 +49,15 @@
 
 
 
-
-<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
 
 
 <style type="text/css">
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
 code.sourceCode > span { color: inherit; text-decoration: inherit; }
 pre.sourceCode { margin: 0; }
 @media screen {
@@ -114,6 +117,7 @@ code span.va { color: #19177c; } /* Variable */
 code span.vs { color: #4070a0; } /* VerbatimString */
 code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
 </style>
+
 
 <link rel="stylesheet" href="style.css" type="text/css" />
 </head>
@@ -218,107 +222,104 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="session-info" class="section level1">
+<div id="session-info" class="section level1" number="14">
 <h1><span class="header-section-number">Chapter 14</span> session info</h1>
 <p>Session info for this book</p>
-<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="session-info.html#cb103-1"></a>sessioninfo<span class="op">::</span><span class="kw">session_info</span>()</span></code></pre></div>
+<div class="sourceCode" id="cb103"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb103-1"><a href="session-info.html#cb103-1" aria-hidden="true" tabindex="-1"></a>sessioninfo<span class="sc">::</span><span class="fu">session_info</span>()</span></code></pre></div>
 <pre><code>#&gt; ─ Session info ───────────────────────────────────────────────────────────────
 #&gt;  setting  value                       
-#&gt;  version  R version 4.0.3 (2020-10-10)
-#&gt;  os       macOS Catalina 10.15.7      
-#&gt;  system   x86_64, darwin17.0          
-#&gt;  ui       X11                         
+#&gt;  version  R version 4.1.1 (2021-08-10)
+#&gt;  os       macOS Big Sur 11.6          
+#&gt;  system   aarch64, darwin20.5.0       
+#&gt;  ui       unknown                     
 #&gt;  language (EN)                        
 #&gt;  collate  en_US.UTF-8                 
 #&gt;  ctype    en_US.UTF-8                 
-#&gt;  tz       US/Pacific                  
-#&gt;  date     2020-10-16                  
+#&gt;  tz       America/Los_Angeles         
+#&gt;  date     2021-10-04                  
 #&gt; 
 #&gt; ─ Packages ───────────────────────────────────────────────────────────────────
-#&gt;  package     * version    date       lib source                       
-#&gt;  aRxiv         0.5.19     2019-08-08 [1] CRAN (R 4.0.0)               
-#&gt;  assertthat    0.2.1      2019-03-21 [1] CRAN (R 4.0.0)               
-#&gt;  bookdown      0.21       2020-10-13 [1] CRAN (R 4.0.3)               
-#&gt;  cli           2.1.0      2020-10-12 [1] CRAN (R 4.0.3)               
-#&gt;  colorspace    1.4-1      2019-03-18 [1] CRAN (R 4.0.0)               
-#&gt;  crayon        1.3.4.9000 2020-09-02 [1] Github (r-lib/crayon@6b3f0c6)
-#&gt;  crul          1.0.0      2020-10-01 [1] local                        
-#&gt;  curl          4.3        2019-12-02 [1] CRAN (R 4.0.2)               
-#&gt;  data.table  * 1.13.0     2020-07-24 [1] CRAN (R 4.0.2)               
-#&gt;  digest        0.6.25     2020-02-23 [1] CRAN (R 4.0.0)               
-#&gt;  dplyr         1.0.2      2020-08-18 [1] CRAN (R 4.0.2)               
-#&gt;  DT            0.16       2020-10-13 [1] CRAN (R 4.0.3)               
-#&gt;  ellipsis      0.3.1      2020-05-15 [1] CRAN (R 4.0.0)               
-#&gt;  evaluate      0.14       2019-05-28 [1] CRAN (R 4.0.0)               
-#&gt;  fansi         0.4.1      2020-01-08 [1] CRAN (R 4.0.0)               
-#&gt;  fastmap       1.0.1      2019-10-08 [1] CRAN (R 4.0.0)               
-#&gt;  fulltext    * 1.6.0      2020-10-16 [1] local                        
-#&gt;  generics      0.0.2      2018-11-29 [1] CRAN (R 4.0.0)               
-#&gt;  ggplot2       3.3.2      2020-06-19 [1] CRAN (R 4.0.2)               
-#&gt;  glue          1.4.2      2020-08-27 [1] CRAN (R 4.0.2)               
-#&gt;  gtable        0.3.0      2019-03-25 [1] CRAN (R 4.0.0)               
-#&gt;  hoardr        0.5.2      2018-12-02 [1] CRAN (R 4.0.0)               
-#&gt;  htmltools     0.5.0      2020-06-16 [1] CRAN (R 4.0.2)               
-#&gt;  htmlwidgets   1.5.2      2020-10-03 [1] CRAN (R 4.0.2)               
-#&gt;  httpcode      0.3.0      2020-04-10 [1] CRAN (R 4.0.0)               
-#&gt;  httpuv        1.5.4      2020-06-06 [1] CRAN (R 4.0.0)               
-#&gt;  httr          1.4.2      2020-07-20 [1] CRAN (R 4.0.2)               
-#&gt;  jsonlite      1.7.1      2020-09-07 [1] CRAN (R 4.0.2)               
-#&gt;  knitr         1.30       2020-09-22 [1] CRAN (R 4.0.2)               
-#&gt;  later         1.1.0.1    2020-06-05 [1] CRAN (R 4.0.0)               
-#&gt;  lifecycle     0.2.0      2020-03-06 [1] CRAN (R 4.0.0)               
-#&gt;  lubridate     1.7.9      2020-06-08 [1] CRAN (R 4.0.1)               
-#&gt;  magrittr      1.5        2014-11-22 [1] CRAN (R 4.0.0)               
-#&gt;  microdemic    0.5.0.91   2020-09-17 [1] local                        
-#&gt;  mime          0.9        2020-02-04 [1] CRAN (R 4.0.0)               
-#&gt;  miniUI        0.1.1.1    2018-05-18 [1] CRAN (R 4.0.0)               
-#&gt;  munsell       0.5.0      2018-06-12 [1] CRAN (R 4.0.0)               
-#&gt;  pillar        1.4.6      2020-07-10 [1] CRAN (R 4.0.2)               
-#&gt;  pkgconfig     2.0.3      2019-09-22 [1] CRAN (R 4.0.0)               
-#&gt;  plyr          1.8.6      2020-03-03 [1] CRAN (R 4.0.0)               
-#&gt;  promises      1.1.1      2020-06-09 [1] CRAN (R 4.0.0)               
-#&gt;  pubchunks   * 0.3.0      2020-09-04 [1] local                        
-#&gt;  purrr         0.3.4      2020-04-17 [1] CRAN (R 4.0.0)               
-#&gt;  R6            2.4.1      2019-11-12 [1] CRAN (R 4.0.0)               
-#&gt;  rappdirs      0.3.1      2016-03-28 [1] CRAN (R 4.0.0)               
-#&gt;  Rcpp          1.0.5      2020-07-06 [1] CRAN (R 4.0.0)               
-#&gt;  rcrossref     1.1.0      2020-10-10 [1] local                        
-#&gt;  rentrez       1.2.2      2019-05-02 [1] CRAN (R 4.0.2)               
-#&gt;  reshape2      1.4.4      2020-04-09 [1] CRAN (R 4.0.0)               
-#&gt;  rlang         0.4.8      2020-10-08 [1] CRAN (R 4.0.2)               
-#&gt;  rmarkdown     2.4        2020-09-30 [1] CRAN (R 4.0.2)               
-#&gt;  rplos       * 0.9.0.91   2020-10-07 [1] local                        
-#&gt;  rstudioapi    0.11       2020-02-07 [1] CRAN (R 4.0.0)               
-#&gt;  scales        1.1.1      2020-05-11 [1] CRAN (R 4.0.0)               
-#&gt;  sessioninfo   1.1.1      2018-11-05 [1] CRAN (R 4.0.0)               
-#&gt;  shiny         1.5.0      2020-06-23 [1] CRAN (R 4.0.2)               
-#&gt;  solrium       1.1.4      2019-11-02 [1] CRAN (R 4.0.0)               
-#&gt;  storr         1.2.4      2020-10-12 [1] CRAN (R 4.0.3)               
-#&gt;  stringi       1.5.3      2020-09-09 [1] CRAN (R 4.0.2)               
-#&gt;  stringr       1.4.0      2019-02-10 [1] CRAN (R 4.0.0)               
-#&gt;  tibble        3.0.4      2020-10-12 [1] CRAN (R 4.0.3)               
-#&gt;  tidyselect    1.1.0      2020-05-11 [1] CRAN (R 4.0.0)               
-#&gt;  triebeard     0.3.0      2016-08-04 [1] CRAN (R 4.0.0)               
-#&gt;  urltools      1.7.3      2019-04-14 [1] CRAN (R 4.0.0)               
-#&gt;  utf8          1.1.4      2018-05-24 [1] CRAN (R 4.0.0)               
-#&gt;  vctrs         0.3.4      2020-08-29 [1] CRAN (R 4.0.2)               
-#&gt;  whisker       0.4        2019-08-28 [1] CRAN (R 4.0.0)               
-#&gt;  withr         2.3.0      2020-09-22 [1] CRAN (R 4.0.2)               
-#&gt;  xfun          0.18       2020-09-29 [1] CRAN (R 4.0.2)               
-#&gt;  XML           3.99-0.5   2020-07-23 [1] CRAN (R 4.0.2)               
-#&gt;  xml2          1.3.2      2020-04-23 [1] CRAN (R 4.0.0)               
-#&gt;  xtable        1.8-4      2019-04-21 [1] CRAN (R 4.0.0)               
-#&gt;  yaml          2.2.1      2020-02-01 [1] CRAN (R 4.0.0)               
+#&gt;  package     * version  date       lib source                             
+#&gt;  aRxiv         0.5.19   2019-08-08 [1] CRAN (R 4.1.1)                     
+#&gt;  bookdown      0.24     2021-09-02 [1] CRAN (R 4.1.1)                     
+#&gt;  bslib         0.2.5.1  2021-05-18 [1] CRAN (R 4.1.0)                     
+#&gt;  cli           3.0.1    2021-07-17 [1] CRAN (R 4.1.0)                     
+#&gt;  colorspace    2.0-2    2021-06-24 [1] CRAN (R 4.1.0)                     
+#&gt;  crayon        1.4.1    2021-02-08 [1] CRAN (R 4.1.0)                     
+#&gt;  crul          1.1.0.93 2021-08-16 [1] local                              
+#&gt;  curl          4.3.2    2021-06-23 [1] CRAN (R 4.1.0)                     
+#&gt;  data.table  * 1.14.0   2021-02-21 [1] CRAN (R 4.1.0)                     
+#&gt;  digest        0.6.27   2020-10-24 [1] CRAN (R 4.1.0)                     
+#&gt;  dplyr         1.0.7    2021-06-18 [1] CRAN (R 4.1.0)                     
+#&gt;  DT            0.18     2021-04-14 [1] CRAN (R 4.1.0)                     
+#&gt;  ellipsis      0.3.2    2021-04-29 [1] CRAN (R 4.1.0)                     
+#&gt;  evaluate      0.14     2019-05-28 [1] CRAN (R 4.1.0)                     
+#&gt;  fansi         0.5.0    2021-05-25 [1] CRAN (R 4.1.0)                     
+#&gt;  fastmap       1.1.0    2021-01-25 [1] CRAN (R 4.1.0)                     
+#&gt;  fulltext    * 2.0      2021-10-04 [1] Github (ropensci/fulltext@3bdfb86) 
+#&gt;  generics      0.1.0    2020-10-31 [1] CRAN (R 4.1.0)                     
+#&gt;  ggplot2       3.3.5    2021-06-25 [1] CRAN (R 4.1.0)                     
+#&gt;  glue          1.4.2    2020-08-27 [1] CRAN (R 4.1.0)                     
+#&gt;  gtable        0.3.0    2019-03-25 [1] CRAN (R 4.1.0)                     
+#&gt;  hoardr        0.5.2    2018-12-02 [1] CRAN (R 4.1.0)                     
+#&gt;  htmltools     0.5.2    2021-08-25 [1] CRAN (R 4.1.1)                     
+#&gt;  htmlwidgets   1.5.3    2020-12-10 [1] CRAN (R 4.1.0)                     
+#&gt;  httpcode      0.3.0    2020-04-10 [1] CRAN (R 4.1.0)                     
+#&gt;  httpuv        1.6.2    2021-08-18 [1] CRAN (R 4.1.1)                     
+#&gt;  httr          1.4.2    2020-07-20 [1] CRAN (R 4.1.0)                     
+#&gt;  jquerylib     0.1.4    2021-04-26 [1] CRAN (R 4.1.0)                     
+#&gt;  jsonlite      1.7.2    2020-12-09 [1] CRAN (R 4.1.0)                     
+#&gt;  knitr         1.33     2021-04-24 [1] CRAN (R 4.1.0)                     
+#&gt;  later         1.3.0    2021-08-18 [1] CRAN (R 4.1.1)                     
+#&gt;  lifecycle     1.0.0    2021-02-15 [1] CRAN (R 4.1.0)                     
+#&gt;  lubridate     1.7.10   2021-02-26 [1] CRAN (R 4.1.1)                     
+#&gt;  magrittr      2.0.1    2020-11-17 [1] CRAN (R 4.1.0)                     
+#&gt;  microdemic    0.6.0    2020-11-20 [1] CRAN (R 4.1.1)                     
+#&gt;  mime          0.11     2021-06-23 [1] CRAN (R 4.1.0)                     
+#&gt;  miniUI        0.1.1.1  2018-05-18 [1] CRAN (R 4.1.0)                     
+#&gt;  munsell       0.5.0    2018-06-12 [1] CRAN (R 4.1.0)                     
+#&gt;  pillar        1.6.2    2021-07-29 [1] CRAN (R 4.1.0)                     
+#&gt;  pkgconfig     2.0.3    2019-09-22 [1] CRAN (R 4.1.0)                     
+#&gt;  plyr          1.8.6    2020-03-03 [1] CRAN (R 4.1.0)                     
+#&gt;  promises      1.2.0.1  2021-02-11 [1] CRAN (R 4.1.0)                     
+#&gt;  pubchunks   * 0.4.0    2021-09-10 [1] local                              
+#&gt;  purrr         0.3.4    2020-04-17 [1] CRAN (R 4.1.0)                     
+#&gt;  R6            2.5.1    2021-08-19 [1] CRAN (R 4.1.1)                     
+#&gt;  rappdirs      0.3.3    2021-01-31 [1] CRAN (R 4.1.0)                     
+#&gt;  Rcpp          1.0.7    2021-07-07 [1] CRAN (R 4.1.0)                     
+#&gt;  rcrossref     1.1.0.99 2021-10-04 [1] Github (ropensci/rcrossref@319f34c)
+#&gt;  rentrez       1.2.3    2020-11-10 [1] CRAN (R 4.1.0)                     
+#&gt;  reshape2      1.4.4    2020-04-09 [1] CRAN (R 4.1.1)                     
+#&gt;  rlang         0.4.11   2021-04-30 [1] CRAN (R 4.1.0)                     
+#&gt;  rmarkdown     2.10     2021-08-06 [1] CRAN (R 4.1.1)                     
+#&gt;  rplos       * 1.0.0    2021-02-23 [1] CRAN (R 4.1.1)                     
+#&gt;  rstudioapi    0.13     2020-11-12 [1] CRAN (R 4.1.0)                     
+#&gt;  sass          0.4.0    2021-05-12 [1] CRAN (R 4.1.0)                     
+#&gt;  scales        1.1.1    2020-05-11 [1] CRAN (R 4.1.0)                     
+#&gt;  sessioninfo   1.1.1    2018-11-05 [1] CRAN (R 4.1.0)                     
+#&gt;  shiny         1.6.0    2021-01-25 [1] CRAN (R 4.1.0)                     
+#&gt;  solrium       1.2.0    2021-05-19 [1] CRAN (R 4.1.0)                     
+#&gt;  storr         1.2.5    2020-12-01 [1] CRAN (R 4.1.1)                     
+#&gt;  stringi       1.7.4    2021-08-25 [1] CRAN (R 4.1.1)                     
+#&gt;  stringr       1.4.0    2019-02-10 [1] CRAN (R 4.1.0)                     
+#&gt;  tibble        3.1.4    2021-08-25 [1] CRAN (R 4.1.1)                     
+#&gt;  tidyselect    1.1.1    2021-04-30 [1] CRAN (R 4.1.0)                     
+#&gt;  triebeard     0.3.0    2016-08-04 [1] CRAN (R 4.1.0)                     
+#&gt;  urltools      1.7.3    2019-04-14 [1] CRAN (R 4.1.0)                     
+#&gt;  utf8          1.2.2    2021-07-24 [1] CRAN (R 4.1.0)                     
+#&gt;  vctrs         0.3.8    2021-04-29 [1] CRAN (R 4.1.0)                     
+#&gt;  whisker       0.4      2019-08-28 [1] CRAN (R 4.1.0)                     
+#&gt;  withr         2.4.2    2021-04-18 [1] CRAN (R 4.1.0)                     
+#&gt;  xfun          0.25     2021-08-06 [1] CRAN (R 4.1.1)                     
+#&gt;  XML           3.99-0.7 2021-08-17 [1] CRAN (R 4.1.1)                     
+#&gt;  xml2          1.3.2    2020-04-23 [1] CRAN (R 4.1.0)                     
+#&gt;  xtable        1.8-4    2019-04-21 [1] CRAN (R 4.1.0)                     
+#&gt;  yaml          2.2.1    2020-02-01 [1] CRAN (R 4.1.0)                     
 #&gt; 
-#&gt; [1] /Library/Frameworks/R.framework/Versions/4.0/Resources/library</code></pre>
+#&gt; [1] /opt/homebrew/lib/R/4.1/site-library
+#&gt; [2] /opt/homebrew/Cellar/r/4.1.1/lib/R/library</code></pre>
 
 </div>
-
-
-
-
-
-
             </section>
 
           </div>
@@ -329,7 +330,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
-<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
 <script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
 <script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
@@ -348,6 +348,7 @@ gitbook.start({
 "weibo": false,
 "instapaper": false,
 "vk": false,
+"whatsapp": false,
 "all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
 },
 "fontsettings": {
@@ -368,6 +369,10 @@ gitbook.start({
 "text": null
 },
 "download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
 "toc": {
 "collapse": "subsection"
 }
